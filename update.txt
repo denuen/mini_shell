@@ -1,1 +1,5 @@
 [06/03/2024], we are focusing on haviung a well structured idea of how the project is going to be executed as a team. We are now searching functions explainations asking each other every question related to any doubt.
+[07/03/2024] We took a more aggressive approach, going straight to dividing the work into the macros 'parser' (tokenization and creation of the Binary Tree) and 'executor' (built-ins management and execution of the Binary Tree).
+{ A binary tree in Minishell is used to represent the syntactic structure of commands allowing hierarchical management of operators | && || ; which facilitates recursive execution and operator precedence handling }
+Antonio (apintaur): Parsing;
+Ahmed (ahabdelr): Executor;

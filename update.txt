@@ -3,3 +3,4 @@
 { A binary tree in Minishell is used to represent the syntactic structure of commands allowing hierarchical management of operators | && || ; which facilitates recursive execution and operator precedence handling }
 Antonio (apintaur): Parsing;
 Ahmed (ahabdelr): Executor;
+[08/03/2024] We have established the initial framework of the project and are beginning the foundational work, with tasks divided as previously outlined.

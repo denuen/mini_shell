@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 04:46:21 by apintaur          #+#    #+#             */
-/*   Updated: 2024/12/16 23:03:19 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/08 23:31:49 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,15 @@ static char	**ft_salloc(char **ss, const char *s, size_t *k, size_t cnt)
 
 static void	*ft_ssdestroy(char **ss)
 {
-	while (ss != NULL)
+	int	i;
+
+	if (!ss)
+		return (NULL);
+	i = 0;
+	while (ss[i] != NULL)
 	{
-		free(*ss);
-		(*ss)++;
+		free(ss[i]);
+		i++;
 	}
 	free(ss);
 	return (NULL);

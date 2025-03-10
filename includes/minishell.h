@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/09 16:40:36 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:23:04 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 
 # include "ast.h"
 # include <readline/readline.h>
+# include <readline/history.h>
+# include <unistd.h>
+# include <errno.h>
+# include <string.h>
 
 typedef struct s_check
 {
@@ -36,5 +40,9 @@ int	ms_isredir(const char *s);
 
 //Errors msgs
 int	ms_invalidcmd(const char *cmd);
+
+//Uutput formatting
+void	ft_output(char *str);
+void	ft_output_error(char *command, char *info);
 
 #endif

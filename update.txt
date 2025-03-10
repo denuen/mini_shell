@@ -4,3 +4,4 @@
 Antonio (apintaur): Parsing;
 Ahmed (ahabdelr): Executor;
 [08/03/2024] We have established the initial framework of the project and are beginning the foundational work, with tasks divided as previously outlined.
+[10/03/2024] After a weekend taken to organize the code-related part of the project, we focused on setting up built-ins and the fundamentals of the recursivity behind the project.

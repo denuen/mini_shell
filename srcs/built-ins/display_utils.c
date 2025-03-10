@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/08 19:55:37 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/08 22:02:59 by ahabdelr         ###   ########.fr       */
+/*   Created: 2025/03/10 11:06:56 by ahabdelr          #+#    #+#             */
+/*   Updated: 2025/03/10 16:14:48 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "../../includes/minishell.h"
 
-int	pwd(t_node *node)
+void	ft_output_error(char *command, char *info)
 {
-	char	*path;
+		rl_on_new_line();
+		printf("%s: %s: %s", command, strerror(errno), info);
+		rl_on_new_line();
+		rl_redisplay();
+}
 
-	path = getcwd(NULL, 0);
-	//handle the path = NULL case
-	
+void	ft_output(char *str)
+{
+		rl_on_new_line();
+		rl_replace_line(str, 0);
+		rl_redisplay();
+		rl_on_new_line();
+		rl_redisplay();
 }

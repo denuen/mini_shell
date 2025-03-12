@@ -6,11 +6,12 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/09 16:44:03 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/13 00:18:44 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdlib.h>
 
 /*
 * TODO:
@@ -18,55 +19,23 @@
 * line and parse it adding each cmd/op/redir in the
 * correct node
 */
-t_node	*ms_parse_input(const char *line)
+
+void	ms_validate_line(t_node **ast, char *line)
 {
-	t_node	*ast;
-
-	ms_validate_line(&ast, line);
-}
-
-int	ms_isvalid(const char *s)
-{
-	//TODO: utility for ms_check_cmd
-}
-
-int	ms_check_cmd(const char **line)
-{
-	t_node	*ast;
-	char	**tmp;
-	int		i;
-
-	if (!line)
-		return (0);
-	i = 0;
-	while (line[i])
-	{
-		if (!ms_iscmd(line[i]) && !ms_isvalid(line[i]))
-			return (ms_invalidcmd(line[i]));
-		i++;
-		while (!ms_iscmd(line[i]))
-		{
-			if (!ms_isvalid(line[i]))
-				return (ms_invalidcmd(line[i]));
-			i++;
-		}
-	}
-}
-
-void	ms_validate_line(t_node **ast, const char *line)
-{
-	t_node	*ast;
+	t_node	*new_node;
 	char	**split;
 	int		i;
 	int		j;
+	int		ret;
 
 	i = 0;
+	j = 0;
 	split = ft_split(line, ' ');
 	while (split[i] != NULL)
 	{
-		j = 0;
-		ms_check_cmd(split[i]);
-		//TODO: allocate command line in ast and handle
-		//the remain input, checking if it is valid
+		if (!ms_validate_cmd(split, ast, &i)
+			|| !ms_validate_op(split, ast, &i)
+			|| !ms_validate_redir(split, &ast, &i))
+			ft_input_error(line, split, ast, i);
 	}
 }

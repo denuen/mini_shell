@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 19:55:37 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/10 16:14:45 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:26:13 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	ms_pwd(t_node *node)
 		return (0);
 	}
 	ft_output_error(node->cmd[0], " ");
-	return (1);
+	return (-1);
 }

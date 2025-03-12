@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/10 13:23:04 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:07:35 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 # define NUM_CMDS 7
 
 # include "ast.h"
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
 # include <errno.h>
 # include <string.h>
+# include <sys/wait.h>
 
 typedef struct s_check
 {
@@ -44,5 +46,14 @@ int	ms_invalidcmd(const char *cmd);
 //Uutput formatting
 void	ft_output(char *str);
 void	ft_output_error(char *command, char *info);
+
+//executor
+int	ms_executor(t_node *node);
+
+//built ins
+int	ms_cd(t_node *node);
+int	ms_echo(t_node *node);
+int	ms_pwd(t_node *node);
+
 
 #endif

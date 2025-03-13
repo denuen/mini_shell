@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_utils.c                                    :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 11:06:56 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/13 16:13:58 by ahabdelr         ###   ########.fr       */
+/*   Created: 2025/03/13 16:14:35 by ahabdelr          #+#    #+#             */
+/*   Updated: 2025/03/13 16:50:49 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//da sistemare per display solo sullo standard error per il cambio dell'STDOUT
-void	ft_output_error(char *command, char *info)
-{
-		rl_on_new_line();
-		printf("%s: %s: %s", command, strerror(errno), info);
-		rl_on_new_line();
-		rl_redisplay();
-}
+extern char **environ;
 
-void	ft_output(char *str)
+int	ms_export(t_node *node)
 {
-		rl_on_new_line();
-		rl_replace_line(str, 0);
-		rl_redisplay();
-		rl_on_new_line();
-		rl_redisplay();
+	int	i;
+
+	i = 0;
+	//export senza arguments
+	if (node->cmd[1] == NULL)
+	{
+		while (environ[i] != NULL)
+		{
+			ft_printf("%s\n", environ[i]);
+			i++;
+		}
+		return (0);
+	}
 }

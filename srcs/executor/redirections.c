@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/12 16:59:35 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:37:57 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ int	ms_tofile_exec(t_node *left, t_node *right)
 {
 	int	fd;
 	pid_t	pid;
+	int	status;
 
-	//controlla se il file esiste con access magari
 	pid = fork();
 	if (pid == 0)
 	{
 		fd = open(right->redir, O_WRONLY | O_TRUNC );
+		if (fd < 0)
+			exit(-1);
 		dup2(fd, STDOUT_FILENO);
-		ms_executor(left);
+		status = ms_executor(left);
 		close(fd);
+		exit(status);
 	}
-	return (1);
+	wait(&status);
+	close(fd);
+	status = WEXITSTATUS(status);
+	return (status);
 }
 
 int	ms_fromfile_exec(t_node *left, t_node *right)
@@ -39,7 +45,8 @@ int	ms_fromfile_exec(t_node *left, t_node *right)
 	if (pid == 0)
 	{
 		fd = open(right->redir, O_RDONLY);
-		//controlla se il file esiste se fd è minore di 0
+		if (fd < 0)
+			exit(-1);
 		dup2(fd, STDIN_FILENO);
 		status = ms_executor(left);
 		close(fd);
@@ -47,6 +54,7 @@ int	ms_fromfile_exec(t_node *left, t_node *right)
 	}
 	wait(&status);
 	status = WEXITSTATUS(status);
+	close(fd);
 	return (status);
 }
 
@@ -60,7 +68,8 @@ int	ms_appen_exec(t_node *left, t_node *right)
 	if (pid == 0)
 	{
 		fd = open(right->redir, O_APPEND);
-		//controlla se il file esiste se fd è minore di 0
+		if (fd < 0)
+			exit(-1);
 		dup2(fd, STDOUT_FILENO);
 		status = ms_executor(left);
 		close(fd);
@@ -68,5 +77,32 @@ int	ms_appen_exec(t_node *left, t_node *right)
 	}
 	wait(&status);
 	status = WEXITSTATUS(status);
+	close(fd);
+	return (status);
+}
+
+int	ms_heredoc_exec(t_node *left, t_node *right)
+{
+	int	status;
+	pid_t	pid;
+	int	fd[2];
+
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		write(1, &right->redir, ft_strlen(right->redir));
+		exit(0);
+	}
+	else
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		status = ms_executor(left);
+	}
 	return (status);
 }

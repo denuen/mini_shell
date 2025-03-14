@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/13 00:19:30 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:29:46 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_node
 	int				type;
 	char			**cmd;
 	char			*op;
-	int				pos;
-	char			*redir;
+	char			**redir;
+	int				priority;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
@@ -38,6 +38,7 @@ t_node	*ft_ast_newredir(char *redir);
 void	ft_ast_destroy(t_node *node);
 
 // Ast operations
+t_node	*ft_ast_insertnode(t_node *ast, t_node *new_node);
 void	ft_ast_addleft(t_node *ast, t_node *node);
 void	ft_ast_addright(t_node *ast, t_node *node);
 

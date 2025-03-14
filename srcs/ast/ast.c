@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:05 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/13 00:12:58 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:51:49 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_node *ft_ast_newcommand(char **cmd)
 	if (!new_node)
 		return (NULL);
 	new_node->type = COMMAND;
+	new_node->priority = 0;
 	new_node->cmd = cmd;
 	new_node->op = NULL;
 	new_node->redir = NULL;
@@ -37,6 +38,10 @@ t_node *ft_ast_newop(char *op)
 	if (!new_node)
 		return (NULL);
 	new_node->type = OPERATOR;
+	if (!ft_strncmp(op, "&&", 2) || !ft_strncmp(op, "||", 2))
+		new_node->priority = 1;
+	else
+		new_node->priority = 2;
 	new_node->op = op;
 	new_node->cmd = NULL;
 	new_node->redir = NULL;
@@ -53,6 +58,7 @@ t_node *ft_ast_newredir(char *redir)
 	if (!new_node)
 		return (NULL);
 	new_node->type = REDIRECTION;
+	new_node->type = 3;
 	new_node->redir = redir;
 	new_node->cmd = NULL;
 	new_node->op = NULL;

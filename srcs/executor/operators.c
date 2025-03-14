@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/13 16:10:01 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:07:21 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	ms_and_operator(t_node *left, t_node *right)
 	pid = fork();
 	if (pid == 0)
 	{
-		status[0] = executor(left);
+		status[0] = ms_executor(left);
 		exit(status[0]);
 	}
 	wait(&status[0]);
 	status[0] = WEXITSTATUS(status[0]);
 	if (status[0] == 0)
-		status [1] = executor(right);
+		status[1] = ms_executor(right);
 	return (status[0] + status[1]);
 }

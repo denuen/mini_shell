@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/13 15:37:57 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:17:58 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int	ms_tofile_exec(t_node *left, t_node *right)
 	pid = fork();
 	if (pid == 0)
 	{
-		fd = open(right->redir, O_WRONLY | O_TRUNC );
+		fd = open(right->redir, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
 		status = ms_executor(left);
-		close(fd);
 		exit(status);
 	}
 	wait(&status);
@@ -49,7 +48,6 @@ int	ms_fromfile_exec(t_node *left, t_node *right)
 			exit(-1);
 		dup2(fd, STDIN_FILENO);
 		status = ms_executor(left);
-		close(fd);
 		exit(status);
 	}
 	wait(&status);
@@ -58,7 +56,7 @@ int	ms_fromfile_exec(t_node *left, t_node *right)
 	return (status);
 }
 
-int	ms_appen_exec(t_node *left, t_node *right)
+int	ms_append_exec(t_node *left, t_node *right)
 {
 	pid_t	pid;
 	int	status;
@@ -71,8 +69,8 @@ int	ms_appen_exec(t_node *left, t_node *right)
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
-		status = ms_executor(left);
 		close(fd);
+		status = ms_executor(left);
 		exit(status);
 	}
 	wait(&status);
@@ -94,7 +92,8 @@ int	ms_heredoc_exec(t_node *left, t_node *right)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		write(1, &right->redir, ft_strlen(right->redir));
+		write(1, right->redir, ft_strlen(right->redir));
+		write(1, "\n", 1);
 		exit(0);
 	}
 	else

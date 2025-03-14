@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_strlen_arr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 16:14:35 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/14 13:54:32 by ahabdelr         ###   ########.fr       */
+/*   Created: 2025/03/14 14:10:45 by ahabdelr          #+#    #+#             */
+/*   Updated: 2025/03/14 14:12:33 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <unistd.h>
 
-int	ms_export(t_node *node)
+int	ft_strlen_arr(char **arr)
 {
 	int	i;
 
+	if (arr == NULL)
+		return (NULL);
 	i = 0;
-	//export senza arguments
-	if (node->cmd[1] == NULL)
-	{
-		while (environ[i] != NULL)
-		{
-			ft_printf("%s\n", environ[i]);
-			i++;
-		}
-		return (0);
-	}
+	while (arr[i][0] != NULL)
+		i++;
+	return (i);
 }

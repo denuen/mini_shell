@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/12 13:25:51 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:52:39 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,28 @@ int	ft_redirection_exec(t_node *node)
 		status = ms_heredoc_exec(node->left, node->right);
 }
 
+int	ms_extern(t_node *node)
+{
+	int	status;
+	pid_t	pid;
+
+	status = 0;
+	pid = fork();
+	if (pid == 0)
+	{
+		if (ft_strlen_arr(node->cmd) == 2)
+			execve(node->cmd[0], &node->cmd[1], environ);
+		else
+			execve(node->cmd[0], NULL, environ);
+		perror("Error executing command");
+		exit(-1);
+	}
+	wait(&status);
+	status = WEXITSTATUS(status);
+	return (status);
+}
+//gestito quelle inserite tramite aboslute path, adesso bisogna fare il path finder e cercare quelle inserite senza contesto come grep cat ecc...
+
 int	ft_commmand_exec(t_node *node)
 {
 	int	status;
@@ -50,6 +72,8 @@ int	ft_commmand_exec(t_node *node)
 		status = ms_echo(node);
 	else if (node->cmd[0] == "pwd")
 		status = ms_pwd(node);
+	else
+		status = ms_extern(node);
 	return (status);
 }
 

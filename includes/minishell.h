@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/14 12:52:38 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:54:04 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+extern char **environ;
 
 //Check
 void	ms_validate_line(t_node **ast, char *line);

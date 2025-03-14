@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/13 00:21:38 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:52:38 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,17 @@
 
 //Check
 void	ms_validate_line(t_node **ast, char *line);
-int		ms_validate_cmd(char **line, t_node **ast, int *i);
 
+int		ms_validate_cmd(char **split, t_node **ast, int *i);
+int		ms_validate_op(char **split, t_node **ast, int *i);
+int		ms_validate_redir(char **split, t_node **ast, int *i);
 //Check utils
 char	*ms_isexecutable(const char *s);
 char	*ms_isbuiltin(const char *s);
 char	*ms_isop(const char *s);
 char	*ms_isredir(const char *s);
 
-//Errors msgs
-int		ms_invalidinput(char *line, char **split, t_node *ast, int i);
-
-// Uutput formatting
+// Output formatting
 void	ft_output(char *str);
 void	ft_output_error(char *command, char *info);
 

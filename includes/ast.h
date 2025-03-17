@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/13 16:29:46 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:49:30 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 
 # include "libft/includes/libft.h"
 
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_node
 {
 	int				type;
@@ -27,6 +34,7 @@ typedef struct s_node
 	char			*op;
 	char			**redir;
 	int				priority;
+	t_env			*env;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;

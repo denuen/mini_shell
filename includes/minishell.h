@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 15:18:26 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:20:07 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
+typedef struct s_minishell
+{
+	t_node	*ast;
+	t_env	*envs;
+	t_env	*vars;
+}	t_minishell;
 
 //Check
 void	ms_validate_line(t_minishell *ms, char *line);

@@ -6,11 +6,11 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:35:42 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/13 15:39:04 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:15:17 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/ast.h"
 
 t_node	*ft_ast_insertnode(t_node *ast, t_node *new_node)
 {
@@ -30,14 +30,14 @@ t_node	*ft_ast_insertnode(t_node *ast, t_node *new_node)
 	}
 }
 
-void	ft_ast_addleft(t_node *ast, t_node *node)
+void	ft_ast_update_env(t_node *ast, t_env *env, int flag)
 {
-	if (ast)
-		ast->left = node;
-}
-
-void	ft_ast_addright(t_node *ast, t_node *node)
-{
-	if (ast)
-		ast->right = node;
+	if (ast->left)
+		ft_ast_update_env(ast->left, env, flag);
+	if (ast->right)
+		ft_ast_update_env(ast->right, env, flag);
+	if (flag == ENVS)
+		ast->envs = env;
+	else if (flag == VARS)
+		ast->vars = env;
 }

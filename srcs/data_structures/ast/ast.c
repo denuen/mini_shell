@@ -6,16 +6,16 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:05 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/13 13:51:49 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:18:26 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ast.h"
+#include "../../../includes/ast.h"
 #include <stdlib.h>
 
-t_node *ft_ast_newcommand(char **cmd)
+t_node	*ft_ast_newcommand(char **cmd)
 {
-	t_node *new_node;
+	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
@@ -30,9 +30,9 @@ t_node *ft_ast_newcommand(char **cmd)
 	return (new_node);
 }
 
-t_node *ft_ast_newop(char *op)
+t_node	*ft_ast_newop(char *op)
 {
-	t_node *new_node;
+	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
@@ -50,15 +50,15 @@ t_node *ft_ast_newop(char *op)
 	return (new_node);
 }
 
-t_node *ft_ast_newredir(char *redir)
+t_node	*ft_ast_newredir(char *redir)
 {
-	t_node *new_node;
+	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 		return (NULL);
 	new_node->type = REDIRECTION;
-	new_node->type = 3;
+	new_node->priority = 3;
 	new_node->redir = redir;
 	new_node->cmd = NULL;
 	new_node->op = NULL;
@@ -67,12 +67,12 @@ t_node *ft_ast_newredir(char *redir)
 	return (new_node);
 }
 
-void ft_ast_destroy(t_node *node)
+void	ft_ast_destroy(t_node *node)
 {
-	int i;
+	int	i;
 
 	if (!node)
-		return;
+		return ;
 	i = 0;
 	if (node->left)
 		ft_ast_destroy(node->left);
@@ -95,12 +95,12 @@ void ft_ast_destroy(t_node *node)
 
 /********************** Debugging zone **********************/
 
-void ft_ast_printtree(t_node *node)
+void	ft_ast_printtree(t_node *node)
 {
-	int i;
+	int	i;
 
 	if (!node)
-		return;
+		return ;
 	if (node->left)
 		ft_ast_printtree(node->left);
 	if (node->right)
@@ -113,12 +113,12 @@ void ft_ast_printtree(t_node *node)
 		ft_printf("Redirection: %s\n", node->redir);
 }
 
-void ft_ast_printcmd(t_node *node)
+void	ft_ast_printcmd(t_node *node)
 {
-	int i;
+	int	i;
 
 	if (!node || node->type != COMMAND)
-		return;
+		return ;
 	if (node->cmd)
 	{
 		i = 0;
@@ -135,7 +135,7 @@ void ft_ast_printcmd(t_node *node)
 	}
 }
 
-int ft_ast_size(t_node *node)
+int	ft_ast_size(t_node *node)
 {
 	if (!node)
 		return (0);

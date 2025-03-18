@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/14 14:54:04 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:18:26 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define NUM_CMDS 7
 
 # include "ast.h"
+# include "env.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -25,19 +26,22 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-extern char **environ;
-
 //Check
-void	ms_validate_line(t_node **ast, char *line);
+void	ms_validate_line(t_minishell *ms, char *line);
 
-int		ms_validate_cmd(char **split, t_node **ast, int *i);
-int		ms_validate_op(char **split, t_node **ast, int *i);
-int		ms_validate_redir(char **split, t_node **ast, int *i);
+int		ms_validate_cmd(t_minishell *ms, char **split, int *i);
+int		ms_validate_op(t_minishell *ms, char **split, int *i);
+int		ms_validate_redir(t_minishell *ms, char **split, int *i);
+
 //Check utils
 char	*ms_isexecutable(const char *s);
 char	*ms_isbuiltin(const char *s);
 char	*ms_isop(const char *s);
 char	*ms_isredir(const char *s);
+
+//Parsing errors
+int		ft_matrix_destroy(void **ptr);
+void	ft_input_error(char *line, t_minishell *ms, char **split, int i);
 
 // Output formatting
 void	ft_output(char *str);
@@ -51,4 +55,8 @@ int		ms_cd(t_node *node);
 int		ms_echo(t_node *node);
 int		ms_pwd(t_node *node);
 
+//General utils
+char	*ft_strndup(const char *s, int n);
+int		ft_findchr(const char *s, char c);
+t_env	*ft_get_envs(char **envp);
 #endif

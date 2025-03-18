@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:32:58 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/14 12:31:52 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:09:55 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_matrix_destroy(void **ptr)
 	return (0);
 }
 
-int	ft_input_error(char *line, char **split, t_node *ast, int i)
+void	ft_input_error(char *line, t_minishell *ms, char **split, int i)
 {
 	if (ms_isredir(split[i]) || ms_isop(split[i]))
 		ft_printf("sintax error in '%s'", split[i]);
@@ -41,12 +41,8 @@ int	ft_input_error(char *line, char **split, t_node *ast, int i)
 	if (line)
 		free(line);
 	ft_matrix_destroy((void **)split);
-	ft_ast_destroy(ast);
-	return (0);
-}
-
-void	ms_error(t_node *ast)
-{
-	ft_ast_destroy(ast);
-	exit(EXIT_FAILURE);
+	ft_env_destroy(ms->envs);
+	ft_env_destroy(ms->vars);
+	ft_ast_destroy(ms->ast);
+	exit (EXIT_FAILURE);
 }

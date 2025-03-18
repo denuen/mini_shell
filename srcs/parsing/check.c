@@ -6,34 +6,36 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/14 10:57:17 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:10:53 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
-/*
-* TODO:
-* this function should handle the entire
-* line and parse it adding each cmd/op/redir in the
-* correct node
-*/
-void	ms_validate_line(t_node **ast, char *line)
+static char	*ft_get_vars(char **split)
 {
-	t_node	*new_node;
+}
+
+void	ms_validate_line(t_minishell *ms, char *line)
+{
 	char	**split;
 	int		i;
 
-	i = 0;
 	split = ft_split(line, ' ');
-	while (split[i] != NULL)
+	ms->vars = ft_get_vars(split);
+	split = ft_rearrange_line(ms, split);
+	while (split[i])
 	{
-		if (!ms_validate_cmd(split, ast, &i)
-			|| !ms_validate_op(split, ast, &i)
-			|| !ms_validate_redir(split, ast, &i))
-			ft_input_error(line, split, ast, i);
+		if (ms_validate_cmd(&ms, split, &i))
+			continue ;
+		else if (ms_validate_redir(&ms, split, &i))
+			continue ;
+		else if (ms_validate_op(&ms, split, &i))
+			continue ;
+		else
+			ft_input_error(line, ms, split, i);
 	}
 	ft_matrix_destroy(split);
-	free (line);
+	free(line);
 }

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/17 14:49:30 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:20:05 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,17 @@
 # define OPERATOR 1
 # define REDIRECTION 2
 
+# define ENVS 0
+# define VARS 1
+
 # include "libft/includes/libft.h"
-
-typedef struct s_env
-{
-	char			*name;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-typedef struct s_node
+typedef	struct s_node
 {
 	int				type;
 	char			**cmd;
 	char			*op;
 	char			**redir;
 	int				priority;
-	t_env			*env;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;

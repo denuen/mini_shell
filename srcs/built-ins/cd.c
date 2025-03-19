@@ -6,13 +6,13 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:26:09 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/12 13:26:07 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:58:02 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ms_cd(t_node *node)
+int	ms_cd(t_node *node, t_minishell *ms)
 {
 	if (chdir(node->cmd[1]) != -1)
 	{

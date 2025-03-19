@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 15:20:07 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:59:06 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	ft_output_error(char *command, char *info);
 int		ms_executor(t_node *node);
 
 // built ins
-int		ms_cd(t_node *node);
-int		ms_echo(t_node *node);
-int		ms_pwd(t_node *node);
+int		ms_cd(t_node *node, t_minishell *ms);
+int		ms_echo(t_node *node, t_minishell *ms);
+int		ms_pwd(t_node *node, t_minishell *ms);
 
 //General utils
 char	*ft_strndup(const char *s, int n);

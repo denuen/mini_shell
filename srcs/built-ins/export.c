@@ -6,88 +6,45 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:14:35 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/17 17:40:00 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:39:42 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_export_add(t_env *new, t_node *node)
+int	ft_env_arg(char *name, t_node *node, t_minishell *ms)
 {
-	t_env	*current;
-
-	current = node->env;
-	if (current == NULL || ft_strncmp(current->name, new->name, 1000) > 0)
+	t_env	*env;
+	t_env	*var;
+	
+	env = ft_env_find(ms->envs, name);
+	if (env)
 	{
-		new->next = current;
-		node->env = new;
-		return (0);
+		if (node->cmd[2])
+			env->value = node->cmd[2];
 	}
-	while (current->next && ft_strncmp(current->next->name, new->name, 1000) > 0)
+	else
 	{
-		if (ft_strncmp(current->next->name, new->name, 1000) == 0)
+		var = ft_env_find(ms->vars, name);
+		if (var)
 		{
-			new->next = current->next->next;
-			current->next = new;
+			var = ft_new_env(var->name, var->value);
+			ft_env_addordered(ms->envs, var);
 			return (0);
 		}
-		current = current->next;
+		else
+		{
+			var = ft_new_env(name, node->cmd[2]);
+			ft_env_addordered(ms->envs, var);
+		}
 	}
-	new->next = current->next;
-	current->next = new;
-	return (0);
 }
 
-int	ft_export_var(char *search, t_node *node)
+int	ms_export(t_node *node, t_minishell *ms)
 {
-	t_env	*current;
-
-	current = node->var;
-	while (current && ft_strncmp(search, current->name, 1000) != 0)
-		current = current->next;
-	if (current)
-		ft_export_add(current, node);
-	else
-	{
-		current = (t_env *)malloc(sizeof(t_env));
-		current->name = search;
-		current->value = NULL;
-		ft_export_add(current, node);
-	}
-	return (0);
-}
-
-int	ft_export_print(t_node *node)
-{
-	t_env	*current;
-
-	current = node->env;
-	while (current != NULL)
-	{
-		ft_printf("%s=\"%s\"\n", current->name, current->value);
-		current = current->next;
-	}
-	return (0);
-}
-
-int	ft_get_string(t_env *new, t_node *node)
-{
-// da gestire A) con virgolette, B) senza virgolette
-}
-
-int	ms_export(t_node *node)
-{
-	t_env	new;
-
 	if (node->cmd[1] == NULL)
-		return  (ft_export_print(node));
-	else if (!ft_strchr(node->cmd[1], '='))
-		return (ft_export_var(node->cmd[1], node));
+		ft_env_print(ms->envs);
 	else
-	{
-		new = (t_env *)malloc(sizeof(t_env));
-		if (ft_get_string(*new, node))
-			return (ft_export_add(new, node));
-	}
-
+		ft_env_arg(node->cmd[1], node, ms);
+	return (0);
 }

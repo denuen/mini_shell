@@ -6,13 +6,13 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/14 13:17:58 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:50:10 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ms_tofile_exec(t_node *left, t_node *right)
+int	ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	int	fd;
 	pid_t	pid;
@@ -34,7 +34,7 @@ int	ms_tofile_exec(t_node *left, t_node *right)
 	return (status);
 }
 
-int	ms_fromfile_exec(t_node *left, t_node *right)
+int	ms_fromfile_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	int	fd;
 	pid_t	pid;
@@ -56,7 +56,7 @@ int	ms_fromfile_exec(t_node *left, t_node *right)
 	return (status);
 }
 
-int	ms_append_exec(t_node *left, t_node *right)
+int	ms_append_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	pid_t	pid;
 	int	status;
@@ -79,7 +79,7 @@ int	ms_append_exec(t_node *left, t_node *right)
 	return (status);
 }
 
-int	ms_heredoc_exec(t_node *left, t_node *right)
+int	ms_heredoc_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	int	status;
 	pid_t	pid;

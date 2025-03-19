@@ -6,13 +6,13 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/14 14:07:21 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:49:49 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ms_or_exec(t_node *left, t_node *right)
+int	ms_or_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	int	status;
 
@@ -22,7 +22,7 @@ int	ms_or_exec(t_node *left, t_node *right)
 	return (status);
 }
 
-int	ms_bg_exec(t_node *left, t_node *right)
+int	ms_bg_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	pid_t	pid;
 	int	status[2];
@@ -41,7 +41,7 @@ int	ms_bg_exec(t_node *left, t_node *right)
 	return (status[0] + status[1]);
 }
 
-int	ms_pipe_exec(t_node *left, t_node *right)
+int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	int	pipefd[2];
 	pid_t	pid;
@@ -68,7 +68,7 @@ int	ms_pipe_exec(t_node *left, t_node *right)
 	return (status[0] + status[1]);	
 }
 
-int	ms_and_operator(t_node *left, t_node *right)
+int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
 {
 	pid_t	pid;
 	int	status[2];

@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:47:50 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/19 16:59:45 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:13:50 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ms_split(const char *s, char c)
 		else
 		{
 			while ((s[i + cnt] != '\0' && s[i + cnt] != c) || open != '\0')
-				ms_counter(s[i + cnt], &open, &cnt);
+				ms_counter(s[i + cnt], &open, &cnt, &i);
 			if (ms_salloc(ss, &(s[i]), &k, cnt) == NULL)
 				return (ms_ssdestroy(ss));
 		}

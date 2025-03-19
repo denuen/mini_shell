@@ -6,26 +6,29 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:40:43 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/19 16:58:21 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:14:17 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 
-void	ms_counter(char s, char *open, size_t *cnt)
+void	ms_counter(char s, char *open, size_t *cnt, int *i)
 {
 	if (s == '\0')
 	// funzione per aspettare l'unquote
 	if ((s == '"' || s == '\'') && *open == '\0')
 	{
 		*open = s;
+		(*i)++;
 	}
 	else if (s == *open && *open != '\0')
 	{
 		*open = '\0';
+		(*i)++;
 	}
-	(*cnt)++;
+	else
+		(*cnt)++;
 }
 
 char	**ms_misery_init(size_t *i, size_t* k, const char* s, char c)

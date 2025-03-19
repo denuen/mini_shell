@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:40:43 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/19 16:14:02 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:58:21 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**ms_misery_init(size_t *i, size_t* k, const char* s, char c)
 {
 	*i = 0;
 	*k = 0;
-	return (ft_ssalloc(s, c));
+	return (ms_ssalloc(s, c));
 }
 
 void	ms_split_checks(char s, char *open, int *i)
@@ -42,13 +42,10 @@ void	ms_split_checks(char s, char *open, int *i)
 	if ((s == '"' || s == '\'') && *open == '\0')
 	{
 		*open = s;
-		(*i)--;
 	}
 	else if (s == *open && *open != '\0')
 	{
-		(*i)--;
 		*open = '\0';
 	}
 	(*i)++;
-
 }

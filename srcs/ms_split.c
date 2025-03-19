@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:47:50 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/19 16:20:33 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:59:45 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ static char	**ms_salloc(char **ss, const char *s, size_t *k, size_t cnt)
 {
 	size_t	i;
 	char	open;
+	int	j;
 
+	j = 0;
 	open = '\0';
 	i = 0;
 	if (s == NULL || cnt == 0)
@@ -102,10 +104,11 @@ static char	**ms_salloc(char **ss, const char *s, size_t *k, size_t cnt)
 	{
 		if ((s[i] == '"' || s == '\'') && open == '\0')
 			open = s[i];
-		else if (s == open && open != '\0')
+		else if (s[i] == open && open != '\0')
 			open = '\0';
 		if (!(s[i] == open && open != '\0'))
-			ss[*k][i] = s[i];
+			j++;
+		ss[*k][i] = s[i + j];
 		i++;
 	}
 	ss[*k][i] = '\0';

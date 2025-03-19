@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:48:31 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 12:24:14 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:50:02 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ static char	**ft_assigncmd(char **split, int start, int *tokens)
 	return (cmd);
 }
 
-int	ms_validate_cmd(char **split, t_node **ast, int *i)
+int	ms_validate_cmd(char **split, t_minishell *ms, int *i)
 {
 	char	**cmd;
 	int		tokens;
 
-	if (!split || !ast || !i)
+	if (!split || !ms || !i)
 		return (0);
 	cmd = ft_assigncmd(split, *i, &tokens);
 	if (!cmd)
 		return (0);
 	*i += tokens;
-	if (!ft_ast_insertnode(ast, ft_ast_newcommand(cmd)))
+	if (!ft_ast_insertnode(&(ms->ast), ft_ast_newcommand(cmd)))
 	{
 		ft_matrix_destroy((void **)cmd);
 		return (0);

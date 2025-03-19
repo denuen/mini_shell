@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 15:11:14 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:04:17 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **envp)
 
 	//Check iniziali, su argc e argv
 	ms.envs = ft_get_envs(envp);
+	ms.vars = NULL;
 	readline(line);
 	while (line)
 	{

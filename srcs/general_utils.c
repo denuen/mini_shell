@@ -6,30 +6,12 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 15:01:45 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:22:14 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
-
-//It allocates a string of a certain size specified by 'n'
-char	*ft_strndup(const char *s, int n)
-{
-	char	*new_s;
-	int		len;
-
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s);
-	if (n > len)
-		n = len;
-	new_s = (char *) malloc(sizeof(char) * (n + 1));
-	if (!new_s)
-		return (NULL);
-	ft_strlcpy(new_s, s, n);
-	return (new_s);
-}
 
 /*
 * It returns:
@@ -58,26 +40,27 @@ t_env	*ft_get_envs(char **envp)
 {
 	t_env	*envs;
 	t_env	*new_env;
+	t_env	tmp;
 	int		i;
-	int		j;
+	int		divisor;
 
 	if (!envp)
 		return (NULL);
-	while (envp[i])
-		i++;
 	envs = NULL;
 	i = 0;
 	while (envp[i])
 	{
-		j = ft_findchr(envp[i], '=');
-		new_env = ft_new_env(ft_strndup(envp[i], j + 1), \
-		ft_strndup(envp[j + 1], ft_strlen(envp[i])));
-		if (!new_env)
-		{
-			ft_env_destroy(envs);
-			return (NULL);
-		}
-		ft_env_addback(envs, new_env);
+		divisor = ft_findchr(envp[i], '=');
+		if (divisor < 0)
+			break ;
+		tmp.name = ft_substr(envp[i], 0, divisor);
+		tmp.value = ft_strdup(envp[i][divisor + 1]);
+		new_env = ft_new_env(tmp.name, tmp.value);
+		if (new_env)
+			ft_env_addback(&envs, new_env);
+		free (tmp.name);
+		free (tmp.value);
+		i++;
 	}
 	return (envs);
 }

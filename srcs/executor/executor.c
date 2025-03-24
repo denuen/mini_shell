@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/19 14:27:13 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/24 08:06:57 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ms_extern(t_node *node, t_minishell *ms)
 	status = WEXITSTATUS(status);
 	return (status);
 }
-//gestito quelle inserite tramite aboslute path, adesso bisogna fare il path finder e cercare quelle inserite senza contesto come grep cat ecc...
 
 int	ft_commmand_exec(t_node *node, t_minishell *ms)
 {
@@ -72,6 +71,8 @@ int	ft_commmand_exec(t_node *node, t_minishell *ms)
 		status = ms_echo(node, ms);
 	else if (node->cmd[0] == "pwd")
 		status = ms_pwd(node, ms);
+	else if (node->cmd[0] == "export")
+		status = ms_export(node, ms);
 	else
 		status = ms_extern(node, ms);
 	return (status);
@@ -80,7 +81,6 @@ int	ft_commmand_exec(t_node *node, t_minishell *ms)
 int	ms_executor(t_node *node, t_minishell *ms)
 {
 	int	status;
-	//setting up recursivity (cleaning fds)
 
 	if (node->type == COMMAND)
 		status = ft_commmand_exec(node, ms);

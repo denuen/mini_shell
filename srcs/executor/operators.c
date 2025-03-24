@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/19 10:49:49 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/24 09:01:23 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ int	ms_bg_exec(t_node *left, t_node *right, t_minishell *ms)
 		status[0] = ms_executor(left);
 		exit(status[0]);
 	}
+	status[1] = ms_executor(right);
 	wait(&status[0]);
 	status[0] = WEXITSTATUS(status[0]);
-	if (status[0] == 0)
-		status[1] = ms_executor(right);
 	return (status[0] + status[1]);
 }
 
@@ -63,9 +62,8 @@ int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 	close(pipefd[1]);
 	wait(&status[0]);
 	status[0] = WEXITSTATUS(status[0]);
-	if (status[0] == 0)
-		status[1] = ms_executor(right);
-	return (status[0] + status[1]);	
+	status[1] = ms_executor(right);
+	return (status[1]);	
 }
 
 int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
@@ -84,5 +82,7 @@ int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
 	status[0] = WEXITSTATUS(status[0]);
 	if (status[0] == 0)
 		status[1] = ms_executor(right);
+	if (status[1] == 1)
+		status[1] = 0; //tutto ok, ancora da inserire che se ritorna 1 allora è un file
 	return (status[0] + status[1]);
 }

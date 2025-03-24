@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/19 14:35:42 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:36:13 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_minishell
 	t_env	*vars;
 }	t_minishell;
 
+extern	char **environ;
 //Check
 void	ms_validate_line(t_minishell *ms, char *line);
 

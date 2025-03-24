@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/24 10:12:22 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:13:37 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		ms_pwd(t_node *node, t_minishell *ms);
 
 //General utils
 int		ft_findchr(const char *s, char c);
+char	*ms_strnjoin(char *s1, const char *s2, int n);
 t_env	*ft_get_envs(char **envp);
 
 //signals

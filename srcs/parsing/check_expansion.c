@@ -6,73 +6,52 @@
 " $ " -> espandibile
 */
 
-int	ft_quote_case(char **split, int i, char type)
+static char	*ft_expansion(t_minishell *ms, char *string, int start)
 {
-	int	pos;
+	t_env	*to_find;
+	char	*join;
+	t_env	tmp;
+	int		end;
 
-	pos = ft_findchr(split[i], type);
-	if (pos > 0 && ft_findchr(&(split[i][pos + 1]), type) > 0)
-		return (1);
-	else if (pos > 0)
-		return (-1);
-	return (0);
+	end = start;
+	while (string[end] != ' ' && string[end] != '"')
+		end++;
+	tmp.name = ft_substr(string, start, end - start);
+	to_find = ft_env_find(ms->envs, tmp.name);
+	if (!to_find)
+		to_find = ft_env_find(ms->vars, tmp.name);
+	if (to_find)
+	{
+		//Temporary string
+		tmp.value = ms_strnjoin(NULL, string, start - 1);
+		tmp.value = ms_strnjoin(tmp.value, to_find->value, ft_strlen(to_find->value));
+		tmp.value = ms_strnjoin(tmp.value, &(string[end]), ft_strlen(string));
+	}
+	else
+		tmp.value = ft_strdup(string);
+	free (tmp.name);
+	free (string);
+	return (tmp.value);
 }
 
-static char	*ft_expand_var(t_minishell *ms, char **split, int i)
+static char	*ft_tryexpansion(t_minishell *ms, char *string)
 {
-	char	*new_string;
-	t_env	*var;
-	char	*var_name;
-	int		var_len;
-	int		j;
+	int		ret;
+	int		single_q;
+	int		double_q;
 
-	j = ft_findchr(split[i], '$') + 1;
-	var_len = ft_strlen(&(split[i][j]));
-	var_name = (char *) malloc(sizeof(char *) * (var_len + 1));
-	ft_strlcpy(var_name, split[i], var_len);
-	j = ft_findchr(var_name, '\"');
-	if (j > 0)
-		var_name[j] = '\0';
-	var = ft_env_find(ms->envs, var_name);
-	if (var != NULL)
-		new_string = ft_strdup(var->value);
+	ret = ft_findchr(string, "$");
+	if (ret < 0)
+		return (string);
 	else
 	{
-		var = ft_env_find(ms->vars, var_name);
-		if (!var)
-			new_string = NULL;
+		single_q = ft_findchr(string, '\'');
+		double_q = ft_findchr(string, '"');
+		if (single_q >= 0 && (double_q < 0 || (double_q > single_q)))
+			return (string);
 		else
-			new_string = ft_strdup(var->value);
+			return (ft_expansion(ms, string, ret + 1));
 	}
-	free (split[i]);
-	free (var_name);
-	return (new_string);
-}
-
-static char	*ft_tryexpansion(t_minishell *ms, char **split, int i)
-{
-	int	ret;
-
-	if (ft_findchr(split[i], '$'))
-	{
-		ret = ft_quote_case(split, i, '\'');
-		if (ret < 0)
-			return (ft_handle_openquote(ms, split, i, "\'"));
-		else if (ret > 0)
-			return (split[i]);
-		else if (!ret)
-		{
-			ret = ft_quote_case(split, i, '\"');
-			if (ret > 0 || ret == 0)
-				return (ft_expand_var(ms, split, i));
-			else if (ret < 0)
-			{
-				return (ft_handle_openquote(ms, split, i, '\"'));
-				return (NULL);
-			}
-		}
-	}
-	return (split[i]);
 }
 
 char	**ft_rearrange_line(t_minishell *ms, char **split)
@@ -87,9 +66,19 @@ char	**ft_rearrange_line(t_minishell *ms, char **split)
 		i++;
 	while (split[i + j])
 	{
-		split[i + j] = ft_tryexpansion(ms, split, (i + j));
-		if (!split)
+		split[i + j] = ft_tryexpansion(ms, split[i + j]);
+		if (!split[i + j])
 			return (NULL);
 		j++;
 	}
+	new_split = (char **) malloc(sizeof(char *) * (j + 1));
+	j = 0;
+	while (split[i + j])
+	{
+		new_split[j] = ft_strdup(split[i + j]);
+		j++;
+	}
+	new_split[j] = NULL;
+	ft_matrix_destroy(split);
+	return (new_split);
 }

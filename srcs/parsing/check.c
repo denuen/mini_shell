@@ -6,12 +6,14 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 17:05:20 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/24 19:35:20 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
+
+char	**ft_rearrange_line(t_minishell *ms, char **split);
 
 static	void ft_get_vars(t_minishell *ms, char **split, int *i)
 {

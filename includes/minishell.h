@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/24 17:13:37 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/24 23:16:48 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int		ms_executor(t_node *node);
 int		ms_cd(t_node *node, t_minishell *ms);
 int		ms_echo(t_node *node, t_minishell *ms);
 int		ms_pwd(t_node *node, t_minishell *ms);
+int		ms_unset(t_node *node, t_minishell *ms);
+
 
 //General utils
 int		ft_findchr(const char *s, char c);

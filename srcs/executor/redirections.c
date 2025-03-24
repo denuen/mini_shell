@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/24 08:40:02 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:17:41 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int	ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms)
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
+		sig_check();
 		status = ms_executor(left);
 		close(fd);
 		exit(status);
 	}
 	wait(&status);
+	sig_check();
 	status = WEXITSTATUS(status);
 	return (status);
 }
@@ -47,11 +49,13 @@ int	ms_fromfile_exec(t_node *left, t_node *right, t_minishell *ms)
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDIN_FILENO);
+		sig_check();
 		status = ms_executor(left);
 		close(fd);
 		exit(status);
 	}
 	wait(&status);
+	sig_check();
 	status = WEXITSTATUS(status);
 	return (status);
 }
@@ -70,11 +74,13 @@ int	ms_append_exec(t_node *left, t_node *right, t_minishell *ms)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
+		sig_check();
 		status = ms_executor(left);
 		exit(status);
 	}
 	wait(&status);
 	status = WEXITSTATUS(status);
+	sig_check();
 	return (status);
 }
 
@@ -91,6 +97,7 @@ int	ms_heredoc_exec(t_node *left, t_node *right, t_minishell *ms)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
+		sig_check();
 		write(STDOUT_FILENO, right->redir[0], ft_strlen(right->redir[0]));
 		write(STDOUT_FILENO, "\n", 1);
 		exit(0);
@@ -100,6 +107,7 @@ int	ms_heredoc_exec(t_node *left, t_node *right, t_minishell *ms)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
+		sig_check();
 		status = ms_executor(left);
 	}
 	return (status);

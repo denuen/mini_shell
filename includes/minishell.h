@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/21 11:36:13 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:12:22 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_minishell
 }	t_minishell;
 
 extern	char **environ;
+int		signal;
 //Check
 void	ms_validate_line(t_minishell *ms, char *line);
 
@@ -65,4 +66,7 @@ int		ms_pwd(t_node *node, t_minishell *ms);
 //General utils
 int		ft_findchr(const char *s, char c);
 t_env	*ft_get_envs(char **envp);
+
+//signals
+void	sig_check(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/24 10:14:16 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:05:01 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,5 @@ int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
 	sig_check();
 	if (status[0] == 0)
 		status[1] = ms_executor(right);
-	if (status[1] == 1)
-		status[1] = 0; //tutto ok, ancora da inserire che se l'executor ritorna 1 allora è un file
 	return (status[0] + status[1]);
 }

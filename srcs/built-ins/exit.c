@@ -6,16 +6,20 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:50:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/24 23:26:43 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:00:05 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdlib.h>
 
 int	ms_exit(t_minishell *ms)
 {
-	//It needs to be reviewed based on the implementation to check for the behaviour
-	//Key point: it should free all the object currently allocated and terminate all
-	//the processes.
-	//Maybe with a variadic approach?
+	if (ms->envs)
+		ft_env_destroy(ms->envs);
+	if (ms->vars)
+		ft_env_destroy(ms->vars);
+	if (ms->ast)
+		ft_ast_destroy(ms->ast);
+	exit (EXIT_FAILURE);
 }

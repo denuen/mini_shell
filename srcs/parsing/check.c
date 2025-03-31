@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/24 19:35:20 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:26:19 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 
 char	**ft_rearrange_line(t_minishell *ms, char **split);
 
-static	void ft_get_vars(t_minishell *ms, char **split, int *i)
+static void	ft_get_vars(t_minishell *ms, char **split, int *i)
 {
 	t_env	*new_var;
 	t_env	tmp;
 	int		divisor;
 
 	if (!ms || !split)
-		return;
+		return ;
 	while (split[*i])
 	{
 		divisor = ft_findchr(split[*i], '=');
 		if (divisor < 0)
 			break ;
 		tmp.name = ft_substr(split[*i], 0, divisor);
-		tmp.value = ft_strdup(split[*i][divisor + 1]);
+		tmp.value = ft_strdup(&split[*i][divisor + 1]);
 		new_var = ft_new_env(tmp.name, tmp.value);
 		if (new_var)
 			ft_env_addordered(&ms->vars, new_var);
@@ -45,20 +45,20 @@ void	ms_validate_line(t_minishell *ms, char *line)
 	int		i;
 
 	i = 0;
-	split = ft_split(line, ' ');
+	split = ms_split(line, ' ');
 	ft_get_vars(ms, split, &i);
 	split = ft_rearrange_line(ms, split);
 	while (split[i])
 	{
-		if (ms_validate_cmd(&ms, split, &i))
-			continue;
-		else if (ms_validate_redir(&ms, split, &i))
-			continue;
-		else if (ms_validate_op(&ms, split, &i))
-			continue;
+		if (ms_validate_cmd(ms, split, &i))
+			continue ;
+		else if (ms_validate_redir(ms, split, &i))
+			continue ;
+		else if (ms_validate_op(ms, split, &i))
+			continue ;
 		else
 			ft_input_error(line, ms, split, i);
 	}
-	ft_matrix_destroy(split);
+	ft_matrix_destroy((void **)split);
 	free(line);
 }

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/25 10:01:55 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:06:51 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_minishell
 
 extern	char **environ;
 int		signal;
+
 //Check
 void	ms_validate_line(t_minishell *ms, char *line);
 

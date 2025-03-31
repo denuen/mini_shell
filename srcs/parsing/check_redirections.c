@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:49:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/19 10:51:13 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:26:41 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	**ft_assignredir(char **split, int start, int *tokens)
 	return (redir);
 }
 
-int	ms_validate_redir(char **split, t_minishell *ms, int *i)
+int	ms_validate_redir(t_minishell *ms, char **split, int *i)
 {
 	char	**redir;
 	int		tokens;
@@ -58,6 +58,6 @@ int	ms_validate_redir(char **split, t_minishell *ms, int *i)
 	}
 	redir[tokens] = NULL;
 	*i += tokens;
-	ft_ast_insertnode(&(ms->ast), ft_ast_newredir(redir));
+	ms->ast = ft_ast_insertnode(ms->ast, ft_ast_newredir(redir[0]));
 	return (1);
 }

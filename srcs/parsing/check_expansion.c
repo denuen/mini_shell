@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_expansion.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/31 23:24:29 by apintaur          #+#    #+#             */
+/*   Updated: 2025/03/31 23:36:53 by apintaur         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
@@ -5,6 +17,19 @@
 ' $ ' -> non espandibile
 " $ " -> espandibile
 */
+
+static char	*ms_replace_expline(char *env_value, char *line, int start, int end)
+{
+	char	*tmp_value;
+
+	if (start > 0)
+		tmp_value = ms_strnjoin(NULL, line, start - 1);
+	else
+		tmp_value = ft_strdup("");
+	tmp_value = ms_strnjoin(tmp_value, env_value, ft_strlen(env_value));
+	tmp_value = ms_strnjoin(tmp_value, &(line[end]), ft_strlen(&line[end]));
+	return (tmp_value);
+}
 
 static char	*ft_expansion(t_minishell *ms, char *string, int start)
 {
@@ -14,33 +39,28 @@ static char	*ft_expansion(t_minishell *ms, char *string, int start)
 	int		end;
 
 	end = start;
-	while (string[end] != ' ' && string[end] != '"')
+	while (string[end] && string[end] != ' ' && string[end] != '"')
 		end++;
 	tmp.name = ft_substr(string, start, end - start);
 	to_find = ft_env_find(ms->envs, tmp.name);
 	if (!to_find)
 		to_find = ft_env_find(ms->vars, tmp.name);
 	if (to_find)
-	{
-		//Temporary string
-		tmp.value = ms_strnjoin(NULL, string, start - 1);
-		tmp.value = ms_strnjoin(tmp.value, to_find->value, ft_strlen(to_find->value));
-		tmp.value = ms_strnjoin(tmp.value, &(string[end]), ft_strlen(string));
-	}
+		tmp.value = ms_replace_expline(to_find->value, string, start, end);
 	else
 		tmp.value = ft_strdup(string);
-	free (tmp.name);
-	free (string);
+	free(tmp.name);
+	free(string);
 	return (tmp.value);
 }
 
 static char	*ft_tryexpansion(t_minishell *ms, char *string)
 {
-	int		ret;
-	int		single_q;
-	int		double_q;
+	int	ret;
+	int	single_q;
+	int	double_q;
 
-	ret = ft_findchr(string, "$");
+	ret = ft_findchr(string, '$');
 	if (ret < 0)
 		return (string);
 	else
@@ -71,7 +91,7 @@ char	**ft_rearrange_line(t_minishell *ms, char **split)
 			return (NULL);
 		j++;
 	}
-	new_split = (char **) malloc(sizeof(char *) * (j + 1));
+	new_split = (char **)malloc(sizeof(char *) * (j + 1));
 	j = 0;
 	while (split[i + j])
 	{

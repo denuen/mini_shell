@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/19 14:47:33 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:42:20 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,23 @@ t_env	*ft_get_envs(char **envp)
 	return (envs);
 }
 
+char	*ms_strnjoin(char *s1, const char *s2, int n)
+{
+	char	*joined;
 
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (s1);
+	if (n > ft_strlen(s2))
+		n = ft_strlen(s2);
+	joined = (char *) malloc(ft_strlen(s1) + n + 1);
+	if (!joined)
+		return (NULL);
+	ft_strlcpy(joined, s1, ft_strlen(s1) + 1);
+	ft_strlcat(joined, s2, n + 1);
+	free (s1);
+	return (joined);
+}

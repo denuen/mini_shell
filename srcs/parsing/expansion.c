@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_expansion.c                                  :+:      :+:    :+:   */
+/*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 23:24:29 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/31 23:36:53 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:57:10 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
+#define SINGLE_QUOTE	0
+#define DOUBLE_QUOTE	1
+#define DOLLAR			2
+#define WILDCARD		3
+
 /*
 ' $ ' -> non espandibile
 " $ " -> espandibile
 */
+
+// Dichiarazione della funzione wildcard esterna
+char	*ms_handlewildcard(char *string);
 
 static char	*ms_replace_expline(char *env_value, char *line, int start, int end)
 {
@@ -56,22 +64,26 @@ static char	*ft_expansion(t_minishell *ms, char *string, int start)
 
 static char	*ft_tryexpansion(t_minishell *ms, char *string)
 {
-	int	ret;
-	int	single_q;
-	int	double_q;
+	char	*expanded;
+	int		checks[4];
 
-	ret = ft_findchr(string, '$');
-	if (ret < 0)
+	checks[DOLLAR] = ft_findchr(string, '$');
+	checks[WILDCARD] = ft_findchr(string, '*');
+	if (checks[DOLLAR] < 0 && checks[WILDCARD] < 0)
 		return (string);
-	else
+	if (checks[DOLLAR] > 0)
 	{
-		single_q = ft_findchr(string, '\'');
-		double_q = ft_findchr(string, '"');
-		if (single_q >= 0 && (double_q < 0 || (double_q > single_q)))
-			return (string);
+		checks[SINGLE_QUOTE] = ft_findchr(string, '\'');
+		checks[DOUBLE_QUOTE] = ft_findchr(string, '"');
+		if (checks[SINGLE_QUOTE] >= 0 && (checks[DOUBLE_QUOTE] < 0
+				|| (checks[DOUBLE_QUOTE] > checks[SINGLE_QUOTE])))
+			expanded = string;
 		else
-			return (ft_expansion(ms, string, ret + 1));
+			expanded = ft_expansion(ms, string, checks[DOLLAR] + 1);
 	}
+	if (checks[WILDCARD] > 0)
+		expanded = ms_handlewildcard(string);
+	return (expanded);
 }
 
 char	**ft_rearrange_line(t_minishell *ms, char **split)

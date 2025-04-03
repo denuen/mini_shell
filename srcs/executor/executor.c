@@ -6,7 +6,7 @@
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/24 08:06:57 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:40:29 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	ft_operator_exec(t_node *node, t_minishell *ms)
 {
 	int	status;
 
-	if (node->op == "|")
+	if (ft_strncmp(node->op, "|", ft_strlen(node->op)) == 0)
 		status = ms_pipe_exec(node->left, node->right, ms);
-	else if (node->op == "||")
+	else if (ft_strncmp(node->op, "||", ft_strlen(node->op)) == 0)
 		status = ms_or_exec(node->left, node->right, ms);
-	else if (node->op == "&")
+	else if (ft_strncmp(node->op, "&", ft_strlen(node->op)) == 0)
 		status = ms_bg_exec(node->left, node->right, ms);
-	else if (node->op == "&&")
+	else if (ft_strncmp(node->op, "&&", ft_strlen(node->op)) == 0)
 		status = ms_and_exec(node->left, node->right, ms);
 }
 
@@ -30,13 +30,13 @@ int	ft_redirection_exec(t_node *node, t_minishell *ms)
 {
 	int	status;
 
-	if (node->redir == ">")
+	if (ft_strncmp(node->redir[0], ">", ft_strlen(node->redir[0])) == 0)
 		status = ms_tofile_exec(node->left, node->right, ms);
-	else if (node->redir == "<")
+	else if (ft_strncmp(node->redir[0], "<", ft_strlen(node->redir[0])) == 0)
 		status = ms_fromfile_exec(node->left, node->right, ms);
-	else if (node->redir == ">>")
+	else if (ft_strncmp(node->redir[0], ">>", ft_strlen(node->redir[0])) == 0)
 		status = ms_append_exec(node->left, node->right, ms);
-	else if (node->redir == "<<")
+	else if (ft_strncmp(node->redir[0], "<<", ft_strlen(node->redir[0])) == 0)
 		status = ms_heredoc_exec(node->left, node->right, ms);
 }
 
@@ -65,13 +65,13 @@ int	ft_commmand_exec(t_node *node, t_minishell *ms)
 {
 	int	status;
 
-	if (node->cmd[0] == "cd")
-		status = ms_cd(node, ms);
-	else if (node->cmd[0] == "echo")
-		status = ms_echo(node, ms);
-	else if (node->cmd[0] == "pwd")
-		status = ms_pwd(node, ms);
-	else if (node->cmd[0] == "export")
+	if (ft_strncmp(node->cmd[0], "cd", ft_strlen(node->cmd[0])) == 0)
+		status = ms_cd(node);
+	else if (ft_strncmp(node->cmd[0], "echo", ft_strlen(node->cmd[0])) == 0)
+		status = ms_echo(node);
+	else if (ft_strncmp(node->cmd[0], "pwd", ft_strlen(node->cmd[0])) == 0)
+		status = ms_pwd(node);
+	else if (ft_strncmp(node->cmd[0], "export", ft_strlen(node->cmd[0])) == 0)
 		status = ms_export(node, ms);
 	else
 		status = ms_extern(node, ms);

@@ -6,19 +6,19 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/03 14:15:47 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:25:36 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <stdlib.h>
 
-extern int sgl;
+int sgl;
 
 int main(int argc, char **argv, char **envp)
 {
-	t_minishell ms;
-	char       *line;
+	t_minishell	ms;
+	char		*line;
 
 	(void)argc;
 	(void)argv;
@@ -27,13 +27,16 @@ int main(int argc, char **argv, char **envp)
 	// Check iniziali, su argc e argv
 	ms.envs = ft_get_envs(envp);
 	ms.vars = NULL;
-	readline(line);
+
+	line = readline("scrivi> ");
+	ft_printf("\n");
 	while (line)
 	{
 		ms_validate_line(&ms, line);
 		free(line);
 		line = NULL;
-		readline(line);
+		ft_printf("\n");
+		line = readline("scrivi> ");
 	}
 	ft_ast_destroy(ms.ast);
 	ft_env_destroy(ms.envs);

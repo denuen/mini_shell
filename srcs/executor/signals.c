@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdlib.h>
 
 void sig_handler(int sig, siginfo_t *info, void *void_ms)
 {
@@ -23,11 +24,13 @@ void sig_handler(int sig, siginfo_t *info, void *void_ms)
 	}
 	(void)info;
 	ms = (t_minishell *)void_ms;
+	(void)ms;
 }
 
 int signal_receiver(t_minishell *ms)
 {
 	struct sigaction sa;
+	(void)ms;
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = sig_handler;

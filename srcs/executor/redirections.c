@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/24 10:17:41 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:07:25 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdlib.h>
 
 int	ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms)
 {
@@ -26,7 +27,7 @@ int	ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
 		sig_check();
-		status = ms_executor(left);
+		status = ms_executor(left, ms);
 		close(fd);
 		exit(status);
 	}
@@ -50,7 +51,7 @@ int	ms_fromfile_exec(t_node *left, t_node *right, t_minishell *ms)
 			exit(-1);
 		dup2(fd, STDIN_FILENO);
 		sig_check();
-		status = ms_executor(left);
+		status = ms_executor(left, ms);
 		close(fd);
 		exit(status);
 	}
@@ -75,7 +76,7 @@ int	ms_append_exec(t_node *left, t_node *right, t_minishell *ms)
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		sig_check();
-		status = ms_executor(left);
+		status = ms_executor(left, ms);
 		exit(status);
 	}
 	wait(&status);
@@ -108,7 +109,7 @@ int	ms_heredoc_exec(t_node *left, t_node *right, t_minishell *ms)
 		close(fd[0]);
 		close(fd[1]);
 		sig_check();
-		status = ms_executor(left);
+		status = ms_executor(left, ms);
 	}
 	return (status);
 }

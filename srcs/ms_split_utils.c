@@ -14,8 +14,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-static int	ms_wait_for_eof(char *s, char *open, int *i);
-char		**ms_ssalloc(const char *s, const char c);
+int		ms_wait_for_eof(char *s, char *open, int *i);
+char	**ms_ssalloc(const char *s, const char c);
 
 void	ms_counter(char s, char *open, size_t *cnt, int *i)
 {

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:47:50 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/03 14:17:04 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:21:41 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static size_t	ms_wordcounter(const char *s, const char c);
 int				ms_split_checks(char *s, char *open, int *i);
 char			**ms_ssalloc(const char *s, const char c);
 static void		*ms_ssdestroy(char **ss);
-int	ms_wait_for_eof(char *s, char *open, int *i);
+int				ms_wait_for_eof(char *s, char *open, int *i);
 
 char	**ms_split(const char *s, char c)
 {

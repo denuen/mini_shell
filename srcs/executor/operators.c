@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/25 10:05:01 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:06:37 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdlib.h>
 
 int	ms_or_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	int	status;
 
 	sig_check();
-	status = ms_executor(left);
+	status = ms_executor(left, ms);
 	sig_check();
 	if (status != 0)
-		status = ms_executor(right);
+		status = ms_executor(right, ms);
 	return (status);
 }
 
@@ -34,11 +35,11 @@ int	ms_bg_exec(t_node *left, t_node *right, t_minishell *ms)
 	if (pid == 0)
 	{
 		sig_check();
-		status[0] = ms_executor(left);
+		status[0] = ms_executor(left, ms);
 		exit(status[0]);
 	}
 	sig_check();
-	status[1] = ms_executor(right);
+	status[1] = ms_executor(right, ms);
 	wait(&status[0]);
 	status[0] = WEXITSTATUS(status[0]);
 	return (status[0] + status[1]);
@@ -59,7 +60,7 @@ int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
 		sig_check();
-		status[0] = ms_executor(left);
+		status[0] = ms_executor(left, ms);
 		exit(status[0]);
 	}
 	dup2(pipefd[0], STDIN_FILENO);
@@ -68,8 +69,8 @@ int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 	wait(&status[0]);
 	status[0] = WEXITSTATUS(status[0]);
 	sig_check();
-	status[1] = ms_executor(right);
-	return (status[1]);	
+	status[1] = ms_executor(right, ms);
+	return (status[1]);
 }
 
 int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
@@ -81,7 +82,7 @@ int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
 	pid = fork();
 	if (pid == 0)
 	{
-		status[0] = ms_executor(left);
+		status[0] = ms_executor(left, ms);
 		sig_check();
 		exit(status[0]);
 	}
@@ -89,6 +90,6 @@ int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
 	status[0] = WEXITSTATUS(status[0]);
 	sig_check();
 	if (status[0] == 0)
-		status[1] = ms_executor(right);
+		status[1] = ms_executor(right, ms);
 	return (status[0] + status[1]);
 }

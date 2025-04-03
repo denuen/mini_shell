@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/03 14:56:57 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:03:29 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_redirection_exec(t_node *node, t_minishell *ms)
 	return (status);
 }
 
-int	ms_extern(t_node *node, t_minishell *ms)
+int	ms_extern(t_node *node)
 {
 	int	status;
 	pid_t	pid;
@@ -85,7 +85,7 @@ int	ft_commmand_exec(t_node *node, t_minishell *ms)
 	else if (ft_strncmp(node->cmd[0], "export", ft_strlen(node->cmd[0])) == 0)
 		status = ms_export(node, ms);
 	else
-		status = ms_extern(node, ms);
+		status = ms_extern(node);
 	return (status);
 }
 

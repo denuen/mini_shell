@@ -1,6 +1,6 @@
 NAME		= mini_shell
 CC			= gcc
-FLAGS		= -Wall -Wextra -Werror
+FLAGS		= -g -Wall -Wextra -Werror
 SRCS_DIR	= srcs/
 BUILT-IN_DIR = $(SRCS_DIR)built-ins/
 AST_DIR = $(SRCS_DIR)data_structures/ast/
@@ -35,7 +35,7 @@ OBJS		= $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(DIR_LIBFT)

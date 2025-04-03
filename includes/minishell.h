@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/03 14:39:29 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:18:33 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <stdio.h>
 typedef struct s_minishell
 {
 	t_node	*ast;
@@ -33,7 +34,7 @@ typedef struct s_minishell
 }	t_minishell;
 
 extern char	**environ;
-int			sgl;
+extern int			sgl;
 
 // Check
 void	ms_validate_line(t_minishell *ms, char *line);
@@ -57,11 +58,12 @@ void	ft_output(char *str);
 void	ft_output_error(char *command, char *info);
 
 // executor
-int		ms_executor(t_node *node);
+int		ms_executor(t_node *node, t_minishell *ms);
 
 // built ins
 int		ms_cd(t_node *node);
 int		ms_echo(t_node *node);
+int		ms_export(t_node *node, t_minishell *ms);
 int		ms_pwd(t_node *node);
 int		ms_unset(t_node *node, t_minishell *ms);
 int		ms_exit(t_minishell *ms);

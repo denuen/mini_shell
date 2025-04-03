@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/03 15:25:36 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:35:19 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **envp)
 	while (line)
 	{
 		ms_validate_line(&ms, line);
-		free(line);
+		ms_executor(ms.ast, &ms);
 		line = NULL;
 		ft_printf("\n");
 		line = readline("scrivi> ");

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 23:24:29 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/01 15:57:10 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:38:54 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*ms_replace_expline(char *env_value, char *line, int start, int end)
 static char	*ft_expansion(t_minishell *ms, char *string, int start)
 {
 	t_env	*to_find;
-	char	*join;
+	// char	*join;
 	t_env	tmp;
 	int		end;
 
@@ -111,6 +111,6 @@ char	**ft_rearrange_line(t_minishell *ms, char **split)
 		j++;
 	}
 	new_split[j] = NULL;
-	ft_matrix_destroy(split);
+	ft_matrix_destroy((void**)split);
 	return (new_split);
 }

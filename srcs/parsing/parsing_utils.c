@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:33:02 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/01 15:33:45 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:40:37 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ms_isexecutable(const char *s)
 	paths = ft_split(string, ':');
 	if (!paths)
 		return (NULL);
-	ft_normalizepaths(&paths, s);
+	ft_normalizepaths(&paths, (char *)s);
 	while (paths[i])
 	{
 		if (!access(paths[i], F_OK | X_OK))
@@ -67,7 +67,7 @@ char	*ms_isbuiltin(const char *s)
 		|| !ft_strncmp(s, "pwd", len) || !ft_strncmp(s, "export", len)
 		|| !ft_strncmp(s, "unset", len) || !ft_strncmp(s, "env", len)
 		|| !ft_strncmp(s, "exit", len))
-		return (s);
+		return ((char*)s);
 	return (NULL);
 }
 
@@ -81,7 +81,7 @@ char	*ms_isop(const char *s)
 	if (!ft_strncmp(s, "||", len) || !ft_strncmp(s, "&&", len)
 		|| !ft_strncmp(s, "|", len) || !ft_strncmp(s, "&", len)
 		|| !ft_strncmp(s, "*", len))
-		return (s);
+		return ((char*)s);
 	return (NULL);
 }
 
@@ -94,7 +94,7 @@ char	*ms_isredir(const char *s)
 	len = ft_strlen(s);
 	if (!ft_strncmp(s, "<", len) || !ft_strncmp(s, ">", len)
 		|| !ft_strncmp(s, "<<", len) || !ft_strncmp(s, ">>", len))
-		return (s);
+		return ((char*)s);
 	return (NULL);
 }
 

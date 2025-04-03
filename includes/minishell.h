@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/03 15:18:33 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:34:06 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <stdio.h>
+
 typedef struct s_minishell
 {
 	t_node	*ast;
@@ -34,7 +35,7 @@ typedef struct s_minishell
 }	t_minishell;
 
 extern char	**environ;
-extern int			sgl;
+extern int	sgl;
 
 // Check
 void	ms_validate_line(t_minishell *ms, char *line);

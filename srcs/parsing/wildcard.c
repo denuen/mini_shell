@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:13:34 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/03 14:41:41 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:28:15 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	ms_match_segments(char **segments, char *filename)
 {
 	int	i;
 	int	last_pos;
-	// int	segment_len;
 	int	found;
 
 	i = 0;
@@ -34,7 +33,6 @@ static int	ms_match_segments(char **segments, char *filename)
 			i++;
 		else
 		{
-			// segment_len = ft_strlen(segments[i]);
 			found = ms_find_segment(segments[i], filename, &last_pos);
 			if (!found)
 				return (0);

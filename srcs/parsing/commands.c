@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:48:31 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/03 14:38:24 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:28:46 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_assigncmd_args(char **split, int start, int tokens, char ***cmd)
 		(*cmd)[i] = ft_strdup(split[start + i]);
 		if (!(*cmd)[i])
 		{
-			ft_matrix_destroy((void**)(*cmd));
+			ft_matrix_destroy((void **)(*cmd));
 			(*cmd) = NULL;
 			break ;
 		}

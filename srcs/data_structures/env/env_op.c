@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:05:35 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/24 23:07:22 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:27:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ void	ft_env_print(t_env *envs)
 	}
 }
 
-void ft_env_remove(t_env **envs, char *name)
+void	ft_env_remove(t_env **envs, char *name)
 {
-	t_env *lst;
-	t_env *prev;
+	t_env	*lst;
+	t_env	*prev;
 
 	if (!envs || !*envs || !name)
-		return;
+		return ;
 	lst = *envs;
 	prev = NULL;
 	if (!ft_strncmp(lst->name, name, ft_strlen(name) + 1))
@@ -111,7 +111,7 @@ void ft_env_remove(t_env **envs, char *name)
 			lst = lst->next;
 		}
 		if (!lst)
-			return;
+			return ;
 		prev->next = lst->next;
 	}
 	free(lst->name);

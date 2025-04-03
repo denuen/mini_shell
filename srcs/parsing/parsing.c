@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/01 15:33:52 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:29:32 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,4 @@ void	ms_validate_line(t_minishell *ms, char *line)
 			ft_input_error(line, ms, split, i);
 	}
 	ft_matrix_destroy((void **)split);
-	free(line);
 }

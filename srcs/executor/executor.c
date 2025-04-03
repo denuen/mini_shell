@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/03 14:49:09 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:56:57 by ahabdelr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ int	ms_extern(t_node *node, t_minishell *ms)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (ft_strlen_arr(node->cmd) == 2)
-			execve(node->cmd[0], &node->cmd[1], environ);
-		else
-			execve(node->cmd[0], NULL, environ);
+		execve(node->cmd[0], node->cmd, environ);
 		perror("Error executing command");
 		exit(-1);
 	}

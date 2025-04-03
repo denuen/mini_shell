@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/25 10:06:51 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:31:48 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ typedef struct s_minishell
 	t_env	*vars;
 }	t_minishell;
 
-extern	char **environ;
-int		signal;
+extern char	**environ;
+int			sgl;
 
-//Check
+// Check
 void	ms_validate_line(t_minishell *ms, char *line);
 
 int		ms_validate_cmd(t_minishell *ms, char **split, int *i);
 int		ms_validate_op(t_minishell *ms, char **split, int *i);
 int		ms_validate_redir(t_minishell *ms, char **split, int *i);
 
-//Check utils
+// Check utils
 char	*ms_isexecutable(const char *s);
 char	*ms_isbuiltin(const char *s);
 char	*ms_isop(const char *s);
 char	*ms_isredir(const char *s);
 
-//Parsing errors
+// Parsing errors
 int		ft_matrix_destroy(void **ptr);
 void	ft_input_error(char *line, t_minishell *ms, char **split, int i);
 
@@ -60,20 +60,18 @@ void	ft_output_error(char *command, char *info);
 int		ms_executor(t_node *node);
 
 // built ins
-int		ms_cd(t_node *node, t_minishell *ms);
-int		ms_echo(t_node *node, t_minishell *ms);
-int		ms_pwd(t_node *node, t_minishell *ms);
+int		ms_cd(t_node *node);
+int		ms_echo(t_node *node);
+int		ms_pwd(t_node *node);
 int		ms_unset(t_node *node, t_minishell *ms);
 int		ms_exit(t_minishell *ms);
 int		ms_env(t_env *envs);
 
-
-
-//General utils
+// General utils
 int		ft_findchr(const char *s, char c);
 char	*ms_strnjoin(char *s1, const char *s2, int n);
 t_env	*ft_get_envs(char **envp);
 
-//signals
+// signals
 void	sig_check(void);
 #endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   sgls.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,39 +12,40 @@
 
 #include "../../includes/minishell.h"
 
-void	sig_handler(int sig, siginfo_t *info, void *void_ms)
+void sig_handler(int sig, siginfo_t *info, void *void_ms)
 {
-	t_minishell	*ms;
+	t_minishell *ms;
 
 	if (sig == SIGINT)
 	{
-		signal = 1;
+		sgl = 1;
 		ft_putstr_fd("\n", 1);
 	}
 	(void)info;
 	ms = (t_minishell *)void_ms;
 }
 
-int	signal_receiver(t_minishell *ms)
+int signal_receiver(t_minishell *ms)
 {
-	struct sigaction	sa;
+	struct sigaction sa;
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = sig_handler;
 	sigemptyset(&sa.sa_mask);
 	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
-	perror("Error registering SIGINT handler");
-	return -1;
+		perror("Error registering SIGINT handler");
+		return -1;
 	}
 	return 0;
 }
 
-void	sig_check(void)
+void sig_check(void)
 {
-	if (signal == 1)
+	if (sgl == 1)
 		exit(1);
 }
 
-//la funzione di signal handling va inserita nella funzione d'esecuzione madre, quella che creerà
-// un processo apposito per lo svolgimento dell'albero binario
+// la funzione di signal handling va inserita nella funzione d'esecuzione madre,
+// quella che creerà
+//  un processo apposito per lo svolgimento dell'albero binario

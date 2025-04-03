@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:08 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 14:20:05 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:32:06 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # define ENVS 0
 # define VARS 1
 
-# include "libft/includes/libft.h"
-typedef	struct s_node
+# include "../libft/includes/libft.h"
+
+typedef struct s_node
 {
 	int				type;
 	char			**cmd;
@@ -36,7 +37,7 @@ typedef	struct s_node
 // Ast memory management
 t_node	*ft_ast_newcommand(char **cmd);
 t_node	*ft_ast_newop(char *op);
-t_node	*ft_ast_newredir(char *redir);
+t_node	*ft_ast_newredir(char **redir);
 void	ft_ast_destroy(t_node *node);
 
 // Ast operations

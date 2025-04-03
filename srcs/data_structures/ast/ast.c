@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:05 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/18 14:18:26 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:26:00 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_node	*ft_ast_newop(char *op)
 	return (new_node);
 }
 
-t_node	*ft_ast_newredir(char *redir)
+t_node	*ft_ast_newredir(char **redir)
 {
 	t_node	*new_node;
 
@@ -97,8 +97,6 @@ void	ft_ast_destroy(t_node *node)
 
 void	ft_ast_printtree(t_node *node)
 {
-	int	i;
-
 	if (!node)
 		return ;
 	if (node->left)

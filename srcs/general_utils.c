@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/01 16:42:20 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:11:48 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_env	*ft_get_envs(char **envp)
 		if (divisor < 0)
 			break ;
 		tmp.name = ft_substr(envp[i], 0, divisor);
-		tmp.value = ft_strdup(envp[i][divisor + 1]);
+		tmp.value = ft_strdup(&(envp[i][divisor + 1]));
 		new_env = ft_new_env(tmp.name, tmp.value);
 		if (new_env)
 			ft_env_addback(&envs, new_env);
@@ -68,6 +68,7 @@ t_env	*ft_get_envs(char **envp)
 char	*ms_strnjoin(char *s1, const char *s2, int n)
 {
 	char	*joined;
+	int		len;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -75,8 +76,9 @@ char	*ms_strnjoin(char *s1, const char *s2, int n)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (s1);
-	if (n > ft_strlen(s2))
-		n = ft_strlen(s2);
+	len = ft_strlen(s2);
+	if (n > len)
+		n = len;
 	joined = (char *) malloc(ft_strlen(s1) + n + 1);
 	if (!joined)
 		return (NULL);

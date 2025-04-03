@@ -19,6 +19,7 @@ char		**ms_ssalloc(const char *s, const char c);
 
 void	ms_counter(char s, char *open, size_t *cnt, int *i)
 {
+	(void)i;
 	if (s == '\0')
 		return ;
 	if ((s == '"' || s == '\'') && *open == '\0')
@@ -76,7 +77,7 @@ static char	*ms_set_waitingparams(char *s, int *i, char **kw, char **endl)
 	return (ft_strdup(""));
 }
 
-static int	ms_wait_for_eof(char *s, char *open, int *i)
+int	ms_wait_for_eof(char *s, char *open, int *i)
 {
 	char	*line;
 	char	*joined;

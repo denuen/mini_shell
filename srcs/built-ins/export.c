@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahabdelr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:14:35 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/03/19 12:39:42 by ahabdelr         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:22:12 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_env_arg(char *name, t_node *node, t_minishell *ms)
 {
 	t_env	*env;
 	t_env	*var;
-	
+
 	env = ft_env_find(ms->envs, name);
 	if (env)
 	{
@@ -29,15 +29,16 @@ int	ft_env_arg(char *name, t_node *node, t_minishell *ms)
 		if (var)
 		{
 			var = ft_new_env(var->name, var->value);
-			ft_env_addordered(ms->envs, var);
+			ft_env_addordered(&ms->envs, var);
 			return (0);
 		}
 		else
 		{
 			var = ft_new_env(name, node->cmd[2]);
-			ft_env_addordered(ms->envs, var);
+			ft_env_addordered(&ms->envs, var);
 		}
 	}
+	return (1);
 }
 
 int	ms_export(t_node *node, t_minishell *ms)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/04 00:34:10 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:19:04 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ int ft_commmand_exec(t_node *node, t_minishell *ms)
 		status = ms_pwd(node);
 	else if (ft_strncmp(node->cmd[0], "export", ft_strlen(node->cmd[0])) == 0)
 		status = ms_export(node, ms);
+	else if (ft_strncmp(node->cmd[0], "exit", ft_strlen(node->cmd[0])) == 0)
+		status = ms_exit(ms);
+	else if (ft_strncmp(node->cmd[0], "unset", ft_strlen(node->cmd[0])) == 0)
+		status = ms_unset(node, ms);
+	else if (ft_strncmp(node->cmd[0], "env", ft_strlen(node->cmd[0])) == 0)
+		status = ms_env(ms->envs);
 	else
 		status = ms_extern(node);
 	return (status);

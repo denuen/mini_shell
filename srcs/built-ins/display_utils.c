@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:06:56 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/03 14:20:01 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:57:32 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	ft_output_error(char *command, char *info)
 {
 		rl_on_new_line();
-		printf("%s: %s: %s", command, strerror(errno), info);
+		ft_printf("%s: %s: %s", command, strerror(errno), info);
 		rl_on_new_line();
 		rl_redisplay();
 }
@@ -27,5 +27,4 @@ void	ft_output(char *str)
 		rl_replace_line(str, 0);
 		rl_redisplay();
 		rl_on_new_line();
-		rl_redisplay();
 }

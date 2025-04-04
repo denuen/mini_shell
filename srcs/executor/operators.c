@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/03 15:06:37 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:22:59 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 	int	pipefd[2];
 	pid_t	pid;
 	int	status[2];
-
+	
+	//ft_printf("ciao\n");
 	status[1] = 0;
 	pipe(pipefd);
 	pid = fork();

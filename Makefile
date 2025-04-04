@@ -17,7 +17,7 @@ CFILES		 = general_utils.c main.c ms_split.c ms_split_utils.c \
 			$(BUILT-IN_DIR)exit.c $(BUILT-IN_DIR)export.c $(BUILT-IN_DIR)pwd.c $(BUILT-IN_DIR)unset.c \
 			$(AST_DIR)ast.c $(AST_DIR)ast_op.c $(ENV_DIR)env.c $(ENV_DIR)env_op.c \
 			$(EXECUTOR_DIR)executor.c $(EXECUTOR_DIR)operators.c $(EXECUTOR_DIR)redirections.c $(EXECUTOR_DIR)signals.c \
-			$(PARSING_DIR)commands.c $(PARSING_DIR)errors.c $(PARSING_DIR)expansion.c $(PARSING_DIR)operations.c \
+			$(PARSING_DIR)commands.c $(PARSING_DIR)errors.c $(PARSING_DIR)expansion.c $(PARSING_DIR)operators.c \
 			$(PARSING_DIR)parsing.c $(PARSING_DIR)parsing_utils.c $(PARSING_DIR)redirections.c \
 			$(PARSING_DIR)wildcard.c $(PARSING_DIR)wildcard_utils.c
 
@@ -26,7 +26,7 @@ SRCS		= $(addprefix $(SRCS_DIR), general_utils.c main.c ms_split.c ms_split_util
 			$(BUILT-IN_DIR)exit.c $(BUILT-IN_DIR)export.c $(BUILT-IN_DIR)pwd.c $(BUILT-IN_DIR)unset.c \
 			$(AST_DIR)ast.c $(AST_DIR)ast_op.c $(ENV_DIR)env.c $(ENV_DIR)env_op.c \
 			$(EXECUTOR_DIR)executor.c $(EXECUTOR_DIR)operators.c $(EXECUTOR_DIR)redirections.c $(EXECUTOR_DIR)signals.c \
-			$(PARSING_DIR)commands.c $(PARSING_DIR)errors.c $(PARSING_DIR)expansion.c $(PARSING_DIR)operations.c \
+			$(PARSING_DIR)commands.c $(PARSING_DIR)errors.c $(PARSING_DIR)expansion.c $(PARSING_DIR)operators.c \
 			$(PARSING_DIR)parsing.c $(PARSING_DIR)parsing_utils.c $(PARSING_DIR)redirections.c \
 			$(PARSING_DIR)wildcard.c $(PARSING_DIR)wildcard_utils.c
 

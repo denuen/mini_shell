@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:13:34 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 00:28:15 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:12:28 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <stdlib.h>
 
 // Dichiarazioni esterne delle funzioni in wildcard_utils.c
-int		ms_check_prefix(char *string, char *filename);
-int		ms_find_segment(char *segment, char *filename, int *last_pos);
-int		ms_check_suffix(char *string, char *filename, int s_len, int f_len);
+int	ms_check_prefix(char *string, char *filename);
+int	ms_find_segment(char *segment, char *filename, int *last_pos);
+int	ms_check_suffix(char *string, char *filename, int s_len, int f_len);
 
 static int	ms_match_segments(char **segments, char *filename)
 {
@@ -53,6 +53,8 @@ static int	ms_wdcard_match(char *string, char *filename)
 		return (0);
 	s_len = ft_strlen(string);
 	f_len = ft_strlen(filename);
+	if (s_len == 1 && string[0] == '*')
+		return (1);
 	if (!ms_check_prefix(string, filename))
 		return (0);
 	if (!ms_check_suffix(string, filename, s_len, f_len))
@@ -67,6 +69,13 @@ static int	ms_wdcard_match(char *string, char *filename)
 
 static void	ms_append_match(char **wdcard, char *filename)
 {
+	if (!filename || !wdcard)
+		return ;
+	if (*wdcard == NULL)
+	{
+		*wdcard = ft_strdup(filename);
+		return ;
+	}
 	*wdcard = ms_strnjoin(*wdcard, " ", 1);
 	*wdcard = ms_strnjoin(*wdcard, filename, ft_strlen(filename));
 }

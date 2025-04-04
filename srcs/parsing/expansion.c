@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 23:24:29 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 00:28:03 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 09:49:27 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ static char	*ft_tryexpansion(t_minishell *ms, char *string)
 
 	checks[DOLLAR] = ft_findchr(string, '$');
 	checks[WILDCARD] = ft_findchr(string, '*');
+	expanded = string;
+	if (checks[WILDCARD] > 0)
+		ft_printf("wildcard trovata\n");
 	if (checks[DOLLAR] < 0 && checks[WILDCARD] < 0)
 		return (string);
 	if (checks[DOLLAR] > 0)

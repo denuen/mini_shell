@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/03 14:11:48 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 09:48:32 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ t_env	*ft_get_envs(char **envp)
 char	*ms_strnjoin(char *s1, const char *s2, int n)
 {
 	char	*joined;
-	int		len;
+	int		s1_len;
+	int		s2_len;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -76,14 +77,15 @@ char	*ms_strnjoin(char *s1, const char *s2, int n)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (s1);
-	len = ft_strlen(s2);
-	if (n > len)
-		n = len;
-	joined = (char *) malloc(ft_strlen(s1) + n + 1);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	if (n > s2_len)
+		n = s2_len;
+	joined = (char *) malloc(s1_len + n + 1);
 	if (!joined)
 		return (NULL);
-	ft_strlcpy(joined, s1, ft_strlen(s1) + 1);
-	ft_strlcat(joined, s2, n + 1);
+	ft_strlcpy(joined, s1, s1_len + 1);
+	ft_strlcat(joined, s2, s1_len + n + 1);
 	free (s1);
 	return (joined);
 }

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:05 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 00:25:49 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 08:57:29 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	ft_ast_destroy(t_node *node)
 }
 
 /********************** Debugging zone **********************/
+void	ft_ast_printredir(t_node *node);
 
 void	ft_ast_printtree(t_node *node)
 {
@@ -108,7 +109,7 @@ void	ft_ast_printtree(t_node *node)
 	else if (node->type == OPERATOR)
 		ft_printf("Operator: %s\n", node->op);
 	else if (node->type == REDIRECTION)
-		ft_printf("Redirection: %s\n", node->redir);
+		ft_ast_printredir(node);
 }
 
 void	ft_ast_printcmd(t_node *node)
@@ -129,6 +130,28 @@ void	ft_ast_printcmd(t_node *node)
 				i++;
 			}
 			ft_printf("%s\n", node->cmd[i]);
+		}
+	}
+}
+
+void	ft_ast_printredir(t_node *node)
+{
+	int	i;
+
+	if (!node || node->type != REDIRECTION)
+		return ;
+	if (node->redir)
+	{
+		i = 0;
+		if (node->redir[i])
+		{
+			ft_printf("Redir: ");
+			while (node->redir[i + 1] != NULL)
+			{
+				ft_printf("%s ", node->redir[i]);
+				i++;
+			}
+			ft_printf("%s\n", node->redir[i]);
 		}
 	}
 }

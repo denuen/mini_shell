@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 00:29:32 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:32:21 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,20 @@ void	ms_validate_line(t_minishell *ms, char *line)
 	while (split[i])
 	{
 		if (ms_validate_cmd(ms, split, &i))
+		{
+			ft_printf("Validating cmd...\n");
 			continue ;
+		}
 		else if (ms_validate_redir(ms, split, &i))
+		{
+			ft_printf("Validating redir...\n");
 			continue ;
+		}
 		else if (ms_validate_op(ms, split, &i))
+		{
+			ft_printf("Validating op...\n");
 			continue ;
+		}
 		else
 			ft_input_error(line, ms, split, i);
 	}

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 04:19:12 by apintaur          #+#    #+#             */
-/*   Updated: 2024/12/15 22:26:34 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/06 17:51:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	size_t	s2_len;
 
 	if (!s1 && !s2)
-		return (malloc(0));
+		return (malloc(1));
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	new = (char *) malloc (sizeof(char) * (s1_len + s2_len + 1));

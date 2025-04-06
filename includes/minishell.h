@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 00:34:06 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/06 22:48:35 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include "env.h"
 # include <errno.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -74,7 +74,7 @@ int		ms_env(t_env *envs);
 int		ft_findchr(const char *s, char c);
 char	*ms_strnjoin(char *s1, const char *s2, int n);
 t_env	*ft_get_envs(char **envp);
-char	**ms_split(const char *s, char c);
+char	**ms_split(char *s, char c);
 
 // signals
 void	sig_check(void);

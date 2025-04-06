@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 21:42:27 by apintaur          #+#    #+#             */
-/*   Updated: 2025/01/07 14:08:46 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/06 17:51:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_strnjoin(char *s1, char *s2, ssize_t bytes)
 	size_t		i;
 
 	if (!s1 && !s2)
-		return (malloc(0));
+		return (malloc(1));
 	if (!s1 && s2)
 		return (ft_strndup(s2, bytes));
 	i = 0;

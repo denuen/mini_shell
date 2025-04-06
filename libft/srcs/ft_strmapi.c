@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:08:59 by apintaur          #+#    #+#             */
-/*   Updated: 2024/12/15 20:09:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/06 17:51:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strmapi(const char *s, char (*f) (unsigned int, char))
 
 	i = 0;
 	if (s == NULL)
-		return (malloc(0));
+		return (malloc(1));
 	new = (char *) malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (new == NULL)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 09:48:32 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/06 22:24:09 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*ms_strnjoin(char *s1, const char *s2, int n)
 		return (s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	if (n > s2_len)
+	if (n > s2_len || n == -1)
 		n = s2_len;
 	joined = (char *) malloc(s1_len + n + 1);
 	if (!joined)

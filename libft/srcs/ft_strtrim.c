@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 04:36:54 by apintaur          #+#    #+#             */
-/*   Updated: 2024/12/16 22:17:44 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/06 17:51:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strtrim(const char *s, const char *set)
 	start = 0;
 	end = 0;
 	if (s == NULL || set == NULL)
-		return (malloc(0));
+		return (malloc(1));
 	while (ft_isset(s[start], set))
 		start++;
 	if (s[start] == '\0')

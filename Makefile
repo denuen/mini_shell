@@ -1,6 +1,6 @@
 NAME		= mini_shell
 CC			= gcc
-FLAGS		= -g -Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra -Werror
 SRCS_DIR	= srcs/
 BUILT-IN_DIR = $(SRCS_DIR)built-ins/
 AST_DIR = $(SRCS_DIR)data_structures/ast/

@@ -1,0 +1,417 @@
+==29193== Memcheck, a memory error detector
+==29193== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==29193== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==29193== Command: ./mini_shell
+==29193== Parent PID: 26489
+==29193== 
+==29304== 
+==29304== HEAP SUMMARY:
+==29304==     in use at exit: 236,056 bytes in 515 blocks
+==29304==   total heap usage: 1,191 allocs, 676 frees, 266,278 bytes allocated
+==29304== 
+==29304== 2 bytes in 1 blocks are still reachable in loss record 1 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x406115: ft_strdup (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x403778: ms_validate_op (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x404CF5: ms_validate_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4052B1: ms_process_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405378: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 8 bytes in 1 blocks are still reachable in loss record 3 of 86
+==29304==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29304==    by 0x48A4461: xrealloc (xmalloc.c:70)
+==29304==    by 0x488F3CB: expand_prompt (display.c:415)
+==29304==    by 0x488FE4D: rl_expand_prompt (display.c:606)
+==29304==    by 0x487DE93: rl_set_prompt (readline.c:347)
+==29304==    by 0x488A741: readline (readline.c:377)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 14 bytes in 1 blocks are still reachable in loss record 12 of 86
+==29304==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29304==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29304==    by 0x4AD6A73: UnknownInlinedFun (lib_tparm.c:808)
+==29304==    by 0x4AD6A73: _nc_tiparm (lib_tparm.c:1393)
+==29304==    by 0x4ADDB6F: set_attribute_9.isra.0 (trim_sgr0.c:51)
+==29304==    by 0x4ADDBF9: _nc_trim_sgr0 (trim_sgr0.c:241)
+==29304==    by 0x4AD9E67: tgetent_sp (lib_termcap.c:182)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 24 bytes in 2 blocks are still reachable in loss record 17 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x406115: ft_strdup (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x404E1B: ms_isexecutable (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x403080: ft_assigncmd (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x403138: ms_validate_cmd (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x404CBF: ms_validate_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4052B1: ms_process_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405378: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 32 bytes in 2 blocks are still reachable in loss record 19 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x403008: ft_assigncmd (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x403138: ms_validate_cmd (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x404CBF: ms_validate_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4052B1: ms_process_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405378: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 40 bytes in 1 blocks are still reachable in loss record 20 of 86
+==29304==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29304==    by 0x4ACECC3: UnknownInlinedFun (db_iterator.c:367)
+==29304==    by 0x4ACECC3: _nc_first_db (db_iterator.c:285)
+==29304==    by 0x4ADD652: _nc_read_entry2 (read_entry.c:902)
+==29304==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29304==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29304==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 47 bytes in 1 blocks are still reachable in loss record 21 of 86
+==29304==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29304==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29304==    by 0x4ADC92A: _nc_read_termtype (read_entry.c:438)
+==29304==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29304==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29304==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29304==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29304==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29304==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304== 
+==29304== 56 bytes in 1 blocks are still reachable in loss record 23 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x4018C1: ft_ast_newop (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4037A5: ms_validate_op (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x404CF5: ms_validate_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4052B1: ms_process_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405378: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 112 bytes in 2 blocks are still reachable in loss record 30 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x401842: ft_ast_newcommand (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x403167: ms_validate_cmd (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x404CBF: ms_validate_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4052B1: ms_process_line (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405378: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 156 bytes in 1 blocks are still reachable in loss record 31 of 86
+==29304==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29304==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29304==    by 0x4ADC948: _nc_read_termtype (read_entry.c:439)
+==29304==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29304==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29304==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29304==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29304==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29304==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304== 
+==29304== 168 bytes in 1 blocks are still reachable in loss record 32 of 86
+==29304==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29304==    by 0x4AD1886: tparm_setup (lib_tparm.c:657)
+==29304==    by 0x4AD66D7: _nc_tiparm (lib_tparm.c:1340)
+==29304==    by 0x4ADDB6F: set_attribute_9.isra.0 (trim_sgr0.c:51)
+==29304==    by 0x4ADDBF9: _nc_trim_sgr0 (trim_sgr0.c:241)
+==29304==    by 0x4AD9E67: tgetent_sp (lib_termcap.c:182)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 712 bytes in 1 blocks are still reachable in loss record 35 of 86
+==29304==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29304==    by 0x4ADCC23: _nc_read_termtype (read_entry.c:533)
+==29304==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29304==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29304==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29304==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29304==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29304==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 760 bytes in 1 blocks are still reachable in loss record 37 of 86
+==29304==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29304==    by 0x4AD977F: _nc_setupterm (lib_setup.c:925)
+==29304==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 1,108 bytes in 1 blocks are still reachable in loss record 47 of 86
+==29304==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29304==    by 0x4ACD260: copy_termtype (alloc_ttype.c:669)
+==29304==    by 0x4AD9807: _nc_setupterm (lib_setup.c:1001)
+==29304==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 1,113 bytes in 82 blocks are still reachable in loss record 48 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x406115: ft_strdup (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x401E32: ft_new_env (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4054C5: ft_get_envs (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4051C0: ms_init (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405322: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 1,536 bytes in 1 blocks are still reachable in loss record 49 of 86
+==29304==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29304==    by 0x48A4461: xrealloc (xmalloc.c:70)
+==29304==    by 0x487FA04: rl_add_funmap_entry (funmap.c:218)
+==29304==    by 0x487FA5F: UnknownInlinedFun (funmap.c:241)
+==29304==    by 0x487FA5F: rl_initialize_funmap (funmap.c:233)
+==29304==    by 0x488A4A4: UnknownInlinedFun (readline.c:1302)
+==29304==    by 0x488A4A4: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 1,968 bytes in 82 blocks are still reachable in loss record 51 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x401E11: ft_new_env (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4054C5: ft_get_envs (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4051C0: ms_init (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405322: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 3,663 bytes in 82 blocks are still reachable in loss record 55 of 86
+==29304==    at 0x4841866: malloc (vg_replace_malloc.c:446)
+==29304==    by 0x406115: ft_strdup (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x401E64: ft_new_env (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4054C5: ft_get_envs (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x4051C0: ms_init (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304==    by 0x405322: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== 4,000 bytes in 1 blocks are still reachable in loss record 56 of 86
+==29304==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29304==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29304==    by 0x4ADC966: _nc_read_termtype (read_entry.c:440)
+==29304==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29304==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29304==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29304==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29304==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29304==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29304==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304== 
+==29304== 7,952 bytes in 1 blocks are still reachable in loss record 73 of 86
+==29304==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29304==    by 0x4ACBBB7: _nc_build_names.lto_priv.0 (comp_captab.c:3285)
+==29304==    by 0x4ACD4B0: _nc_find_type_entry (comp_hash.c:104)
+==29304==    by 0x4AD05D1: tgetstr_sp (lib_termcap.c:352)
+==29304==    by 0x489F1D2: UnknownInlinedFun (terminal.c:464)
+==29304==    by 0x489F1D2: _rl_init_terminal_io (terminal.c:587)
+==29304==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29304==    by 0x488A487: rl_initialize (readline.c:1196)
+==29304==    by 0x488A746: readline (readline.c:379)
+==29304==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29304== 
+==29304== LEAK SUMMARY:
+==29304==    definitely lost: 0 bytes in 0 blocks
+==29304==    indirectly lost: 0 bytes in 0 blocks
+==29304==      possibly lost: 0 bytes in 0 blocks
+==29304==    still reachable: 23,471 bytes in 266 blocks
+==29304==         suppressed: 212,585 bytes in 249 blocks
+==29304== 
+==29304== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+--29304-- 
+--29304-- used_suppression:     61 readline_leaks readline.supp:2 suppressed: 208,171 bytes in 220 blocks
+--29304-- used_suppression:      4 add_history_leaks readline.supp:23 suppressed: 4,406 bytes in 28 blocks
+--29304-- used_suppression:      1 readline_internal_teardown_leaks readline.supp:32 suppressed: 8 bytes in 1 blocks
+==29304== 
+==29304== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==29193== 
+==29193== HEAP SUMMARY:
+==29193==     in use at exit: 229,127 bytes in 264 blocks
+==29193==   total heap usage: 1,205 allocs, 941 frees, 266,498 bytes allocated
+==29193== 
+==29193== 8 bytes in 1 blocks are still reachable in loss record 2 of 78
+==29193==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29193==    by 0x48A4461: xrealloc (xmalloc.c:70)
+==29193==    by 0x488F3CB: expand_prompt (display.c:415)
+==29193==    by 0x488FE4D: rl_expand_prompt (display.c:606)
+==29193==    by 0x487DE93: rl_set_prompt (readline.c:347)
+==29193==    by 0x488A741: readline (readline.c:377)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 14 bytes in 1 blocks are still reachable in loss record 11 of 78
+==29193==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29193==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29193==    by 0x4AD6A73: UnknownInlinedFun (lib_tparm.c:808)
+==29193==    by 0x4AD6A73: _nc_tiparm (lib_tparm.c:1393)
+==29193==    by 0x4ADDB6F: set_attribute_9.isra.0 (trim_sgr0.c:51)
+==29193==    by 0x4ADDBF9: _nc_trim_sgr0 (trim_sgr0.c:241)
+==29193==    by 0x4AD9E67: tgetent_sp (lib_termcap.c:182)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 40 bytes in 1 blocks are still reachable in loss record 17 of 78
+==29193==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29193==    by 0x4ACECC3: UnknownInlinedFun (db_iterator.c:367)
+==29193==    by 0x4ACECC3: _nc_first_db (db_iterator.c:285)
+==29193==    by 0x4ADD652: _nc_read_entry2 (read_entry.c:902)
+==29193==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29193==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29193==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 47 bytes in 1 blocks are still reachable in loss record 18 of 78
+==29193==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29193==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29193==    by 0x4ADC92A: _nc_read_termtype (read_entry.c:438)
+==29193==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29193==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29193==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29193==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29193==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29193==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193== 
+==29193== 156 bytes in 1 blocks are still reachable in loss record 26 of 78
+==29193==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29193==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29193==    by 0x4ADC948: _nc_read_termtype (read_entry.c:439)
+==29193==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29193==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29193==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29193==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29193==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29193==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193== 
+==29193== 168 bytes in 1 blocks are still reachable in loss record 27 of 78
+==29193==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29193==    by 0x4AD1886: tparm_setup (lib_tparm.c:657)
+==29193==    by 0x4AD66D7: _nc_tiparm (lib_tparm.c:1340)
+==29193==    by 0x4ADDB6F: set_attribute_9.isra.0 (trim_sgr0.c:51)
+==29193==    by 0x4ADDBF9: _nc_trim_sgr0 (trim_sgr0.c:241)
+==29193==    by 0x4AD9E67: tgetent_sp (lib_termcap.c:182)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 712 bytes in 1 blocks are still reachable in loss record 30 of 78
+==29193==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29193==    by 0x4ADCC23: _nc_read_termtype (read_entry.c:533)
+==29193==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29193==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29193==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29193==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29193==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29193==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 760 bytes in 1 blocks are still reachable in loss record 32 of 78
+==29193==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29193==    by 0x4AD977F: _nc_setupterm (lib_setup.c:925)
+==29193==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 1,108 bytes in 1 blocks are still reachable in loss record 42 of 78
+==29193==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29193==    by 0x4ACD260: copy_termtype (alloc_ttype.c:669)
+==29193==    by 0x4AD9807: _nc_setupterm (lib_setup.c:1001)
+==29193==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 1,536 bytes in 1 blocks are still reachable in loss record 43 of 78
+==29193==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29193==    by 0x48A4461: xrealloc (xmalloc.c:70)
+==29193==    by 0x487FA04: rl_add_funmap_entry (funmap.c:218)
+==29193==    by 0x487FA5F: UnknownInlinedFun (funmap.c:241)
+==29193==    by 0x487FA5F: rl_initialize_funmap (funmap.c:233)
+==29193==    by 0x488A4A4: UnknownInlinedFun (readline.c:1302)
+==29193==    by 0x488A4A4: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== 4,000 bytes in 1 blocks are still reachable in loss record 48 of 78
+==29193==    at 0x4849347: realloc (vg_replace_malloc.c:1801)
+==29193==    by 0x4ACD86C: _nc_doalloc (doalloc.c:54)
+==29193==    by 0x4ADC966: _nc_read_termtype (read_entry.c:440)
+==29193==    by 0x4ADD181: _nc_read_file_entry (read_entry.c:603)
+==29193==    by 0x4ADD516: _nc_read_tic_entry.constprop.0 (read_entry.c:861)
+==29193==    by 0x4ADD678: _nc_read_entry2 (read_entry.c:905)
+==29193==    by 0x4AD9627: _nc_setup_tinfo (lib_setup.c:674)
+==29193==    by 0x4AD97D5: _nc_setupterm (lib_setup.c:969)
+==29193==    by 0x4AD9C64: tgetent_sp (lib_termcap.c:104)
+==29193==    by 0x489F1A0: _rl_init_terminal_io (terminal.c:523)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193== 
+==29193== 7,952 bytes in 1 blocks are still reachable in loss record 65 of 78
+==29193==    at 0x4849133: calloc (vg_replace_malloc.c:1675)
+==29193==    by 0x4ACBBB7: _nc_build_names.lto_priv.0 (comp_captab.c:3285)
+==29193==    by 0x4ACD4B0: _nc_find_type_entry (comp_hash.c:104)
+==29193==    by 0x4AD05D1: tgetstr_sp (lib_termcap.c:352)
+==29193==    by 0x489F1D2: UnknownInlinedFun (terminal.c:464)
+==29193==    by 0x489F1D2: _rl_init_terminal_io (terminal.c:587)
+==29193==    by 0x488A487: UnknownInlinedFun (readline.c:1296)
+==29193==    by 0x488A487: rl_initialize (readline.c:1196)
+==29193==    by 0x488A746: readline (readline.c:379)
+==29193==    by 0x40532C: main (in /home/antonio/Desktop/mini_shell/mini_shell)
+==29193== 
+==29193== LEAK SUMMARY:
+==29193==    definitely lost: 0 bytes in 0 blocks
+==29193==    indirectly lost: 0 bytes in 0 blocks
+==29193==      possibly lost: 0 bytes in 0 blocks
+==29193==    still reachable: 16,501 bytes in 12 blocks
+==29193==         suppressed: 212,626 bytes in 252 blocks
+==29193== 
+==29193== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+--29193-- 
+--29193-- used_suppression:     61 readline_leaks readline.supp:2 suppressed: 208,171 bytes in 220 blocks
+--29193-- used_suppression:      4 add_history_leaks readline.supp:23 suppressed: 4,447 bytes in 31 blocks
+--29193-- used_suppression:      1 readline_internal_teardown_leaks readline.supp:32 suppressed: 8 bytes in 1 blocks
+==29193== 
+==29193== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

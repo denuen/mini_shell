@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/06 22:24:09 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:55:12 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ char	*ms_strnjoin(char *s1, const char *s2, int n)
 
 	if (!s1 && !s2)
 		return (NULL);
-	if (!s1)
+	if (!s1 && s2)
 		return (ft_strdup(s2));
-	if (!s2)
+	if (!s2 && s1)
 		return (s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);

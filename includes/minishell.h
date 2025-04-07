@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 10:29:57 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:07:15 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		ft_findchr(const char *s, char c);
 char	*ms_strnjoin(char *s1, const char *s2, int n);
 t_env	*ft_get_envs(char **envp);
 char	**ms_split(char *s, char c, t_minishell *ms);
+void	ms_destroy(t_minishell *ms);
 
 // signals
 void	sig_check(void);

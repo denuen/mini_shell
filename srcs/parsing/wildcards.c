@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:00:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 12:18:07 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:32:32 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ char	*ms_expand_wildcard(char *str, int *changed)
 
 	words = ft_split(str, ' ');
 	result = ft_strdup("");
-	i = 0;
-	while (words[i])
+	i = -1;
+	while (words[++i])
 	{
 		if (ft_strchr(words[i], '*'))
 		{
@@ -86,7 +86,6 @@ char	*ms_expand_wildcard(char *str, int *changed)
 		if (i > 0)
 			result = ms_strnjoin(result, " ", 1);
 		result = ms_strnjoin(result, words[i], ft_strlen(words[i]));
-		i++;
 	}
 	ft_matrix_destroy((void **)words);
 	return (result);

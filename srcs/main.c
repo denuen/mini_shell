@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 15:04:28 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/07 22:21:10 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,23 @@ static void	ms_init(t_minishell *ms, char **envp)
 	sgl = 0;
 }
 
-static void	ms_destroy(t_minishell *ms)
+void	ms_destroy(t_minishell *ms)
 {
 	if (ms->ast)
+	{
 		ft_ast_destroy(ms->ast);
-	ft_env_destroy(ms->envs);
-	ft_env_destroy(ms->vars);
+		ms->ast = NULL;
+	}
+	if (ms->envs)
+	{
+		ft_env_destroy(ms->envs);
+		ms->envs = NULL;
+	}
+	if (ms->vars)
+	{
+		ft_env_destroy(ms->vars);
+		ms->vars = NULL;
+	}
 }
 
 static void	ms_process_line(t_minishell *ms, char *line)
@@ -39,9 +50,13 @@ static void	ms_process_line(t_minishell *ms, char *line)
 		ms->ast = NULL;
 	}
 	ms_validate_line(ms, line);
-	//ft_ast_printtree(ms->ast);
 	if (ms->ast)
 		ms_executor(ms->ast, ms);
+	if (ms->ast)
+	{
+		ft_ast_destroy(ms->ast);
+		ms->ast = NULL;
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -56,13 +71,13 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = readline("minishell$ ");
 		if (!line)
-		{
-			ft_printf("exit\n");
 			break ;
-		}
-		if (*line)
+		if (ft_strlen(line) > 0)
 			add_history(line);
-		ms_process_line(&ms, line);
+		if (ft_strlen(line) > 0)
+			ms_process_line(&ms, line);
+		else
+			free(line);
 	}
 	ms_destroy(&ms);
 	return (0);

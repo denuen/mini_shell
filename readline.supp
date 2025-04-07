@@ -1,0 +1,41 @@
+{
+   readline_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:readline
+   fun:main
+}
+
+{
+   readline_xmalloc_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   ...
+   fun:readline
+   fun:main
+}
+
+{
+   add_history_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:add_history
+   fun:main
+}
+
+{
+   readline_internal_teardown_leaks
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:xmalloc
+   fun:readline_internal_teardown
+   ...
+   fun:readline
+   fun:main
+}

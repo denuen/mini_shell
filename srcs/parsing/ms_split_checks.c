@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 07:49:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 15:01:33 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:25:57 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,22 @@ char	*ft_remove_quotes(char *str)
 
 	if (!str)
 		return (NULL);
-	result = malloc(strlen(str) + 1);
+	if (!ft_strchr(str, '\'') && !ft_strchr(str, '"'))
+		return (str);
+	result = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	if (!result)
+	{
+		free(str);
 		return (NULL);
+	}
 	i = 0;
 	j = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		if (str[i] != '\'' && str[i] != '"')
-		{
-			result[j] = str[i];
-			j++;
-		}
+			result[j++] = str[i];
 		i++;
 	}
-	result[j] = '\0';
 	free(str);
 	return (result);
 }

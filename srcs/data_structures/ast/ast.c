@@ -6,12 +6,14 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:05 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 08:57:29 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:04:08 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/ast.h"
 #include <stdlib.h>
+
+int		ft_matrix_destroy(void **ptr);
 
 t_node	*ft_ast_newcommand(char **cmd)
 {
@@ -69,28 +71,24 @@ t_node	*ft_ast_newredir(char **redir)
 
 void	ft_ast_destroy(t_node *node)
 {
-	int	i;
-
 	if (!node)
 		return ;
-	i = 0;
 	if (node->left)
 		ft_ast_destroy(node->left);
 	if (node->right)
 		ft_ast_destroy(node->right);
 	if (node->type == COMMAND)
-	{
-		while (node->cmd[i] != NULL)
-		{
-			free(node->cmd[i]);
-			i++;
-		}
-		free(node->cmd);
-	}
+		ft_matrix_destroy((void **)node->cmd);
 	else if (node->type == OPERATOR)
-		free(node->op);
+	{
+		if (node->op)
+			free(node->op);
+		node->op = NULL;
+	}
 	else if (node->type == REDIRECTION)
-		free(node->redir);
+		ft_matrix_destroy((void **)node->redir);
+	free(node);
+	node = NULL;
 }
 
 /********************** Debugging zone **********************/

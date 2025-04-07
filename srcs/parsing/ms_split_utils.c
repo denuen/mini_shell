@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 14:59:01 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:29:50 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_wait_for_quotes(char **line, char end);
 void	ft_wait_for_eof(char **line, int start);
 char	*ft_process_heredoc(char *new_line, char *eoff);
 char	*ft_remove_quotes(char *result);
+void	ft_update_quote_state(char c, int *in_squote, int *in_dquote);
 
 void	ft_check_for_redir(char **line)
 {
@@ -38,24 +39,27 @@ void	ft_check_for_quotes(char **line)
 {
 	char	*s;
 	int		i;
-	char	end;
+	int		in_squote;
+	int		in_dquote;
 
 	s = *line;
+	if (!ft_strchr(s, '\'') && !ft_strchr(s, '"'))
+		return ;
 	i = 0;
+	in_squote = 0;
+	in_dquote = 0;
 	while (s[i])
 	{
-		if (s[i] == '\'' || s[i] == '"')
-		{
-			end = s[i];
-			i++;
-			while (s[i] && s[i] != end)
-				i++;
-			if (!s[i])
-				ft_wait_for_quotes(line, end);
-			else
-				i++;
-		}
+		ft_update_quote_state(s[i], &in_squote, &in_dquote);
 		i++;
+	}
+	if (in_squote || in_dquote)
+	{
+		if (in_squote)
+			ft_wait_for_quotes(line, '\'');
+		else
+			ft_wait_for_quotes(line, '"');
+		return ;
 	}
 	*line = ft_remove_quotes(*line);
 }

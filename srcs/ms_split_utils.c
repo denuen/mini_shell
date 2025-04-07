@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/06 22:58:45 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 08:13:45 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	ft_wait_for_quotes(char **line, char end);
 void	ft_wait_for_eof(char **line, int start);
-char	*ft_remove_quotes(char *result, char quote);
 char	*ft_process_heredoc(char *new_line, char *eoff);
+char	*ft_remove_quotes(char *result, char quote);
 
 void	ft_check_for_redir(char **line)
 {
@@ -115,7 +115,8 @@ char	*ft_process_heredoc(char *new_line, char *eoff)
 			break ;
 		if (ft_strnstr(read, eoff, ft_strlen(new_line) + 1))
 		{
-			new_line = ms_strnjoin(new_line, read, ft_strlen(read) - ft_strlen(eoff));
+			new_line = ms_strnjoin(new_line, read, \
+				ft_strlen(read) - ft_strlen(eoff));
 			free(read);
 			break ;
 		}
@@ -125,18 +126,4 @@ char	*ft_process_heredoc(char *new_line, char *eoff)
 	}
 	free(eoff);
 	return (new_line);
-}
-
-char	*ft_remove_quotes(char *result, char quote)
-{
-	char	*clean_result;
-	int		i;
-
-	i = ft_findchr(result, quote);
-	clean_result = ft_substr(result, 0, i);
-	ft_printf("%s\n", clean_result);
-	clean_result = ms_strnjoin(clean_result, &(result[i + 1]), \
-	ft_findchr(&(result[i + 1]), quote));
-	free(result);
-	return (clean_result);
 }

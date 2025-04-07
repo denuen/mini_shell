@@ -21,7 +21,7 @@ CFILES		 = general_utils.c main.c ms_split.c ms_split_utils.c \
 			$(PARSING_DIR)parsing.c $(PARSING_DIR)parsing_utils.c $(PARSING_DIR)redirections.c \
 			$(PARSING_DIR)wildcard.c $(PARSING_DIR)wildcard_utils.c
 
-SRCS		= $(addprefix $(SRCS_DIR), general_utils.c main.c ms_split.c ms_split_utils.c) \
+SRCS		= $(addprefix $(SRCS_DIR), general_utils.c main.c ms_split.c ms_split_utils.c ms_split_checks.c) \
 			$(BUILT-IN_DIR)cd.c $(BUILT-IN_DIR)display_utils.c $(BUILT-IN_DIR)echo.c $(BUILT-IN_DIR)env.c \
 			$(BUILT-IN_DIR)exit.c $(BUILT-IN_DIR)export.c $(BUILT-IN_DIR)pwd.c $(BUILT-IN_DIR)unset.c \
 			$(AST_DIR)ast.c $(AST_DIR)ast_op.c $(ENV_DIR)env.c $(ENV_DIR)env_op.c \

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:35:42 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 00:26:19 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:08:10 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_node	*ft_ast_insertnode(t_node *ast, t_node *new_node)
 {
 	if (!ast)
 		return (new_node);
-	if (new_node->priority > ast->priority)
+	if (new_node->priority < ast->priority)
 	{
 		ast->right = ft_ast_insertnode(ast->right, new_node);
 		return (ast);

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:32:58 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 00:25:41 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:40:03 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,10 @@ int	ft_matrix_destroy(void **ptr)
 	return (0);
 }
 
-void	ft_input_error(char *line, t_minishell *ms, char **split, int i)
+void	ft_input_error(char **split, int i)
 {
 	if (ms_isredir(split[i]) || ms_isop(split[i]))
-		ft_printf("sintax error in '%s'", split[i]);
+		ft_printf("minishell: syntax error near unexpected token '%s'\n", split[i]);
 	else
-		ft_printf("Command '%s' not found.\n", split[0]);
-	if (line)
-		free(line);
-	ft_matrix_destroy((void **)split);
-	ft_env_destroy(ms->envs);
-	ft_env_destroy(ms->vars);
-	ft_ast_destroy(ms->ast);
-	exit (EXIT_FAILURE);
+		ft_printf("minishell: command not found: '%s'\n", split[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/06 22:48:19 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:31:07 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,23 @@ void	ms_validate_line(t_minishell *ms, char *line)
 	int		i;
 
 	i = 0;
-	split = ms_split(line, ' ');
+	split = ms_split(line, ' ', ms);
 	ft_get_vars(ms, split, &i);
-	split = ft_rearrange_line(ms, split);
 	while (split[i])
 	{
 		if (ms_validate_cmd(ms, split, &i))
-		{
-			ft_printf("Validating cmd...\n");
 			continue ;
-		}
 		else if (ms_validate_redir(ms, split, &i))
-		{
-			ft_printf("Validating redir...\n");
 			continue ;
-		}
 		else if (ms_validate_op(ms, split, &i))
-		{
-			ft_printf("Validating op...\n");
 			continue ;
-		}
 		else
-			ft_input_error(line, ms, split, i);
+		{
+			ft_input_error(split, i);
+			ft_ast_destroy(ms->ast);
+			ms->ast = NULL;
+			break ;
+		}
 	}
 	ft_matrix_destroy((void **)split);
 }

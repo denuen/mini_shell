@@ -5,114 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 23:24:29 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 09:49:27 by apintaur         ###   ########.fr       */
+/*   Created: 2025/04/07 08:30:11 by apintaur          #+#    #+#             */
+/*   Updated: 2025/04/07 10:32:26 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
 #include <stdlib.h>
+#include "../includes/minishell.h"
 
-#define SINGLE_QUOTE	0
-#define DOUBLE_QUOTE	1
-#define DOLLAR			2
-#define WILDCARD		3
+void	ft_update_quote_state(char c, int *in_squote, int *in_dquote);
 
-/*
-' $ ' -> non espandibile
-" $ " -> espandibile
-*/
-
-// Dichiarazione della funzione wildcard esterna
-char	*ms_handlewildcard(char *string);
-
-static char	*ms_replace_expline(char *env_value, char *line, int start, int end)
+static char	*ms_replace_variable(t_minishell *ms, \
+						char *line, int start, int end)
 {
-	char	*tmp_value;
+	char	*var_name;
+	char	*var_value;
+	char	*result;
+	t_env	*env_var;
 
-	if (start > 0)
-		tmp_value = ms_strnjoin(NULL, line, start - 1);
+	var_name = ft_substr(line, start, end - start);
+	env_var = ft_env_find(ms->envs, var_name);
+	if (!env_var)
+		env_var = ft_env_find(ms->vars, var_name);
+	if (env_var)
+		var_value = ft_strdup(env_var->value);
 	else
-		tmp_value = ft_strdup("");
-	tmp_value = ms_strnjoin(tmp_value, env_value, ft_strlen(env_value));
-	tmp_value = ms_strnjoin(tmp_value, &(line[end]), ft_strlen(&line[end]));
-	return (tmp_value);
+		var_value = ft_strdup("");
+	result = ft_substr(line, 0, start - 1);
+	result = ms_strnjoin(result, var_value, ft_strlen(var_value));
+	result = ms_strnjoin(result, &(line[end]), ft_strlen(&line[end]));
+	free(var_name);
+	free(var_value);
+	free(line);
+	return (result);
 }
 
-static char	*ft_expansion(t_minishell *ms, char *string, int start)
+int	ft_isnot_delimiter(char c)
 {
-	t_env	*to_find;
-	t_env	tmp;
-	int		end;
-
-	end = start;
-	while (string[end] && string[end] != ' ' && string[end] != '"')
-		end++;
-	tmp.name = ft_substr(string, start, end - start);
-	to_find = ft_env_find(ms->envs, tmp.name);
-	if (!to_find)
-		to_find = ft_env_find(ms->vars, tmp.name);
-	if (to_find)
-		tmp.value = ms_replace_expline(to_find->value, string, start, end);
-	else
-		tmp.value = ft_strdup(string);
-	free(tmp.name);
-	free(string);
-	return (tmp.value);
+	return ((c != ' ' && c != '"'
+			&& c != '\'' && c != '$' && c != '/'));
 }
 
-static char	*ft_tryexpansion(t_minishell *ms, char *string)
+void	ft_get_startpos(int *start, int *i, char *str)
 {
-	char	*expanded;
-	int		checks[4];
-
-	checks[DOLLAR] = ft_findchr(string, '$');
-	checks[WILDCARD] = ft_findchr(string, '*');
-	expanded = string;
-	if (checks[WILDCARD] > 0)
-		ft_printf("wildcard trovata\n");
-	if (checks[DOLLAR] < 0 && checks[WILDCARD] < 0)
-		return (string);
-	if (checks[DOLLAR] > 0)
-	{
-		checks[SINGLE_QUOTE] = ft_findchr(string, '\'');
-		checks[DOUBLE_QUOTE] = ft_findchr(string, '"');
-		if (checks[SINGLE_QUOTE] >= 0 && (checks[DOUBLE_QUOTE] < 0
-				|| (checks[DOUBLE_QUOTE] > checks[SINGLE_QUOTE])))
-			expanded = string;
-		else
-			expanded = ft_expansion(ms, string, checks[DOLLAR] + 1);
-	}
-	if (checks[WILDCARD] > 0)
-		expanded = ms_handlewildcard(string);
-	return (expanded);
+	*start = *i + 1;
+	(*i)++;
+	while (str[*i] && ft_isnot_delimiter(str[*i]))
+		(*i)++;
 }
 
-char	**ft_rearrange_line(t_minishell *ms, char **split)
+char	*ms_expand_variable(t_minishell *ms, char *str, int *changed)
 {
-	char	**new_split;
 	int		i;
-	int		j;
+	int		in_quotes[2];
+	int		start;
+	char	*result;
 
 	i = 0;
-	j = 0;
-	while (split[i] && ft_findchr(split[i], '=') > 0)
+	in_quotes[0] = 0;
+	in_quotes[1] = 0;
+	while (str[i])
+	{
+		ft_update_quote_state(str[i], &in_quotes[0], &in_quotes[1]);
+		if (str[i] == '$' && !in_quotes[0] && str[i + 1] \
+			&& ft_isnot_delimiter(str[i + 1]))
+		{
+			ft_get_startpos(&start, &i, str);
+			if (i > start)
+			{
+				*changed = 1;
+				result = ms_replace_variable(ms, str, start, i);
+				return (result);
+			}
+		}
 		i++;
-	while (split[i + j])
-	{
-		split[i + j] = ft_tryexpansion(ms, split[i + j]);
-		if (!split[i + j])
-			return (NULL);
-		j++;
 	}
-	new_split = (char **)malloc(sizeof(char *) * (j + 1));
-	j = 0;
-	while (split[i + j])
+	return (str);
+}
+
+void	ft_check_for_expansion(t_minishell *ms, char **line)
+{
+	char	*result;
+	int		changed;
+	int		max_iter;
+	int		iter_count;
+
+	result = *line;
+	max_iter = 10;
+	iter_count = 0;
+	changed = 1;
+	while (changed && iter_count < max_iter)
 	{
-		new_split[j] = ft_strdup(split[i + j]);
-		j++;
+		changed = 0;
+		result = ms_expand_variable(ms, result, &changed);
+		iter_count++;
 	}
-	new_split[j] = NULL;
-	ft_matrix_destroy((void **)split);
-	return (new_split);
+	*line = result;
 }

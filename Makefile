@@ -12,23 +12,23 @@ DIR_LIBFT	= libft
 H_DIR_LIBFT = libft/includes
 LIBFT		= $(DIR_LIBFT)/libft.a
 
-CFILES		 = general_utils.c main.c ms_split.c ms_split_utils.c \
-			$(BUILT-IN_DIR)cd.c $(BUILT-IN_DIR)display_utils.c $(BUILT-IN_DIR)echo.c $(BUILT-IN_DIR)env.c \
-			$(BUILT-IN_DIR)exit.c $(BUILT-IN_DIR)export.c $(BUILT-IN_DIR)pwd.c $(BUILT-IN_DIR)unset.c \
-			$(AST_DIR)ast.c $(AST_DIR)ast_op.c $(ENV_DIR)env.c $(ENV_DIR)env_op.c \
-			$(EXECUTOR_DIR)executor.c $(EXECUTOR_DIR)operators.c $(EXECUTOR_DIR)redirections.c $(EXECUTOR_DIR)signals.c \
-			$(PARSING_DIR)commands.c $(PARSING_DIR)errors.c $(PARSING_DIR)expansion.c $(PARSING_DIR)operators.c \
-			$(PARSING_DIR)parsing.c $(PARSING_DIR)parsing_utils.c $(PARSING_DIR)redirections.c \
-			$(PARSING_DIR)wildcard.c $(PARSING_DIR)wildcard_utils.c
+BUILT_INS = cd.c display_utils.c echo.c env.c exit.c export.c pwd.c unset.c
 
-SRCS		= $(addprefix $(SRCS_DIR), general_utils.c main.c ms_split.c ms_split_utils.c ms_split_checks.c) \
-			$(BUILT-IN_DIR)cd.c $(BUILT-IN_DIR)display_utils.c $(BUILT-IN_DIR)echo.c $(BUILT-IN_DIR)env.c \
-			$(BUILT-IN_DIR)exit.c $(BUILT-IN_DIR)export.c $(BUILT-IN_DIR)pwd.c $(BUILT-IN_DIR)unset.c \
-			$(AST_DIR)ast.c $(AST_DIR)ast_op.c $(ENV_DIR)env.c $(ENV_DIR)env_op.c \
-			$(EXECUTOR_DIR)executor.c $(EXECUTOR_DIR)operators.c $(EXECUTOR_DIR)redirections.c $(EXECUTOR_DIR)signals.c \
-			$(PARSING_DIR)commands.c $(PARSING_DIR)errors.c $(PARSING_DIR)expansion.c $(PARSING_DIR)operators.c \
-			$(PARSING_DIR)parsing.c $(PARSING_DIR)parsing_utils.c $(PARSING_DIR)redirections.c \
-			$(PARSING_DIR)wildcard.c $(PARSING_DIR)wildcard_utils.c
+AST = ast.c ast_op.c
+
+ENV = env.c env_op.c
+
+EXECUTOR = executor.c operators.c redirections.c signals.c
+
+PARSING = commands.c errors.c expansion.c operators.c redirections.c wildcards.c wildcards_utils.c ms_split.c \
+		ms_split_utils.c ms_split_checks.c parsing.c parsing_utils.c
+
+SRCS		= $(addprefix $(BUILT-IN_DIR), $(BUILT_INS)) \
+			$(addprefix $(AST_DIR), $(AST)) \
+			$(addprefix $(ENV_DIR), $(ENV)) \
+			$(addprefix $(EXECUTOR_DIR), $(EXECUTOR)) \
+			$(addprefix $(PARSING_DIR), $(PARSING)) \
+			$(SRCS_DIR)main.c $(SRCS_DIR)general_utils.c
 
 OBJS		= $(SRCS:%.c=%.o)
 

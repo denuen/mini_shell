@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:47:31 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 08:13:23 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:26:42 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ int		ft_get_words(const char *s, char sep);
 int		ft_get_letters(const char *s, char sep);
 void	ft_check_for_quotes(char **line);
 void	ft_check_for_redir(char **line);
-char	**ms_split_fill(char **split, char *s, char sep, int words);
 void	ft_update_quote_state(char c, int *in_squote, int *in_dquote);
+void	ft_check_for_expansion(t_minishell *ms, char **line);
+void	ft_check_for_wildcard(char **line);
+char	**ms_split_fill(char **split, char *s, char sep, int words);
 
-char	**ms_split(char *s, char sep)
+char	**ms_split(char *s, char sep, t_minishell *ms)
 {
 	char	**split;
 	int		words;
@@ -29,6 +31,8 @@ char	**ms_split(char *s, char sep)
 		return (NULL);
 	ft_check_for_quotes(&s);
 	ft_check_for_redir(&s);
+	ft_check_for_expansion(ms, &s);
+	ft_check_for_wildcard(&s);
 	words = ft_get_words(s, sep);
 	split = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!split)

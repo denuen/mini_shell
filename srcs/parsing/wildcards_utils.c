@@ -1,23 +1,75 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcard.c                                         :+:      :+:    :+:   */
+/*   wildcards_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 11:13:34 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 10:12:28 by apintaur         ###   ########.fr       */
+/*   Created: 2025/04/07 09:01:21 by apintaur          #+#    #+#             */
+/*   Updated: 2025/04/07 09:24:03 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include <dirent.h>
 #include <stdlib.h>
+#include "../includes/minishell.h"
 
-// Dichiarazioni esterne delle funzioni in wildcard_utils.c
-int	ms_check_prefix(char *string, char *filename);
-int	ms_find_segment(char *segment, char *filename, int *last_pos);
-int	ms_check_suffix(char *string, char *filename, int s_len, int f_len);
+int	ms_check_prefix(char *string, char *filename)
+{
+	int	i;
+
+	i = 0;
+	while (string[i] && string[i] != '*')
+	{
+		if (string[i] != filename[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ms_check_suffix(char *string, char *filename, int s_len, int f_len)
+{
+	int	i;
+	int	j;
+
+	if (s_len <= 0 || s_len > f_len)
+		return (0);
+	i = ft_strlen(string) - 1;
+	j = ft_strlen(filename) - 1;
+	while (i >= 0 && string[i] != '*')
+	{
+		if (string[i] != filename[j])
+			return (0);
+		i--;
+		j--;
+	}
+	return (1);
+}
+
+int	ms_find_segment(char *segment, char *filename, int *last_pos)
+{
+	int	i;
+	int	j;
+	int	segment_len;
+
+	segment_len = ft_strlen(segment);
+	if (segment_len == 0)
+		return (1);
+	i = *last_pos;
+	while (filename[i])
+	{
+		j = 0;
+		while (j < segment_len && filename[i + j] == segment[j])
+			j++;
+		if (j == segment_len)
+		{
+			*last_pos = i + segment_len;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 static int	ms_match_segments(char **segments, char *filename)
 {
@@ -42,7 +94,7 @@ static int	ms_match_segments(char **segments, char *filename)
 	return (1);
 }
 
-static int	ms_wdcard_match(char *string, char *filename)
+int	ms_wdcard_match(char *string, char *filename)
 {
 	int		s_len;
 	int		f_len;
@@ -65,41 +117,4 @@ static int	ms_wdcard_match(char *string, char *filename)
 	result = ms_match_segments(segments, filename);
 	ft_matrix_destroy((void **)segments);
 	return (result);
-}
-
-static void	ms_append_match(char **wdcard, char *filename)
-{
-	if (!filename || !wdcard)
-		return ;
-	if (*wdcard == NULL)
-	{
-		*wdcard = ft_strdup(filename);
-		return ;
-	}
-	*wdcard = ms_strnjoin(*wdcard, " ", 1);
-	*wdcard = ms_strnjoin(*wdcard, filename, ft_strlen(filename));
-}
-
-char	*ms_handlewildcard(char *string)
-{
-	DIR				*dir;
-	struct dirent	*entry;
-	char			*wdcard;
-
-	wdcard = NULL;
-	dir = opendir(".");
-	if (!dir)
-		return (string);
-	entry = readdir(dir);
-	while (entry)
-	{
-		if (entry->d_name[0] != '.' && ms_wdcard_match(string, entry->d_name))
-			ms_append_match(&wdcard, entry->d_name);
-		entry = readdir(dir);
-	}
-	closedir(dir);
-	if (!wdcard)
-		return (string);
-	free(string);
-	return (wdcard);
 }

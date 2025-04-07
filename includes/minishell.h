@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 08:01:43 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:29:57 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ms_isredir(const char *s);
 
 // Parsing errors
 int		ft_matrix_destroy(void **ptr);
-void	ft_input_error(char *line, t_minishell *ms, char **split, int i);
+void	ft_input_error(char **split, int i);
 
 // Output formatting
 void	ft_output(char *str);
@@ -74,7 +74,7 @@ int		ms_env(t_env *envs);
 int		ft_findchr(const char *s, char c);
 char	*ms_strnjoin(char *s1, const char *s2, int n);
 t_env	*ft_get_envs(char **envp);
-char	**ms_split(char *s, char c);
+char	**ms_split(char *s, char c, t_minishell *ms);
 
 // signals
 void	sig_check(void);

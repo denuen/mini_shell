@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/04 15:19:04 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/07 14:59:02 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms);
 int ms_bg_exec(t_node *left, t_node *right, t_minishell *ms);
 int ms_or_exec(t_node *left, t_node *right, t_minishell *ms);
 int ms_and_operator(t_node *left, t_node *right, t_minishell *ms);
-int ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms);
-int ms_fromfile_exec(t_node *left, t_node *right, t_minishell *ms);
-int ms_heredoc_exec(t_node *left, t_node *right, t_minishell *ms);
-int ms_append_exec(t_node *left, t_node *right, t_minishell *ms);
+int ms_tofile_exec(t_node *left, t_minishell *ms, char *file);
+int ms_fromfile_exec(t_node *left, t_minishell *ms, char *file);
+int ms_heredoc_exec(t_node *left, t_minishell *ms, char *file);
+int ms_append_exec(t_node *left, t_minishell *ms, char *file);
 
 int ft_operator_exec(t_node *node, t_minishell *ms)
 {
@@ -44,13 +44,13 @@ int ft_redirection_exec(t_node *node, t_minishell *ms)
 
 	status = 0;
 	if (ft_strncmp(node->redir[0], ">", ft_strlen(node->redir[0])) == 0)
-		status = ms_tofile_exec(node->left, node->right, ms);
+		status = ms_tofile_exec(node->left, ms, node->redir[1]);
 	else if (ft_strncmp(node->redir[0], "<", ft_strlen(node->redir[0])) == 0)
-		status = ms_fromfile_exec(node->left, node->right, ms);
+		status = ms_fromfile_exec(node->left, ms, node->redir[1]);
 	else if (ft_strncmp(node->redir[0], ">>", ft_strlen(node->redir[0])) == 0)
-		status = ms_append_exec(node->left, node->right, ms);
+		status = ms_append_exec(node->left, ms, node->redir[1]);
 	else if (ft_strncmp(node->redir[0], "<<", ft_strlen(node->redir[0])) == 0)
-		status = ms_heredoc_exec(node->left, node->right, ms);
+		status = ms_heredoc_exec(node->left, ms, node->redir[1]);
 	return (status);
 }
 
@@ -64,7 +64,7 @@ int ms_extern(t_node *node)
 	if (pid == 0)
 	{
 		execve(node->cmd[0], node->cmd, environ);
-		perror("Error executing command");
+		//perror("Error executing command");
 		exit(-1);
 	}
 	wait(&status);
@@ -75,7 +75,6 @@ int ms_extern(t_node *node)
 int ft_commmand_exec(t_node *node, t_minishell *ms)
 {
 	int status;
-
 	if (ft_strncmp(node->cmd[0], "cd", ft_strlen(node->cmd[0])) == 0)
 		status = ms_cd(node);
 	else if (ft_strncmp(node->cmd[0], "echo", ft_strlen(node->cmd[0])) == 0)
@@ -92,6 +91,7 @@ int ft_commmand_exec(t_node *node, t_minishell *ms)
 		status = ms_env(ms->envs);
 	else
 		status = ms_extern(node);
+
 	return (status);
 }
 
@@ -99,6 +99,8 @@ int ms_executor(t_node *node, t_minishell *ms)
 {
 	int status;
 
+	//ft_printf("%d\n", node->type);
+	///ft_printf("ciaone\n");
 	status = 0;
 	if (node->type == COMMAND)
 		status = ft_commmand_exec(node, ms);

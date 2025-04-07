@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/04 14:22:59 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/07 14:04:27 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 	int	pipefd[2];
 	pid_t	pid;
 	int	status[2];
-	
-	//ft_printf("ciao\n");
+	int	saved;
+
+	saved = dup(STDIN_FILENO);
 	status[1] = 0;
 	pipe(pipefd);
 	pid = fork();
@@ -71,6 +72,8 @@ int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 	status[0] = WEXITSTATUS(status[0]);
 	sig_check();
 	status[1] = ms_executor(right, ms);
+	dup2(saved, STDIN_FILENO);
+	close(saved);
 	return (status[1]);
 }
 
@@ -78,6 +81,7 @@ int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms)
 {
 	pid_t	pid;
 	int	status[2];
+
 
 	status[1] = 0;
 	pid = fork();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 14:13:51 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:04:28 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ms_process_line(t_minishell *ms, char *line)
 		ms->ast = NULL;
 	}
 	ms_validate_line(ms, line);
-	ft_ast_printtree(ms->ast);
+	//ft_ast_printtree(ms->ast);
 	if (ms->ast)
 		ms_executor(ms->ast, ms);
 }

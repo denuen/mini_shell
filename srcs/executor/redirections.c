@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/03 15:07:25 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:57:30 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
-int	ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms)
+int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file)
 {
 	int	fd;
 	pid_t	pid;
@@ -22,7 +22,7 @@ int	ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms)
 	pid = fork();
 	if (pid == 0)
 	{
-		fd = open(right->redir[0], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
@@ -37,7 +37,7 @@ int	ms_tofile_exec(t_node *left, t_node *right, t_minishell *ms)
 	return (status);
 }
 
-int	ms_fromfile_exec(t_node *left, t_node *right, t_minishell *ms)
+int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
 {
 	int	fd;
 	pid_t	pid;
@@ -46,7 +46,7 @@ int	ms_fromfile_exec(t_node *left, t_node *right, t_minishell *ms)
 	pid = fork();
 	if (pid == 0)
 	{
-		fd = open(right->redir[0], O_RDONLY);
+		fd = open(file, O_RDONLY);
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDIN_FILENO);
@@ -61,7 +61,7 @@ int	ms_fromfile_exec(t_node *left, t_node *right, t_minishell *ms)
 	return (status);
 }
 
-int	ms_append_exec(t_node *left, t_node *right, t_minishell *ms)
+int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
 {
 	pid_t	pid;
 	int	status;
@@ -70,9 +70,9 @@ int	ms_append_exec(t_node *left, t_node *right, t_minishell *ms)
 	pid = fork();
 	if (pid == 0)
 	{
-		fd = open(right->redir[0], O_WRONLY | O_APPEND | O_CREAT, 0644);
+		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (fd < 0)
-			exit(-1);
+			status = -1;
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		sig_check();
@@ -85,7 +85,7 @@ int	ms_append_exec(t_node *left, t_node *right, t_minishell *ms)
 	return (status);
 }
 
-int	ms_heredoc_exec(t_node *left, t_node *right, t_minishell *ms)
+int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 {
 	int	status;
 	pid_t	pid;
@@ -99,7 +99,7 @@ int	ms_heredoc_exec(t_node *left, t_node *right, t_minishell *ms)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 		sig_check();
-		write(STDOUT_FILENO, right->redir[0], ft_strlen(right->redir[0]));
+		write(STDOUT_FILENO, file, ft_strlen(file));
 		write(STDOUT_FILENO, "\n", 1);
 		exit(0);
 	}

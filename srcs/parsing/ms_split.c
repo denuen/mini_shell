@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:47:31 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 12:21:35 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:12:37 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@ char	**ms_split(char *s, char sep, t_minishell *ms)
 	if (!s)
 		return (NULL);
 	ft_check_for_quotes(&s);
-	ft_printf("stringa finale: %s\n", s);
-
 	ft_check_for_redir(&s);
 	ft_check_for_expansion(ms, &s);
 	if (ft_findchr(s, '*') > 0)
 		ft_check_for_wildcard(&s);
-	ft_printf("stringa finale: %s\n", s);
 	words = ft_get_words(s, sep);
 	split = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!split)

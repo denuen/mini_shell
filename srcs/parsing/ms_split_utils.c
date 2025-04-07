@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 13:36:57 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:59:01 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	ft_wait_for_quotes(char **line, char end);
 void	ft_wait_for_eof(char **line, int start);
 char	*ft_process_heredoc(char *new_line, char *eoff);
-char	*ft_remove_quotes(char *result, char quote);
+char	*ft_remove_quotes(char *result);
 
 void	ft_check_for_redir(char **line)
 {
@@ -57,10 +57,7 @@ void	ft_check_for_quotes(char **line)
 		}
 		i++;
 	}
-	while (ft_findchr(*line, '\'') >= 0)
-		*line = ft_remove_quotes(*line, '\'');
-	while (ft_findchr(*line, '"') >= 0)
-		*line = ft_remove_quotes(*line, '"');
+	*line = ft_remove_quotes(*line);
 }
 
 void	ft_wait_for_quotes(char **line, char end)
@@ -84,7 +81,7 @@ void	ft_wait_for_quotes(char **line, char end)
 		if (i > 0)
 			break ;
 	}
-	*line = ft_remove_quotes(result, end);
+	*line = ft_remove_quotes(result);
 }
 
 void	ft_wait_for_eof(char **line, int start)

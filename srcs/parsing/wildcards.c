@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:00:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 09:24:08 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:18:07 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	*ms_expand_wildcard(char *str, int *changed)
 		i++;
 	}
 	ft_matrix_destroy((void **)words);
-	free(str);
 	return (result);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 10:30:05 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:36:57 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	ft_check_for_quotes(char **line)
 		}
 		i++;
 	}
+	while (ft_findchr(*line, '\'') >= 0)
+		*line = ft_remove_quotes(*line, '\'');
+	while (ft_findchr(*line, '"') >= 0)
+		*line = ft_remove_quotes(*line, '"');
 }
 
 void	ft_wait_for_quotes(char **line, char end)

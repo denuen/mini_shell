@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:49:17 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 14:54:02 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:53:55 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ms_validate_op(t_minishell *ms, char **split, int *i)
 	if (!split || !ms || !i)
 		return (0);
 	if (!ms_isop(split[*i]))
-		return (1);
+		return (0);
 	cnt = 0;
 	j = *i;
 	while (split[j] && ms_isop(split[j]))

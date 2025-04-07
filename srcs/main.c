@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 11:14:51 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:54:36 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ static void	ms_process_line(t_minishell *ms, char *line)
 		ms->ast = NULL;
 	}
 	ms_validate_line(ms, line);
-	//ft_ast_printtree(ms->ast);
-	if (ms->ast == NULL)
-		ft_printf("minishell: syntax error\n");
-	else
+	if (ms->ast)
 		ms_executor(ms->ast, ms);
 }
 

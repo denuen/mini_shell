@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:33:02 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/04 09:58:52 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/08 21:15:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,12 @@ char	*ms_isexecutable(const char *s)
 
 char	*ms_isbuiltin(const char *s)
 {
-	int	len;
-
 	if (!s)
 		return (NULL);
-	len = ft_strlen(s);
-	if (!ft_strncmp(s, "echo", len) || !ft_strncmp(s, "cd", len)
-		|| !ft_strncmp(s, "pwd", len) || !ft_strncmp(s, "export", len)
-		|| !ft_strncmp(s, "unset", len) || !ft_strncmp(s, "env", len)
-		|| !ft_strncmp(s, "exit", len))
+	if (!ft_strncmp(s, "echo", ft_strlen("echo")) || !ft_strncmp(s, "cd", 2)
+		|| !ft_strncmp(s, "pwd", 3) || !ft_strncmp(s, "export", 6)
+		|| !ft_strncmp(s, "unset", 5) || !ft_strncmp(s, "env", 3)
+		|| !ft_strncmp(s, "exit", 4))
 		return ((char *)s);
 	return (NULL);
 }
@@ -78,8 +75,8 @@ char	*ms_isop(const char *s)
 	if (!s)
 		return (NULL);
 	len = ft_strlen(s);
-	if (!ft_strncmp(s, "||", len) || !ft_strncmp(s, "&&", len)
-		|| !ft_strncmp(s, "|", len) || !ft_strncmp(s, "&", len))
+	if (!ft_strncmp(s, "||", len) || !ft_strncmp(s, "&&", len) || !ft_strncmp(s,
+			"|", len) || !ft_strncmp(s, "&", len))
 		return ((char *)s);
 	return (NULL);
 }
@@ -91,8 +88,8 @@ char	*ms_isredir(const char *s)
 	if (!s)
 		return (NULL);
 	len = ft_strlen(s);
-	if (!ft_strncmp(s, "<", len) || !ft_strncmp(s, ">", len)
-		|| !ft_strncmp(s, "<<", len) || !ft_strncmp(s, ">>", len))
+	if (!ft_strncmp(s, "<", len) || !ft_strncmp(s, ">", len) || !ft_strncmp(s,
+			"<<", len) || !ft_strncmp(s, ">>", len))
 		return ((char *)s);
 	return (NULL);
 }

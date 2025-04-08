@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_split_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 22:29:50 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:33:33 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_wait_for_eof(char **line, int start)
 	s = *line;
 	while ((s[start] >= 9 && s[start] <= 13) || s[start] == 32)
 		start++;
-	new_line = ft_substr(s, 0, start - 3);
+	new_line = ft_substr(s, 0, start);
 	end = start;
 	while (s[end] && !((s[end] >= 9 && s[end] <= 13) || s[end] == 32))
 		end++;
@@ -126,7 +126,7 @@ char	*ft_process_heredoc(char *new_line, char *eoff)
 			break ;
 		}
 		new_line = ms_strnjoin(new_line, read, -1);
-		new_line = ms_strnjoin(new_line, " ", 1);
+		new_line = ms_strnjoin(new_line, "\n", 1);
 		free(read);
 	}
 	free(eoff);

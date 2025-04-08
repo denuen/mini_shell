@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/08 11:43:15 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/08 16:45:28 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 	int	saved;
 
 	pipe(fd);
+	(void)file;
 	saved = dup(STDIN_FILENO);
 	pid = fork();
 	if (pid == 0)
@@ -110,6 +111,7 @@ int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
+		wait(&status);
 		sig_check();
 		status = ms_executor(left, ms);
 		dup2(saved, STDIN_FILENO);

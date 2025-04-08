@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/07 14:59:02 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/08 16:36:04 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int ft_redirection_exec(t_node *node, t_minishell *ms)
 	status = 0;
 	if (ft_strncmp(node->redir[0], ">", ft_strlen(node->redir[0])) == 0)
 		status = ms_tofile_exec(node->left, ms, node->redir[1]);
-	else if (ft_strncmp(node->redir[0], "<", ft_strlen(node->redir[0])) == 0)
-		status = ms_fromfile_exec(node->left, ms, node->redir[1]);
 	else if (ft_strncmp(node->redir[0], ">>", ft_strlen(node->redir[0])) == 0)
 		status = ms_append_exec(node->left, ms, node->redir[1]);
 	else if (ft_strncmp(node->redir[0], "<<", ft_strlen(node->redir[0])) == 0)
 		status = ms_heredoc_exec(node->left, ms, node->redir[1]);
+	else if (ft_strncmp(node->redir[0], "<", ft_strlen(node->redir[0])) == 0)
+		status = ms_fromfile_exec(node->left, ms, node->redir[1]);
 	return (status);
 }
 

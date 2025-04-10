@@ -68,10 +68,11 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	ms_init(&ms, envp);
-    signal_receiver(&ms);
 	while (1)
 	{
+		sgl_still(&ms);
 		line = readline("minishell$ ");
+		sgl_moving(&ms);
 		if (!line)
 			break ;
 		if (ft_strlen(line) > 0)

@@ -80,4 +80,7 @@ void	ms_destroy(t_minishell *ms);
 
 // signals
 void	sig_check(void);
+int		sgl_moving(t_minishell *ms);
+int sgl_still(t_minishell *ms);
+
 #endif

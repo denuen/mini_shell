@@ -13,16 +13,14 @@
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
-void sig_handler(int sig, siginfo_t *info, void *void_ms)
+void sig_moving(int sig, siginfo_t *info, void *void_ms)
 {
 	t_minishell *ms;
 
 	if (sig == SIGINT)
 	{
 		ft_printf("\n");
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
+		rl_redisplay();
 		sgl = 1;
 	}
 	(void)info;
@@ -30,13 +28,46 @@ void sig_handler(int sig, siginfo_t *info, void *void_ms)
 	(void)ms;
 }
 
-int signal_receiver(t_minishell *ms)
+int sgl_moving(t_minishell *ms)
 {
 	struct sigaction sa;
 	(void)ms;
 
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = sig_handler;
+	sa.sa_sigaction = sig_moving;
+	sigemptyset(&sa.sa_mask);
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+	{
+		perror("Error registering SIGINT handler");
+		return -1;
+	}
+	return 0;
+}
+
+void sig_still(int sig, siginfo_t *info, void *void_ms)
+{
+	t_minishell *ms;
+
+	if (sig == SIGINT)
+	{
+		ft_printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		sgl = 1;
+	}
+	(void)info;
+	ms = (t_minishell *)void_ms;
+	(void)ms;
+}
+
+int sgl_still(t_minishell *ms)
+{
+	struct sigaction sa;
+	(void)ms;
+
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = sig_still;
 	sigemptyset(&sa.sa_mask);
 	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
@@ -48,6 +79,6 @@ int signal_receiver(t_minishell *ms)
 
 void sig_check(void)
 {
-	if (sgl == 1)
-		exit(1);
+	if (sgl != 0)
+		exit(sgl);
 }

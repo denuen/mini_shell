@@ -20,9 +20,6 @@ void sig_handler(int sig, siginfo_t *info, void *void_ms)
 	if (sig == SIGINT)
 	{
 		ft_printf("\n");
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
 		sgl = 1;
 	}
 	(void)info;

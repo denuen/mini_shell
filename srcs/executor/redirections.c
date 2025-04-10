@@ -17,7 +17,6 @@ int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file)
 {
 	int	fd;
 	pid_t	pid;
-	int	status;
 
 	pid = fork();
 	if (pid == 0)
@@ -27,21 +26,19 @@ int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
 		sig_check();
-		status = ms_executor(left, ms);
+		sgl = ms_executor(left, ms);
 		close(fd);
-		exit(status);
+		exit(sgl);
 	}
-	wait(&status);
-	sig_check();
-	status = WEXITSTATUS(status);
-	return (status);
+	wait(&sgl);
+	sgl = WEXITSTATUS(sgl);
+	return (sgl);
 }
 
 int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
 {
 	int	fd;
 	pid_t	pid;
-	int	status;
 
 	pid = fork();
 	if (pid == 0)
@@ -51,20 +48,18 @@ int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
 			exit(-1);
 		dup2(fd, STDIN_FILENO);
 		sig_check();
-		status = ms_executor(left, ms);
+		sgl = ms_executor(left, ms);
 		close(fd);
-		exit(status);
+		exit(sgl);
 	}
-	wait(&status);
-	sig_check();
-	status = WEXITSTATUS(status);
-	return (status);
+	wait(&sgl);
+	sgl = WEXITSTATUS(sgl);
+	return (sgl);
 }
 
 int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
 {
 	pid_t	pid;
-	int	status;
 	int	fd;
 
 	pid = fork();
@@ -72,22 +67,20 @@ int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
 	{
 		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (fd < 0)
-			status = -1;
+			sgl = -1;
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		sig_check();
-		status = ms_executor(left, ms);
-		exit(status);
+		sgl = ms_executor(left, ms);
+		exit(sgl);
 	}
-	wait(&status);
-	status = WEXITSTATUS(status);
-	sig_check();
-	return (status);
+	wait(&sgl);
+	sgl = WEXITSTATUS(sgl);
+	return (sgl);
 }
 
 int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 {
-	int	status;
 	pid_t	pid;
 	int	fd[2];
 	int	saved;
@@ -111,10 +104,9 @@ int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		wait(&status);
-		sig_check();
-		status = ms_executor(left, ms);
+		wait(&sgl);
+		sgl = ms_executor(left, ms);
 		dup2(saved, STDIN_FILENO);
 	}
-	return (status);
+	return (sgl);
 }

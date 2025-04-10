@@ -19,7 +19,7 @@ C_ENV			= env.c env_op.c
 C_EXECUTOR		= executor.c operators.c redirections.c signals.c
 C_PARSING		= commands.c errors.c expansion.c operators.c redirections.c wildcards.c \
 					wildcards_utils.c ms_split.c ms_split_utils.c ms_split_checks.c \
-					parsing.c parsing_utils.c
+					parsing.c parsing_utils.c path_utils.c
 C_GENERAL		= main.c general_utils.c
 
 SRCS			= $(addprefix $(BUILT-IN_DIR), $(C_BUILT_INS)) \

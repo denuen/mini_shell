@@ -20,6 +20,7 @@ void sig_moving(int sig, siginfo_t *info, void *void_ms)
 	if (sig == SIGINT)
 	{
 		ft_printf("\n");
+		rl_replace_line("", 0);
 		rl_redisplay();
 		sgl = 1;
 	}

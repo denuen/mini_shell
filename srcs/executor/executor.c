@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/08 16:36:04 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/10 15:45:28 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,20 @@ int ms_extern(t_node *node)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		execve(node->cmd[0], node->cmd, environ);
 		//perror("Error executing command");
 		exit(-1);
 	}
-	wait(&status);
-	status = WEXITSTATUS(status);
-	return (status);
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		wait(&status);
+		status = WEXITSTATUS(status);
+		sgl_moving(NULL);
+		return (status);
+	}
 }
 
 int ft_commmand_exec(t_node *node, t_minishell *ms)

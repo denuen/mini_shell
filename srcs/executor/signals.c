@@ -19,8 +19,10 @@ void sig_handler(int sig, siginfo_t *info, void *void_ms)
 
 	if (sig == SIGINT)
 	{
+		ft_printf("\n");
+		rl_on_new_line();
+		rl_redisplay();
 		sgl = 1;
-		ft_putstr_fd("\n", 1);
 	}
 	(void)info;
 	ms = (t_minishell *)void_ms;

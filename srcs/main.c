@@ -14,6 +14,7 @@
 #include <stdlib.h>
 
 int	sgl;
+int signal_receiver(t_minishell *ms);
 
 static void	ms_init(t_minishell *ms, char **envp)
 {
@@ -67,6 +68,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	ms_init(&ms, envp);
+    signal_receiver(&ms);
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -75,7 +77,10 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		if (ft_strlen(line) > 0)
+		{
+			sgl = 0;
 			ms_process_line(&ms, line);
+		}
 		else
 			free(line);
 	}

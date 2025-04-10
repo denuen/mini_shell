@@ -56,10 +56,8 @@ int ft_redirection_exec(t_node *node, t_minishell *ms)
 
 int ms_extern(t_node *node)
 {
-	int   status;
 	pid_t pid;
 
-	status = 0;
 	pid = fork();
 	if (pid == 0)
 	{
@@ -72,10 +70,10 @@ int ms_extern(t_node *node)
 	else
 	{
 		signal(SIGINT, SIG_IGN);
-		wait(&status);
-		status = WEXITSTATUS(status);
+		wait(&sgl);
+		sgl = WEXITSTATUS(sgl);
 		sgl_moving(NULL);
-		return (status);
+		return (sgl);
 	}
 }
 

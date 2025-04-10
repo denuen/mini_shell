@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:33:02 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/10 14:18:29 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:49:13 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ char	*ms_isbuiltin(const char *s)
 {
 	if (!s)
 		return (NULL);
-	if (!ft_strncmp(s, "echo", ft_strlen("echo")) || !ft_strncmp(s, "cd", 2)
-		|| !ft_strncmp(s, "pwd", 3) || !ft_strncmp(s, "export", 6)
-		|| !ft_strncmp(s, "unset", 5) || !ft_strncmp(s, "env", 3)
-		|| !ft_strncmp(s, "exit", 4))
+	if ((ft_strlen(s) == 4 && !ft_strncmp(s, "echo", 4))
+		|| (ft_strlen(s) == 2 && !ft_strncmp(s, "cd", 2))
+		|| (ft_strlen(s) == 3 && !ft_strncmp(s, "pwd", 3))
+		|| (ft_strlen(s) == 6 && !ft_strncmp(s, "export", 6))
+		|| (ft_strlen(s) == 5 && !ft_strncmp(s, "unset", 5))
+		|| (ft_strlen(s) == 3 && !ft_strncmp(s, "env", 3))
+		|| (ft_strlen(s) == 4 && !ft_strncmp(s, "exit", 4)))
 		return ((char *)s);
 	return (NULL);
 }

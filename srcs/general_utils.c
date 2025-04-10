@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:55:03 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 17:55:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:10:35 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_findchr(const char *s, char c)
 }
 
 //It allocates the environment variables in a linked list
-t_env	*ft_get_envs(char **envp)
+t_env	*ft_get_envs(void)
 {
 	t_env	*envs;
 	t_env	*new_env;
@@ -44,17 +44,17 @@ t_env	*ft_get_envs(char **envp)
 	int		i;
 	int		divisor;
 
-	if (!envp)
+	if (!environ)
 		return (NULL);
 	envs = NULL;
 	i = 0;
-	while (envp[i])
+	while (environ[i])
 	{
-		divisor = ft_findchr(envp[i], '=');
+		divisor = ft_findchr(environ[i], '=');
 		if (divisor < 0)
 			break ;
-		tmp.name = ft_substr(envp[i], 0, divisor);
-		tmp.value = ft_strdup(&(envp[i][divisor + 1]));
+		tmp.name = ft_substr(environ[i], 0, divisor);
+		tmp.value = ft_strdup(&(environ[i][divisor + 1]));
 		new_env = ft_new_env(tmp.name, tmp.value);
 		if (new_env)
 			ft_env_addback(&envs, new_env);

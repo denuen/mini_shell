@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/08 10:52:17 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/10 15:10:19 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_minishell
 	t_node	*ast;
 	t_env	*envs;
 	t_env	*vars;
+	int		exit_status;
 }	t_minishell;
 
 extern char	**environ;
@@ -74,13 +75,13 @@ int		ms_env(t_env *envs);
 // General utils
 int		ft_findchr(const char *s, char c);
 char	*ms_strnjoin(char *s1, const char *s2, int n);
-t_env	*ft_get_envs(char **envp);
+t_env	*ft_get_envs(void);
 char	**ms_split(char *s, char c, t_minishell *ms);
 void	ms_destroy(t_minishell *ms);
 
 // signals
 void	sig_check(void);
 int		sgl_moving(t_minishell *ms);
-int sgl_still(t_minishell *ms);
+int		sgl_still(t_minishell *ms);
 
 #endif

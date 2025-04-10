@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 22:21:10 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:09:53 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 int	sgl;
 int signal_receiver(t_minishell *ms);
 
-static void	ms_init(t_minishell *ms, char **envp)
+static void	ms_init(t_minishell *ms)
 {
 	ms->ast = NULL;
-	ms->envs = ft_get_envs(envp);
+	ms->envs = ft_get_envs();
 	ms->vars = NULL;
+	ms->exit_status = 0;
 	sgl = 0;
 }
 
@@ -60,14 +61,12 @@ static void	ms_process_line(t_minishell *ms, char *line)
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(void)
 {
 	t_minishell	ms;
 	char		*line;
 
-	(void)argc;
-	(void)argv;
-	ms_init(&ms, envp);
+	ms_init(&ms);
 	while (1)
 	{
 		sgl_still(&ms);

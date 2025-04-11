@@ -14,6 +14,7 @@
 
 int	ms_cd(t_node *node)
 {
+	sgl = 0;
 	if (!node->cmd[1])
 	{
 		write(1, "I told you only RELATIVE or ABSOLUTE path\n", 43);

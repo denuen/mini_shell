@@ -22,10 +22,12 @@ int	ms_pwd(t_node *node)
 		write(1, path, ft_strlen(path));
 		write(1, "\n", 1);
 		free(path);
+		sgl = 0;
 		return (0);
 	}
 	write(1, "\n", 1);
 	ft_output_error(node->cmd[0], " ");
+	sgl = 1;
 	free(path);
 	return (-1);
 }

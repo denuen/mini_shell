@@ -46,6 +46,7 @@ int	ms_export(t_node *node, t_minishell *ms)
 	char	*name;
 	char	*value;
 
+		sgl = 0;
 	if (node->cmd[1] == NULL)
 		ft_env_print(ms->envs);
 	else

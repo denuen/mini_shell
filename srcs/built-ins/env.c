@@ -14,8 +14,10 @@
 
 int	ms_env(t_env *envs)
 {
+	sgl = 0;
 	if (!envs)
 		return (0);
 	ft_env_print(envs);
+	
 	return (1);
 }

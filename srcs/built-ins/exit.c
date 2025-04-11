@@ -16,5 +16,5 @@
 int	ms_exit(t_minishell *ms)
 {
 	ms_destroy(ms);
-	exit (EXIT_FAILURE);
+	exit (ms->exit_status);
 }

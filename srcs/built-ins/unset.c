@@ -17,8 +17,12 @@ int	ms_unset(t_node *node, t_minishell *ms)
 	t_env	*tmp;
 	int		i;
 
+	sgl = 0;
 	if (!node || !ms)
+	{
+		sgl = 1;
 		return (0);
+	}
 	i = 1;
 	if (!node->cmd[i])
 		return (1);

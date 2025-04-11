@@ -18,6 +18,7 @@ int	ms_echo(t_node *node)
 	int	type;
 
 	i = 1;
+	sgl = 0;
 	type = ft_strncmp(node->cmd[1], "-n", 2);
 	if (type == 0)
 		i++;
@@ -30,5 +31,6 @@ int	ms_echo(t_node *node)
 	}
 	if (type != 0)
 		write(1, "\n", 1);
+	sgl = 0;
 	return (0);
 }

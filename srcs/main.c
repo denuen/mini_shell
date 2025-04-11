@@ -6,12 +6,18 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/10 15:24:38 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:33:45 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <stdlib.h>
+
+#define RED		"\033[1;31m"
+#define GREEN	"\033[1;32m"
+#define YELLOW	"\033[1;33m"
+#define BLUE	"\033[1;34m"
+#define RESET	"\033[0m"
 
 int	sgl;
 int signal_receiver(t_minishell *ms);
@@ -70,7 +76,7 @@ int	main(void)
 	while (1)
 	{
 		sgl_still(&ms);
-		line = readline("minishell$ ");
+		line = readline(GREEN "minishell$: " RESET);
 		if (!line)
 			break ;
 		if (ft_strlen(line) > 0)

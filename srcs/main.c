@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 11:46:58 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:52:07 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #define RED			"\033[1;31m"
 #define GREEN		"\033[01;32m"
-#define BLUE		"\033[38;5;33m"
+#define BLUE		"\033[1;34m"
 #define RESET		"\033[0m"
 
 int			sgl;

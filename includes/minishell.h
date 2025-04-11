@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 15:30:54 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:46:39 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,14 @@ void		ft_output_error(char *command, char *info);
 int			ms_executor(t_node *node, t_minishell *ms);
 
 // built ins
-int			ms_cd(t_node *node);
+int			ms_cd(t_node *node, t_minishell *ms);
 int			ms_echo(t_node *node);
 int			ms_export(t_node *node, t_minishell *ms);
 int			ms_pwd(t_node *node);
 int			ms_unset(t_node *node, t_minishell *ms);
 int			ms_exit(t_minishell *ms);
 int			ms_env(t_env *envs);
+int			ms_cd(t_node *node, t_minishell *ms);
 
 // General utils
 int			ft_findchr(const char *s, char c);

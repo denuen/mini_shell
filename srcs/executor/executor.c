@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/11 15:21:31 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:42:07 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int ft_commmand_exec(t_node *node, t_minishell *ms)
 {
 	int status;
 	if (ft_strncmp(node->cmd[0], "cd", ft_strlen(node->cmd[0])) == 0)
-		status = ms_cd(node);
+		status = ms_cd(node, ms);
 	else if (ft_strncmp(node->cmd[0], "echo", ft_strlen(node->cmd[0])) == 0)
 		status = ms_echo(node);
 	else if (ft_strncmp(node->cmd[0], "pwd", ft_strlen(node->cmd[0])) == 0)

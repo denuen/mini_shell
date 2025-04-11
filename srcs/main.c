@@ -6,21 +6,20 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 11:04:56 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:28:38 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <stdlib.h>
 
-#define RED		"\033[1;31m"
-#define GREEN	"\033[1;32m"
-#define YELLOW	"\033[1;33m"
-#define BLUE	"\033[1;34m"
-#define RESET	"\033[0m"
+#define RED			"\033[1;31m"
+#define GREEN		"\033[1;32m"
+#define DARKGRAY	"\033[0;90m"
+#define RESET		"\033[0m"
 
-int	sgl;
-int	signal_receiver(t_minishell *ms);
+int			sgl;
+int			signal_receiver(t_minishell *ms);
 
 static void	ms_init(t_minishell *ms)
 {
@@ -76,18 +75,19 @@ char	*ms_prompt(void)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		return (ms_strnjoin(GREEN, "minishell$: ", -1));
+		return (ms_strnjoin(GREEN, "minishell" DARKGRAY ":" GREEN " ", -1));
 	home = getenv("HOME");
 	if (home && ft_strncmp(cwd, home, ft_strlen(home)) == 0)
 		path_display = ft_strjoin("~", cwd + ft_strlen(home));
 	else
 		path_display = ft_strdup(cwd);
 	free(cwd);
-	prompt = ft_strjoin(GREEN, "minishell:");
+	prompt = ft_strjoin(GREEN, "minishell");
+	prompt = ms_strnjoin(prompt, DARKGRAY ":", -1);
+	prompt = ms_strnjoin(prompt, GREEN, -1);
 	prompt = ms_strnjoin(prompt, path_display, -1);
 	free(path_display);
-	prompt = ms_strnjoin(prompt, "$ ", 2);
-	prompt = ms_strnjoin(prompt, RESET, -1);
+	prompt = ms_strnjoin(prompt, DARKGRAY "$" GREEN " " RESET, -1);
 	return (prompt);
 }
 
@@ -114,7 +114,7 @@ int	main(void)
 		}
 		else
 			free(line);
-		free (prompt);
+		free(prompt);
 	}
 	ms_destroy(&ms);
 	return (0);

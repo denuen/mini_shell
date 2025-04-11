@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 10:04:53 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:17:20 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_wait_for_quotes(t_minishell *ms, char **line, char end)
 		if (!new_line)
 		{
 			ft_printf("minishell: unexpected EOF while \
-looking for matching '%c'\n", end);
+looking for matching '%c'\nexit\n", end);
 			ms_exit(ms);
 		}
 		result = ms_strnjoin(result, new_line, ft_strlen(new_line));

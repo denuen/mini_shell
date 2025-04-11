@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 10:33:45 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:04:56 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define RESET	"\033[0m"
 
 int	sgl;
-int signal_receiver(t_minishell *ms);
+int	signal_receiver(t_minishell *ms);
 
 static void	ms_init(t_minishell *ms)
 {
@@ -67,16 +67,42 @@ static void	ms_process_line(t_minishell *ms, char *line)
 	}
 }
 
+char	*ms_prompt(void)
+{
+	char	*cwd;
+	char	*home;
+	char	*path_display;
+	char	*prompt;
+
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (ms_strnjoin(GREEN, "minishell$: ", -1));
+	home = getenv("HOME");
+	if (home && ft_strncmp(cwd, home, ft_strlen(home)) == 0)
+		path_display = ft_strjoin("~", cwd + ft_strlen(home));
+	else
+		path_display = ft_strdup(cwd);
+	free(cwd);
+	prompt = ft_strjoin(GREEN, "minishell:");
+	prompt = ms_strnjoin(prompt, path_display, -1);
+	free(path_display);
+	prompt = ms_strnjoin(prompt, "$ ", 2);
+	prompt = ms_strnjoin(prompt, RESET, -1);
+	return (prompt);
+}
+
 int	main(void)
 {
 	t_minishell	ms;
 	char		*line;
+	char		*prompt;
 
 	ms_init(&ms);
 	while (1)
 	{
 		sgl_still(&ms);
-		line = readline(GREEN "minishell$: " RESET);
+		prompt = ms_prompt();
+		line = readline(prompt);
 		if (!line)
 			break ;
 		if (ft_strlen(line) > 0)
@@ -88,6 +114,7 @@ int	main(void)
 		}
 		else
 			free(line);
+		free (prompt);
 	}
 	ms_destroy(&ms);
 	return (0);

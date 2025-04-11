@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 11:28:38 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:46:58 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <stdlib.h>
 
 #define RED			"\033[1;31m"
-#define GREEN		"\033[1;32m"
-#define DARKGRAY	"\033[0;90m"
+#define GREEN		"\033[01;32m"
+#define BLUE		"\033[38;5;33m"
 #define RESET		"\033[0m"
 
 int			sgl;
@@ -66,7 +66,7 @@ static void	ms_process_line(t_minishell *ms, char *line)
 	}
 }
 
-char	*ms_prompt(void)
+char	*ms_get_prompt(void)
 {
 	char	*cwd;
 	char	*home;
@@ -75,7 +75,7 @@ char	*ms_prompt(void)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		return (ms_strnjoin(GREEN, "minishell" DARKGRAY ":" GREEN " ", -1));
+		return (ms_strnjoin(GREEN, "minishell$: ", -1));
 	home = getenv("HOME");
 	if (home && ft_strncmp(cwd, home, ft_strlen(home)) == 0)
 		path_display = ft_strjoin("~", cwd + ft_strlen(home));
@@ -83,11 +83,15 @@ char	*ms_prompt(void)
 		path_display = ft_strdup(cwd);
 	free(cwd);
 	prompt = ft_strjoin(GREEN, "minishell");
-	prompt = ms_strnjoin(prompt, DARKGRAY ":", -1);
-	prompt = ms_strnjoin(prompt, GREEN, -1);
+	prompt = ms_strnjoin(prompt, RESET, -1);
+	prompt = ms_strnjoin(prompt, ":", -1);
+	prompt = ms_strnjoin(prompt, RESET, -1);
+	prompt = ms_strnjoin(prompt, BLUE, -1);
 	prompt = ms_strnjoin(prompt, path_display, -1);
 	free(path_display);
-	prompt = ms_strnjoin(prompt, DARKGRAY "$" GREEN " " RESET, -1);
+	prompt = ms_strnjoin(prompt, RESET, -1);
+	prompt = ms_strnjoin(prompt, "$ ", -1);
+	prompt = ms_strnjoin(prompt, RESET, -1);
 	return (prompt);
 }
 
@@ -101,7 +105,7 @@ int	main(void)
 	while (1)
 	{
 		sgl_still(&ms);
-		prompt = ms_prompt();
+		prompt = ms_get_prompt();
 		line = readline(prompt);
 		if (!line)
 			break ;

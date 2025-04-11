@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:14 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 22:01:00 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:23:45 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ms_validate_line(t_minishell *ms, char *line)
 			continue ;
 		else
 		{
-			ft_input_error(split, i);
+			ft_input_error(ms, split, i);
 			ft_ast_destroy(ms->ast);
 			ms->ast = NULL;
 			break ;

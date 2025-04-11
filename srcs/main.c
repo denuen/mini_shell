@@ -6,17 +6,17 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 11:52:07 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:25:09 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <stdlib.h>
 
-#define RED			"\033[1;31m"
-#define GREEN		"\033[01;32m"
-#define BLUE		"\033[1;34m"
-#define RESET		"\033[0m"
+#define RED "\033[1;31m"
+#define GREEN "\033[01;32m"
+#define BLUE "\033[1;34m"
+#define RESET "\033[0m"
 
 int			sgl;
 int			signal_receiver(t_minishell *ms);
@@ -49,8 +49,9 @@ void	ms_destroy(t_minishell *ms)
 	}
 }
 
-static void	ms_process_line(t_minishell *ms, char *line)
+static void	ms_process_line(t_minishell *ms, char *line, int *sgl)
 {
+	*sgl = 0;
 	if (ms->ast)
 	{
 		ft_ast_destroy(ms->ast);
@@ -104,18 +105,18 @@ int	main(void)
 	ms_init(&ms);
 	while (1)
 	{
-		sgl_still(&ms);
+		sig_setter();
 		prompt = ms_get_prompt();
 		line = readline(prompt);
 		if (!line)
+		{
+			write(1, "exit\n\n", 6);
 			break ;
+		}
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		if (ft_strlen(line) > 0)
-		{
-			sgl = 0;
-			ms_process_line(&ms, line);
-		}
+			ms_process_line(&ms, line, &sgl);
 		else
 			free(line);
 		free(prompt);

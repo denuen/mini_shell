@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/11 10:48:44 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:21:31 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int ms_extern(t_node *node)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		wait(&sgl);
+		if (WIFSIGNALED(sgl) && WTERMSIG(sgl) == SIGINT)
+			write (STDOUT_FILENO, "\n", 1);
 		sgl = WEXITSTATUS(sgl);
 		return (sgl);
 	}

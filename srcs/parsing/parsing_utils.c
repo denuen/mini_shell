@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:33:02 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/10 14:49:13 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 00:34:09 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ X_OK → Check if it's executable.
 
 */
 
-int	ft_normalizepaths(char ***paths, char *line);
-char *check_direct_path(const char *s);
-char *check_path_env(const char *s);
+int		ft_normalizepaths(char ***paths, char *line);
+char	*check_direct_path(const char *s);
+char	*check_path_env(const char *s);
 
 char	*ms_isexecutable(const char *s)
 {
-	char *path;
+	char	*path;
 
 	if (!s)
 		return (NULL);

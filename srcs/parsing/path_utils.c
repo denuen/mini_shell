@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:09:48 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/10 14:19:24 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 00:33:46 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*check_path_env(const char *s)
 		if (!access(paths[i], F_OK | X_OK))
 		{
 			normalized_path = ft_strdup(paths[i]);
-			break;
+			break ;
 		}
 		i++;
 	}

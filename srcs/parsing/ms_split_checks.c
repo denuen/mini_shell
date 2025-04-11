@@ -6,45 +6,46 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 07:49:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 22:25:57 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:10:29 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "../includes/minishell.h"
+#include <stdlib.h>
 
-void	ft_update_quote_state(char c, int *in_squote, int *in_dquote)
+void	ft_upd_qstate(char c, int *in_squotes, int *in_dquotes)
 {
-	if (c == '\'' && !(*in_dquote))
-		*in_squote = !(*in_squote);
-	else if (c == '"' && !(*in_squote))
-		*in_dquote = !(*in_dquote);
+	if (c == '\'' && !(*in_dquotes))
+		*in_squotes = !(*in_squotes);
+	if (c == '"' && !(*in_squotes))
+		*in_dquotes = !(*in_dquotes);
 }
 
-char	*ft_remove_quotes(char *str)
+void	ft_remove_quotes(char **str)
 {
-	int		i;
-	int		j;
+	t_utils	u;
 	char	*result;
 
-	if (!str)
-		return (NULL);
-	if (!ft_strchr(str, '\'') && !ft_strchr(str, '"'))
-		return (str);
-	result = ft_calloc(ft_strlen(str) + 1, sizeof(char));
-	if (!result)
+	if (!str || !*str || (!ft_strchr(*str, '\'') && !ft_strchr(*str, '"')))
+		return ;
+	result = ft_calloc(ft_strlen(*str) + 1, sizeof(char));
+	u.i = -1;
+	u.j = 0;
+	u.squote = 0;
+	u.dquote = 0;
+	while ((*str)[++(u.i)])
 	{
-		free(str);
-		return (NULL);
+		if (((*str)[(u.i)] == '\'' && !u.dquote)
+				|| ((*str)[(u.i)] == '"' && !u.squote))
+		{
+			if ((*str)[(u.i)] == '\'')
+				u.squote = !u.squote;
+			else
+				u.dquote = !u.dquote;
+		}
+		else
+			result[(u.j)++] = (*str)[(u.i)];
 	}
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] != '\'' && str[i] != '"')
-			result[j++] = str[i];
-		i++;
-	}
-	free(str);
-	return (result);
+	free((*str));
+	*str = result;
 }

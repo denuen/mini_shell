@@ -6,19 +6,19 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:00:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 22:32:32 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 00:31:53 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <dirent.h>
 #include "../includes/minishell.h"
+#include <dirent.h>
+#include <stdlib.h>
 
-void	ft_update_quote_state(char c, int *in_squote, int *in_dquote);
-int		ms_check_prefix(char *string, char *filename);
-int		ms_check_suffix(char *string, char *filename, int s_len, int f_len);
-int		ms_find_segment(char *segment, char *filename, int *last_pos);
-int		ms_wdcard_match(char *string, char *filename);
+void		ft_upd_qstate(char c, int *in_squote, int *in_dquote);
+int			ms_check_prefix(char *string, char *filename);
+int			ms_check_suffix(char *string, char *filename, int s_len, int f_len);
+int			ms_find_segment(char *segment, char *filename, int *last_pos);
+int			ms_wdcard_match(char *string, char *filename);
 
 static void	ms_append_match(char **wdcard, char *filename)
 {

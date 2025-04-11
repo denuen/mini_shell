@@ -6,76 +6,90 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 08:30:11 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/08 14:19:05 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:13:27 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "../includes/minishell.h"
+#include <stdlib.h>
 
-void	ft_update_quote_state(char c, int *in_squote, int *in_dquote);
+#define SINGLE 0
+#define DOUBLE 1
 
-static char	*ms_replace_variable(t_minishell *ms, \
-						char *line, int start, int end)
+void		ft_upd_qstate(char c, int *in_squote, int *in_dquote);
+
+static int	get_var_name_length(const char *str, int start)
+{
+	int	i;
+
+	i = 0;
+	if (str[start] == '?')
+		return (1);
+	while (str[start + i] && (ft_isalnum(str[start + i])
+			|| str[start + i] == '_'))
+		i++;
+	return (i);
+}
+
+static char	*get_var_value(t_minishell *ms, const char *var_name)
+{
+	t_env	*env_var;
+
+	if (!ft_strncmp(var_name, "?", 1))
+		return (ft_itoa(ms->exit_status));
+	env_var = ft_env_find(ms->envs, (char *)var_name);
+	if (!env_var)
+		env_var = ft_env_find(ms->vars, (char *)var_name);
+	if (env_var)
+		return (ft_strdup(env_var->value));
+	else
+		return (ft_strdup(""));
+}
+
+static char	*replace_variable(t_minishell *ms, char *str, int dollar_pos,
+		int var_len)
 {
 	char	*var_name;
 	char	*var_value;
 	char	*result;
-	t_env	*env_var;
+	char	*front_substr;
+	char	*back_substr;
 
-	var_name = ft_substr(line, start, end - start);
-	env_var = ft_env_find(ms->envs, var_name);
-	if (!env_var)
-		env_var = ft_env_find(ms->vars, var_name);
-	if (env_var)
-		var_value = ft_strdup(env_var->value);
-	else
-		var_value = ft_strdup("");
-	result = ft_substr(line, 0, start - 1);
-	result = ms_strnjoin(result, var_value, ft_strlen(var_value));
-	result = ms_strnjoin(result, &(line[end]), ft_strlen(&line[end]));
+	var_name = ft_substr(str, dollar_pos + 1, var_len);
+	var_value = get_var_value(ms, var_name);
 	free(var_name);
+	front_substr = ft_substr(str, 0, dollar_pos);
+	result = ms_strnjoin(front_substr, var_value, ft_strlen(var_value));
 	free(var_value);
-	free(line);
+	back_substr = ft_strdup(str + dollar_pos + var_len + 1);
+	result = ms_strnjoin(result, back_substr, ft_strlen(back_substr));
+	free(back_substr);
+	free(str);
 	return (result);
-}
-
-int	ft_isnot_delimiter(char c)
-{
-	return ((c != ' ' && c != '"'
-			&& c != '\'' && c != '$' && c != '/'));
-}
-
-void	ft_get_startpos(int *start, int *i, char *str)
-{
-	*start = *i + 1;
-	(*i)++;
-	while (str[*i] && ft_isnot_delimiter(str[*i]))
-		(*i)++;
 }
 
 char	*ms_expand_variable(t_minishell *ms, char *str, int *changed)
 {
-	int		i;
-	int		in_quotes[2];
-	int		start;
-	char	*result;
+	int	i;
+	int	in_quotes[2];
+	int	var_len;
 
 	i = 0;
-	in_quotes[0] = 0;
-	in_quotes[1] = 0;
+	in_quotes[SINGLE] = 0;
+	in_quotes[DOUBLE] = 0;
 	while (str[i])
 	{
-		ft_update_quote_state(str[i], &in_quotes[0], &in_quotes[1]);
-		if (str[i] == '$' && !in_quotes[0] && str[i + 1] \
-			&& ft_isnot_delimiter(str[i + 1]))
+		ft_upd_qstate(str[i], &(in_quotes[SINGLE]), &(in_quotes[DOUBLE]));
+		if (str[i] == '$' && !(in_quotes[SINGLE]) && str[i + 1])
 		{
-			ft_get_startpos(&start, &i, str);
-			if (i > start)
+			if (str[i + 1] == '?')
+				var_len = 1;
+			else
+				var_len = get_var_name_length(str, i + 1);
+			if (var_len > 0)
 			{
 				*changed = 1;
-				result = ms_replace_variable(ms, str, start, i);
-				return (result);
+				return (replace_variable(ms, str, i, var_len));
 			}
 		}
 		i++;
@@ -87,18 +101,13 @@ void	ft_check_for_expansion(t_minishell *ms, char **line)
 {
 	char	*result;
 	int		changed;
-	int		max_iter;
-	int		iter_count;
 
 	result = *line;
-	max_iter = 10;
-	iter_count = 0;
 	changed = 1;
-	while (changed && iter_count < max_iter)
+	while (changed)
 	{
 		changed = 0;
 		result = ms_expand_variable(ms, result, &changed);
-		iter_count++;
 	}
 	*line = result;
 }

@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/10 15:10:19 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:08:33 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define STDIN 1
 # define NUM_CMDS 7
+# define SINGLE 0
+# define DOUBLE 1
 
 # include "ast.h"
 # include "env.h"
@@ -27,6 +29,14 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef struct s_utils
+{
+	int	i;
+	int	j;
+	int	squote;
+	int	dquote;
+}	t_utils;
 
 typedef struct s_minishell
 {

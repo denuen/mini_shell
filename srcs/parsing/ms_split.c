@@ -6,20 +6,21 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:47:31 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 19:32:31 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:02:43 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "../includes/minishell.h"
+#include <stdlib.h>
 
 int		ft_get_words(const char *s, char sep);
 int		ft_get_letters(const char *s, char sep);
-void	ft_check_for_quotes(char **line);
+void	ft_handle_incomplete_quotes(t_minishell *ms, char **line);
 void	ft_check_for_redir(char **line);
-void	ft_update_quote_state(char c, int *in_squote, int *in_dquote);
+void	ft_upd_qstate(char c, int *in_squote, int *in_dquote);
 void	ft_check_for_expansion(t_minishell *ms, char **line);
 void	ft_check_for_wildcard(char **line);
+void	ft_remove_quotes(char **str);
 char	**ms_split_fill(char **split, char *s, char sep, int words);
 
 char	**ms_split(char *s, char sep, t_minishell *ms)
@@ -29,9 +30,10 @@ char	**ms_split(char *s, char sep, t_minishell *ms)
 
 	if (!s)
 		return (NULL);
-	ft_check_for_quotes(&s);
+	ft_handle_incomplete_quotes(ms, &s);
 	ft_check_for_redir(&s);
 	ft_check_for_expansion(ms, &s);
+	ft_remove_quotes(&s);
 	if (ft_findchr(s, '*') > 0)
 		ft_check_for_wildcard(&s);
 	words = ft_get_words(s, sep);
@@ -62,7 +64,7 @@ char	**ms_split_fill(char **split, char *s, char sep, int words)
 		}
 	}
 	split[j] = NULL;
-	free (s);
+	free(s);
 	return (split);
 }
 
@@ -77,7 +79,7 @@ int	ft_get_letters(const char *s, char sep)
 	in_dquote = 0;
 	while (s[i])
 	{
-		ft_update_quote_state(s[i], &in_squote, &in_dquote);
+		ft_upd_qstate(s[i], &in_squote, &in_dquote);
 		if (s[i] == sep && !in_squote && !in_dquote)
 			break ;
 		i++;
@@ -94,7 +96,7 @@ int	ft_process_word(const char *s, char sep, int *i)
 	in_dquote = 0;
 	while (s[*i])
 	{
-		ft_update_quote_state(s[*i], &in_squote, &in_dquote);
+		ft_upd_qstate(s[*i], &in_squote, &in_dquote);
 		if (s[*i] == sep && !in_squote && !in_dquote)
 			return (0);
 		(*i)++;
@@ -114,7 +116,7 @@ int	ft_get_words(const char *s, char sep)
 	in_quotes[1] = 0;
 	while (s[i])
 	{
-		ft_update_quote_state(s[i], &in_quotes[0], &in_quotes[1]);
+		ft_upd_qstate(s[i], &in_quotes[0], &in_quotes[1]);
 		if (s[i] == sep && !in_quotes[0] && !in_quotes[1])
 		{
 			i++;

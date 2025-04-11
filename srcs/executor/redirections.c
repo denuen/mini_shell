@@ -25,7 +25,6 @@ int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file)
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
-		sig_check();
 		sgl = ms_executor(left, ms);
 		close(fd);
 		exit(sgl);
@@ -47,7 +46,6 @@ int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDIN_FILENO);
-		sig_check();
 		sgl = ms_executor(left, ms);
 		close(fd);
 		exit(sgl);
@@ -70,7 +68,6 @@ int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
 			sgl = -1;
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
-		sig_check();
 		sgl = ms_executor(left, ms);
 		exit(sgl);
 	}
@@ -94,7 +91,6 @@ int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		sig_check();
 		write(STDOUT_FILENO, file, ft_strlen(file));
 		write(STDOUT_FILENO, "\n", 1);
 		exit(0);

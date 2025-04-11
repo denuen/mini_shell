@@ -30,7 +30,5 @@ int	ms_echo(t_node *node)
 	}
 	if (type != 0)
 		write(1, "\n", 1);
-	else
-		write(1, "%\n", 2);
 	return (0);
 }

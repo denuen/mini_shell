@@ -113,5 +113,6 @@ int ms_executor(t_node *node, t_minishell *ms)
 		status = ft_operator_exec(node, ms);
 	else if (node->type == REDIRECTION)
 		status = ft_redirection_exec(node, ms);
+	ms->exit_status = sgl;
 	return (status);
 }

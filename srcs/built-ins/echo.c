@@ -19,7 +19,7 @@ int	ms_echo(t_node *node)
 
 	i = 1;
 	sgl = 0;
-	type = ft_strncmp(node->cmd[1], "-n", 2);
+	type = ft_strncmp(node->cmd[1], "-n", 3);
 	if (type == 0)
 		i++;
 	while (node->cmd[i])

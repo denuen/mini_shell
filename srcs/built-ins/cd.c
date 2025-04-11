@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:26:09 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/11 16:26:01 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/11 16:30:59 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ms_cd(t_node *node, t_minishell *ms)
 	{
 		temp = previous;
 		previous = getcwd(NULL, 0);
-		ft_printf("%s\n", temp);
+		if (temp != NULL)
+			ft_printf("%s\n", temp);
 		chdir(temp);
 		return (0);	
 	}

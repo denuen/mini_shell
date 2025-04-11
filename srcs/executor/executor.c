@@ -70,9 +70,9 @@ int ms_extern(t_node *node)
 	else
 	{
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		wait(&sgl);
 		sgl = WEXITSTATUS(sgl);
-		sgl_moving(NULL);
 		return (sgl);
 	}
 }

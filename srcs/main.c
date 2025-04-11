@@ -71,7 +71,6 @@ int	main(void)
 	{
 		sgl_still(&ms);
 		line = readline("minishell$ ");
-		sgl_moving(&ms);
 		if (!line)
 			break ;
 		if (ft_strlen(line) > 0)

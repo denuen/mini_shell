@@ -17,10 +17,12 @@ int	ms_cd(t_node *node)
 	if (!node->cmd[1])
 	{
 		write(1, "I told you only RELATIVE or ABSOLUTE path\n", 43);
+		sgl = 1;
 		return (-1);
 	}
 	if (chdir(node->cmd[1]) != -1)
 		return (0);
 	ft_output_error(node->cmd[0], node->cmd[1]);
+	sgl = 1;
 	return (-1);
 }

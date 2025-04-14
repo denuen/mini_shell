@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 10:17:20 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:15:39 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_wait_for_quotes(t_minishell *ms, char **line, char end)
 	found_end = 0;
 	while (!found_end)
 	{
-		new_line = readline("quote> ");
+		new_line = readline("> ");
 		if (!new_line)
 		{
 			ft_printf("minishell: unexpected EOF while \
@@ -79,6 +79,7 @@ looking for matching '%c'\nexit\n", end);
 			ms_exit(ms);
 		}
 		result = ms_strnjoin(result, new_line, ft_strlen(new_line));
+		result = ms_strnjoin(result, "\n", 1);
 		if (ft_strchr(new_line, end))
 			found_end = 1;
 		free(new_line);
@@ -113,7 +114,7 @@ char	*ft_process_heredoc(char *new_line, char *eoff)
 
 	while (1)
 	{
-		read = readline("heredoc> ");
+		read = readline("> ");
 		if (!read)
 			break ;
 		if (ft_strnstr(read, eoff, ft_strlen(new_line) + 1))

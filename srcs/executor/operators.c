@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:20:54 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/10 21:57:40 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:26:48 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ms_or_exec(t_node *left, t_node *right, t_minishell *ms)
 int	ms_bg_exec(t_node *left, t_node *right, t_minishell *ms)
 {
 	pid_t	pid;
-	int	status;
+	int		status;
 
 	status = 0;
 	pid = fork();
@@ -42,9 +42,9 @@ int	ms_bg_exec(t_node *left, t_node *right, t_minishell *ms)
 
 int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms)
 {
-	int	pipefd[2];
+	int		pipefd[2];
 	pid_t	pid;
-	int	saved;
+	int		saved;
 
 	saved = dup(STDIN_FILENO);
 	pipe(pipefd);

@@ -6,25 +6,25 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/14 12:06:51 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:26:27 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
-int ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms);
-int ms_bg_exec(t_node *left, t_node *right, t_minishell *ms);
-int ms_or_exec(t_node *left, t_node *right, t_minishell *ms);
-int ms_and_operator(t_node *left, t_node *right, t_minishell *ms);
-int ms_tofile_exec(t_node *left, t_minishell *ms, char *file);
-int ms_fromfile_exec(t_node *left, t_minishell *ms, char *file);
-int ms_heredoc_exec(t_node *left, t_minishell *ms, char *file);
-int ms_append_exec(t_node *left, t_minishell *ms, char *file);
+int	ms_pipe_exec(t_node *left, t_node *right, t_minishell *ms);
+int	ms_bg_exec(t_node *left, t_node *right, t_minishell *ms);
+int	ms_or_exec(t_node *left, t_node *right, t_minishell *ms);
+int	ms_and_operator(t_node *left, t_node *right, t_minishell *ms);
+int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file);
+int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file);
+int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file);
+int	ms_append_exec(t_node *left, t_minishell *ms, char *file);
 
-int ft_operator_exec(t_node *node, t_minishell *ms)
+int	ft_operator_exec(t_node *node, t_minishell *ms)
 {
-	int status;
+	int	status;
 
 	status = 0;
 	if (ft_strncmp(node->op, "|", ft_strlen(node->op)) == 0)
@@ -38,9 +38,9 @@ int ft_operator_exec(t_node *node, t_minishell *ms)
 	return (status);
 }
 
-int ft_redirection_exec(t_node *node, t_minishell *ms)
+int	ft_redirection_exec(t_node *node, t_minishell *ms)
 {
-	int status;
+	int	status;
 
 	status = 0;
 	if (ft_strncmp(node->redir[0], ">", ft_strlen(node->redir[0])) == 0)
@@ -54,9 +54,9 @@ int ft_redirection_exec(t_node *node, t_minishell *ms)
 	return (status);
 }
 
-int ms_extern(t_node *node)
+int	ms_extern(t_node *node)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == 0)
@@ -64,7 +64,6 @@ int ms_extern(t_node *node)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		execve(node->cmd[0], node->cmd, environ);
-		//perror("Error executing command");
 		exit(-1);
 	}
 	else
@@ -73,17 +72,17 @@ int ms_extern(t_node *node)
 		signal(SIGQUIT, SIG_IGN);
 		wait(&sgl);
 		if (WIFSIGNALED(sgl) && WTERMSIG(sgl) == SIGINT)
-			write (STDOUT_FILENO, "\n", 1);
+			write(STDOUT_FILENO, "\n", 1);
 		else if (WIFSIGNALED(sgl) && WTERMSIG(sgl) == SIGQUIT)
-			write (STDOUT_FILENO, "Quit (core dumped)\n", 19);
+			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
 		sgl = WEXITSTATUS(sgl);
 		return (sgl);
 	}
 }
 
-int ft_commmand_exec(t_node *node, t_minishell *ms)
+int	ft_commmand_exec(t_node *node, t_minishell *ms)
 {
-	int status;
+	int	status;
 
 	status = 0;
 	if (ft_strncmp(node->cmd[0], "cd", ft_strlen(node->cmd[0])) == 0)
@@ -102,16 +101,13 @@ int ft_commmand_exec(t_node *node, t_minishell *ms)
 		status = ms_env(ms->envs);
 	else
 		status = ms_extern(node);
-	
 	return (status);
 }
 
-int ms_executor(t_node *node, t_minishell *ms)
+int	ms_executor(t_node *node, t_minishell *ms)
 {
-	int status;
+	int	status;
 
-	//ft_printf("%d\n", node->type);
-	///ft_printf("ciaone\n");
 	status = 0;
 	if (node->type == COMMAND)
 		status = ft_commmand_exec(node, ms);

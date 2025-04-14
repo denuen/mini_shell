@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/08 16:45:28 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:32:17 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file)
 {
-	int	fd;
+	int		fd;
 	pid_t	pid;
 
 	pid = fork();
@@ -36,7 +36,7 @@ int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file)
 
 int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
 {
-	int	fd;
+	int		fd;
 	pid_t	pid;
 
 	pid = fork();
@@ -58,7 +58,7 @@ int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
 int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
 {
 	pid_t	pid;
-	int	fd;
+	int		fd;
 
 	pid = fork();
 	if (pid == 0)
@@ -79,11 +79,10 @@ int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
 int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 {
 	pid_t	pid;
-	int	fd[2];
-	int	saved;
+	int		fd[2];
+	int		saved;
 
 	pipe(fd);
-	(void)file;
 	saved = dup(STDIN_FILENO);
 	pid = fork();
 	if (pid == 0)
@@ -91,8 +90,7 @@ int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		write(STDOUT_FILENO, file, ft_strlen(file));
-		write(STDOUT_FILENO, "\n", 1);
+		ft_printf("%s", file);
 		exit(0);
 	}
 	else

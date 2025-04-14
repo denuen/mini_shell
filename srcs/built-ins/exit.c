@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:50:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/14 12:10:40 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:28:49 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_isnum(char *str)
 void	ms_exit(t_minishell *ms, char *status)
 {
 	int	exit_code;
-	
+
 	if (ft_isnum(status) == INT_MIN)
 	{
 		ft_printf("minishell: exit: %s: numeric argument required\n", status);

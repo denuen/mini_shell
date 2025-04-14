@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:37:22 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/08 15:17:48 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:29:00 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ms_echo(t_node *node)
 		i++;
 	while (node->cmd[i])
 	{
-		if ((type != 0 && i > 1 ) || (type  == 0 && i > 2))
+		if ((type != 0 && i > 1) || (type == 0 && i > 2))
 			write(1, " ", 1);
 		ft_printf("%s", node->cmd[i]);
 		i++;

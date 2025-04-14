@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:05 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/07 19:04:08 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:34:50 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,72 +91,72 @@ void	ft_ast_destroy(t_node *node)
 	node = NULL;
 }
 
-/********************** Debugging zone **********************/
-void	ft_ast_printredir(t_node *node);
+// /********************** Debugging zone **********************/
+// void	ft_ast_printredir(t_node *node);
 
-void	ft_ast_printtree(t_node *node)
-{
-	if (!node)
-		return ;
-	if (node->left)
-		ft_ast_printtree(node->left);
-	if (node->right)
-		ft_ast_printtree(node->right);
-	if (node->type == COMMAND)
-		ft_ast_printcmd(node);
-	else if (node->type == OPERATOR)
-		ft_printf("Operator: %s\n", node->op);
-	else if (node->type == REDIRECTION)
-		ft_ast_printredir(node);
-}
+// void	ft_ast_printtree(t_node *node)
+// {
+// 	if (!node)
+// 		return ;
+// 	if (node->left)
+// 		ft_ast_printtree(node->left);
+// 	if (node->right)
+// 		ft_ast_printtree(node->right);
+// 	if (node->type == COMMAND)
+// 		ft_ast_printcmd(node);
+// 	else if (node->type == OPERATOR)
+// 		ft_printf("Operator: %s\n", node->op);
+// 	else if (node->type == REDIRECTION)
+// 		ft_ast_printredir(node);
+// }
 
-void	ft_ast_printcmd(t_node *node)
-{
-	int	i;
+// void	ft_ast_printcmd(t_node *node)
+// {
+// 	int	i;
 
-	if (!node || node->type != COMMAND)
-		return ;
-	if (node->cmd)
-	{
-		i = 0;
-		if (node->cmd[i])
-		{
-			ft_printf("Command: ");
-			while (node->cmd[i + 1] != NULL)
-			{
-				ft_printf("%s ", node->cmd[i]);
-				i++;
-			}
-			ft_printf("%s\n", node->cmd[i]);
-		}
-	}
-}
+// 	if (!node || node->type != COMMAND)
+// 		return ;
+// 	if (node->cmd)
+// 	{
+// 		i = 0;
+// 		if (node->cmd[i])
+// 		{
+// 			ft_printf("Command: ");
+// 			while (node->cmd[i + 1] != NULL)
+// 			{
+// 				ft_printf("%s ", node->cmd[i]);
+// 				i++;
+// 			}
+// 			ft_printf("%s\n", node->cmd[i]);
+// 		}
+// 	}
+// }
 
-void	ft_ast_printredir(t_node *node)
-{
-	int	i;
+// void	ft_ast_printredir(t_node *node)
+// {
+// 	int	i;
 
-	if (!node || node->type != REDIRECTION)
-		return ;
-	if (node->redir)
-	{
-		i = 0;
-		if (node->redir[i])
-		{
-			ft_printf("Redir: ");
-			while (node->redir[i + 1] != NULL)
-			{
-				ft_printf("%s ", node->redir[i]);
-				i++;
-			}
-			ft_printf("%s\n", node->redir[i]);
-		}
-	}
-}
+// 	if (!node || node->type != REDIRECTION)
+// 		return ;
+// 	if (node->redir)
+// 	{
+// 		i = 0;
+// 		if (node->redir[i])
+// 		{
+// 			ft_printf("Redir: ");
+// 			while (node->redir[i + 1] != NULL)
+// 			{
+// 				ft_printf("%s ", node->redir[i]);
+// 				i++;
+// 			}
+// 			ft_printf("%s\n", node->redir[i]);
+// 		}
+// 	}
+// }
 
-int	ft_ast_size(t_node *node)
-{
-	if (!node)
-		return (0);
-	return (1 + ft_ast_size(node->left) + ft_ast_size(node->right));
-}
+// int	ft_ast_size(t_node *node)
+// {
+// 	if (!node)
+// 		return (0);
+// 	return (1 + ft_ast_size(node->left) + ft_ast_size(node->right));
+// }

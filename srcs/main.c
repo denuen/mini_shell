@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 16:26:32 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:38:29 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ int	main(void)
 	ms_init(&ms);
 	while (1)
 	{
-		sig_setter();
-		prompt = ms_get_prompt();
+		sig_setter(&prompt);
 		line = readline(prompt);
 		if (!line)
 		{

@@ -13,6 +13,8 @@
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
+char	*ms_get_prompt(void);
+
 void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
@@ -24,10 +26,11 @@ void	sig_handler(int sig)
 	}
 }
 
-void	sig_setter(void)
+void	sig_setter(char **prompt)
 {
 	struct sigaction	sa;
 
+	*prompt = ms_get_prompt();
 	sa.sa_flags = 0;
 	sa.sa_handler = sig_handler;
 	sigemptyset(&sa.sa_mask);

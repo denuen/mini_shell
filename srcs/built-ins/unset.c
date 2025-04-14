@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:50:16 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/24 23:18:28 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:27:49 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	ms_unset(t_node *node, t_minishell *ms)
 		sgl = 1;
 		return (0);
 	}
-	i = 1;
-	if (!node->cmd[i])
+	if (!node->cmd[1])
 		return (1);
-	while (node->cmd[i])
+	i = 0;
+	while (node->cmd[++i])
 	{
 		tmp = ft_env_find(ms->envs, node->cmd[i]);
 		if (tmp)
@@ -37,7 +37,6 @@ int	ms_unset(t_node *node, t_minishell *ms)
 			if (tmp)
 				ft_env_remove(&(ms->vars), node->cmd[i]);
 		}
-		i++;
 	}
 	return (1);
 }

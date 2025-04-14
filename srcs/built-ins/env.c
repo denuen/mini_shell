@@ -6,7 +6,7 @@
 /*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:50:22 by apintaur          #+#    #+#             */
-/*   Updated: 2025/03/24 23:22:12 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:26:31 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@ int	ms_env(t_env *envs)
 	if (!envs)
 		return (0);
 	ft_env_print(envs);
-	
 	return (1);
 }

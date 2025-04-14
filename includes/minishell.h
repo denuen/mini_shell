@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 22:29:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/14 12:05:58 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:40:29 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			ms_echo(t_node *node);
 int			ms_export(t_node *node, t_minishell *ms);
 int			ms_pwd(t_node *node);
 int			ms_unset(t_node *node, t_minishell *ms);
-void			ms_exit(t_minishell *ms, char  *status);
+void		ms_exit(t_minishell *ms, char *status);
 int			ms_env(t_env *envs);
 int			ms_cd(t_node *node, t_minishell *ms);
 
@@ -93,6 +93,6 @@ void		ms_destroy(t_minishell *ms);
 // signals
 void		sig_check(void);
 int			sgl_moving(t_minishell *ms);
-void		sig_setter(void);
+void		sig_setter(char **prompt);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
+/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/11 15:42:07 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 11:08:43 by apintaur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int ms_extern(t_node *node)
 		wait(&sgl);
 		if (WIFSIGNALED(sgl) && WTERMSIG(sgl) == SIGINT)
 			write (STDOUT_FILENO, "\n", 1);
+		else if (WIFSIGNALED(sgl) && WTERMSIG(sgl) == SIGQUIT)
+			write (STDOUT_FILENO, "Quit (core dumped)\n", 19);
 		sgl = WEXITSTATUS(sgl);
 		return (sgl);
 	}

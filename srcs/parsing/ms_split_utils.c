@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_split_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 22:45:41 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/14 11:15:39 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:06:57 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_wait_for_quotes(t_minishell *ms, char **line, char end)
 		{
 			ft_printf("minishell: unexpected EOF while \
 looking for matching '%c'\nexit\n", end);
-			ms_exit(ms);
+			ms_exit(ms, NULL);
 		}
 		result = ms_strnjoin(result, new_line, ft_strlen(new_line));
 		result = ms_strnjoin(result, "\n", 1);

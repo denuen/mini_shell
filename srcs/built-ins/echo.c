@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:37:22 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/14 13:29:00 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:51:22 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ms_echo(t_node *node)
 	int	type;
 
 	i = 1;
-	sgl = 0;
+	g_sgl = 0;
 	type = ft_strncmp(node->cmd[1], "-n", 3);
 	if (type == 0)
 		i++;
@@ -31,6 +31,6 @@ int	ms_echo(t_node *node)
 	}
 	if (type != 0)
 		write(1, "\n", 1);
-	sgl = 0;
+	g_sgl = 0;
 	return (0);
 }

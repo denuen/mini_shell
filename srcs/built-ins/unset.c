@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:50:16 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/14 13:27:49 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:51:52 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	ms_unset(t_node *node, t_minishell *ms)
 	t_env	*tmp;
 	int		i;
 
-	sgl = 0;
+	g_sgl = 0;
 	if (!node || !ms)
 	{
-		sgl = 1;
+		g_sgl = 1;
 		return (0);
 	}
 	if (!node->cmd[1])

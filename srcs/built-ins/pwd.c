@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 19:55:37 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/08 10:51:15 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:51:46 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	ms_pwd(t_node *node)
 		write(1, path, ft_strlen(path));
 		write(1, "\n", 1);
 		free(path);
-		sgl = 0;
+		g_sgl = 0;
 		return (0);
 	}
 	write(1, "\n", 1);
 	ft_output_error(node->cmd[0], " ");
-	sgl = 1;
+	g_sgl = 1;
 	free(path);
 	return (-1);
 }

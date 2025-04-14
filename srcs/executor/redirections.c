@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:38:19 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/14 13:32:17 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:54:08 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	ms_tofile_exec(t_node *left, t_minishell *ms, char *file)
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDOUT_FILENO);
-		sgl = ms_executor(left, ms);
+		g_sgl = ms_executor(left, ms);
 		close(fd);
-		exit(sgl);
+		exit(g_sgl);
 	}
-	wait(&sgl);
-	sgl = WEXITSTATUS(sgl);
-	return (sgl);
+	wait(&g_sgl);
+	g_sgl = WEXITSTATUS(g_sgl);
+	return (g_sgl);
 }
 
 int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
@@ -46,13 +46,13 @@ int	ms_fromfile_exec(t_node *left, t_minishell *ms, char *file)
 		if (fd < 0)
 			exit(-1);
 		dup2(fd, STDIN_FILENO);
-		sgl = ms_executor(left, ms);
+		g_sgl = ms_executor(left, ms);
 		close(fd);
-		exit(sgl);
+		exit(g_sgl);
 	}
-	wait(&sgl);
-	sgl = WEXITSTATUS(sgl);
-	return (sgl);
+	wait(&g_sgl);
+	g_sgl = WEXITSTATUS(g_sgl);
+	return (g_sgl);
 }
 
 int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
@@ -65,15 +65,15 @@ int	ms_append_exec(t_node *left, t_minishell *ms, char *file)
 	{
 		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (fd < 0)
-			sgl = -1;
+			g_sgl = -1;
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
-		sgl = ms_executor(left, ms);
-		exit(sgl);
+		g_sgl = ms_executor(left, ms);
+		exit(g_sgl);
 	}
-	wait(&sgl);
-	sgl = WEXITSTATUS(sgl);
-	return (sgl);
+	wait(&g_sgl);
+	g_sgl = WEXITSTATUS(g_sgl);
+	return (g_sgl);
 }
 
 int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
@@ -98,9 +98,9 @@ int	ms_heredoc_exec(t_node *left, t_minishell *ms, char *file)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		wait(&sgl);
-		sgl = ms_executor(left, ms);
+		wait(&g_sgl);
+		g_sgl = ms_executor(left, ms);
 		dup2(saved, STDIN_FILENO);
 	}
-	return (sgl);
+	return (g_sgl);
 }

@@ -39,6 +39,6 @@ void	sig_setter(char **prompt)
 
 void	sig_check(void)
 {
-	if (sgl != 0)
-		exit(sgl);
+	if (g_sgl != 0)
+		exit(g_sgl);
 }

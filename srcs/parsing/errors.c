@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:32:58 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/11 15:30:33 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:54:23 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ unexpected token '%s'\n", split[i]);
 	else
 	{
 		ft_printf("minishell: command not found: '%s'\n", split[i]);
-		sgl = 127;
-		ms->exit_status = sgl;
+		g_sgl = 127;
+		ms->exit_status = g_sgl;
 	}
 }

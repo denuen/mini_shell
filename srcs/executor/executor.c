@@ -6,7 +6,7 @@
 /*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:15:17 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/14 13:26:27 by marvin@42.f      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:52:22 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ int	ms_extern(t_node *node)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
-		wait(&sgl);
-		if (WIFSIGNALED(sgl) && WTERMSIG(sgl) == SIGINT)
+		wait(&g_sgl);
+		if (WIFSIGNALED(g_sgl) && WTERMSIG(g_sgl) == SIGINT)
 			write(STDOUT_FILENO, "\n", 1);
-		else if (WIFSIGNALED(sgl) && WTERMSIG(sgl) == SIGQUIT)
+		else if (WIFSIGNALED(g_sgl) && WTERMSIG(g_sgl) == SIGQUIT)
 			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-		sgl = WEXITSTATUS(sgl);
-		return (sgl);
+		g_sgl = WEXITSTATUS(g_sgl);
+		return (g_sgl);
 	}
 }
 
@@ -115,6 +115,6 @@ int	ms_executor(t_node *node, t_minishell *ms)
 		status = ft_operator_exec(node, ms);
 	else if (node->type == REDIRECTION)
 		status = ft_redirection_exec(node, ms);
-	ms->exit_status = sgl;
+	ms->exit_status = g_sgl;
 	return (status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:50:19 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/14 13:28:49 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:51:36 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ms_exit(t_minishell *ms, char *status)
 		exit_code = ms->exit_status;
 	}
 	else if (status == NULL)
-		exit_code = sgl;
+		exit_code = g_sgl;
 	else
 		exit_code = ft_atoi(status);
 	ms_destroy(ms);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:14:35 by ahabdelr          #+#    #+#             */
-/*   Updated: 2025/04/14 13:26:50 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:51:40 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ms_export(t_node *node, t_minishell *ms)
 	char	*name;
 	char	*value;
 
-	sgl = 0;
+	g_sgl = 0;
 	if (node->cmd[1] == NULL)
 		ft_env_print(ms->envs);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apintaur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin@42.fr <ahabdelr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:52:23 by apintaur          #+#    #+#             */
-/*   Updated: 2025/04/14 13:38:29 by apintaur         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:06:05 by marvin@42.f      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #define BLUE "\033[1;34m"
 #define RESET "\033[0m"
 
-int			sgl;
+int			g_sgl;
 int			signal_receiver(t_minishell *ms);
 
 static void	ms_init(t_minishell *ms)
@@ -27,7 +27,7 @@ static void	ms_init(t_minishell *ms)
 	ms->envs = ft_get_envs();
 	ms->vars = NULL;
 	ms->exit_status = 0;
-	sgl = 0;
+	g_sgl = 0;
 }
 
 void	ms_destroy(t_minishell *ms)
@@ -116,7 +116,7 @@ int	main(void)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		if (ft_strlen(line) > 0)
-			ms_process_line(&ms, line, &sgl);
+			ms_process_line(&ms, line, &g_sgl);
 		else
 			free(line);
 		free(prompt);

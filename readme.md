@@ -3,7 +3,7 @@
 
 
 ![mini-demo](mini.gif)
-> Colors were not mandatory, we put it "for the vibe"
+> Colors were not mandatory, we put them "for the vibe"
 
 ## Introduction
 Welcome to Minishell – the minimal shell that gets straight to the point. We know most people will only read this introduction, so here’s everything you need to know: Minishell is built to execute commands, handle built-in functions, and support essential piping and redirection features. Inspired by the rigorous requirements of the 42 Ecole Minishell project, it offers an immersive learning experience on Unix internals, while delivering a practical, fully functional shell.

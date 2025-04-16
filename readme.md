@@ -15,8 +15,6 @@ Welcome to Minishell – the minimal shell that gets straight to the point. We k
 - [Detailed Functionality and Implementation](#detailed-functionality-and-implementation)
 - [Testing & Development](#testing--development)
 - [Requirements](#requirements)
-- [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ## Features

@@ -1,6 +1,6 @@
 # Minishell - Graded 123/100 (23/25 Bonus)
 > A lightweight yet powerful Unix shell designed for simplicity, efficiency, and educational excellence.
-
+![mini-demo](mini.gif)
 ## Introduction
 Welcome to Minishell – the minimal shell that gets straight to the point. We know most people will only read this introduction, so here’s everything you need to know: Minishell is built to execute commands, handle built-in functions, and support essential piping and redirection features. Inspired by the rigorous requirements of the 42 Ecole Minishell project, it offers an immersive learning experience on Unix internals, while delivering a practical, fully functional shell.
 

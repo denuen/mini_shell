@@ -30,7 +30,7 @@ Follow these steps to set up Minishell:
 
 1. **Clone the Repository:**
     ```bash
-    git clone https://github.com/ahmeee-dev/mini_shell.git
+    git clone https://github.com/denuen/mini_shell.git
     cd mini_shell
     ```
 
@@ -108,7 +108,7 @@ If you encounter any issues or have improvement suggestions, please open an issu
 ## Acknowledgments
 - **Community:** Thanks to the active developer community and all 42 students whose shared experiences and resources have shaped this project.
 - **42 Ecole:** Special recognition to Ecole 42 for fostering an environment of innovation and rigorous learning.
-- **Contributors:** ahabdelr (ahmeee-dev) & apintaur (denuen)
+- **Contributors:** apintaur (denuen) & ahabdelr (ahmeee-dev)
 
 ---
 
